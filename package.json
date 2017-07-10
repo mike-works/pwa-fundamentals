@@ -1,0 +1,44 @@
+{
+  "name": "frontendgrocer",
+  "version": "0.0.1",
+  "description": "A grocery shopping progressive web app",
+  "main": "index.js",
+  "repository": "https://github.com/mike-north/pwa-workshop.git",
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "none",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server",
+    "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
+    "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "compression-webpack-plugin": "^0.4.0",
+    "css-loader": "^0.28.4",
+    "eslint": "^4.2.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "html-webpack-plugin": "^2.29.0",
+    "muicss": "^0.9.17",
+    "node-sass": "^4.5.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "next",
+    "react-router-dom": "^4.1.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "dependencies": {
+    "@types/react": "^15.0.35"
+  }
+}
