@@ -2,9 +2,12 @@
   "name": "frontendgrocer",
   "version": "0.0.1",
   "description": "A grocery shopping progressive web app",
-  "main": "index.js",
+  "main": "server/index.js",
   "repository": "https://github.com/mike-north/pwa-workshop.git",
-  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "contributors": [
+    "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+    "Steve Kinney <hello@stevekinney.net> (https://stevekinney.net)"
+  ],
   "license": "none",
   "scripts": {
     "watch": "./node_modules/.bin/webpack-dev-server",

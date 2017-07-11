@@ -9,13 +9,13 @@
   </a>
 </p>
 <p align='center'>
-  <a href="https://travis-ci.org/mike-north/modern-javascript" title="Build Status">
+  <a href="https://travis-ci.org/mike-north/pwa-fundamentals" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-fundamentals.svg?branch=solutions"/>
   </a>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
     <img title="Course Outline" src="https://img.shields.io/badge/mike.works-course%20outline-blue.svg"/>
   </a>
-  <a href="https://bit.ly/modern-js" title="Slides">
+  <a href="https://docs.mike.works/pwa-fundamentals" title="Slides">
     <img title="Slides" src="https://img.shields.io/badge/mike.works-slides-blue.svg"/>
   </a>
 </p>
@@ -25,12 +25,17 @@ This is the example project used for the <a title="Mike.Works" href="https://mik
 
 # What are the pieces?
 
-* [Webpack 2](https://webpack.js.org)
-* [Babel](http://babeljs.io/) 6.x, setup with the [stage-2](https://github.com/babel/babel/tree/7.0/packages/babel-preset-stage-2) plugins, compiling to ES5 JavaScript
-* [ESLint](https://github.com/eslint/eslint) for linting, setup with a strict set of rules derived from [Airbnb's ESLint Config](https://www.npmjs.com/package/eslint-config-airbnb)
-* [sass-loader](https://github.com/webpack-contrib/sass-loader) for traditional management of styles
+* [Webpack 3](https://webpack.js.org)
+* [Babel](http://babeljs.io/) 7.x, setup with the [babel-preset-env](https://github.com/babel/babel/tree/7.0/packages/babel-preset-env) plugins, compiling to ES5 JavaScript
+* [ESLint](https://github.com/eslint/eslint) for linting JS and JSX
+* [sass-loader](https://github.com/webpack-contrib/sass-loader) for traditional management of [Sass](http://sass-lang.com/) styles
 * [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) so compiled styles are external stylesheets instead of inline style blocks
+* [React](http://facebook.github.io/react/) as a component library
+* [MUI](https://www.muicss.com/) as a lightweight (6.6K) Material Design inspired UI kit
 * [Jest](http://facebook.github.io/jest/) as a testing platform
+* [SimpleHTTP2Server](https://github.com/GoogleChrome/simplehttp2server) as a HTTP/2 proxy (for development only)
+* [SQLite3](https://www.sqlite.org/) - as a lightweight, embedded database (for API)
+* [Express](http://expressjs.com/) - as a HTTP server for our API.
 
 # How to use it
 
@@ -88,7 +93,7 @@ exercises contained within this project to run your own workshops
 
 # Copyright
 
-&copy; 2017 [Mike.Works](https://mike.works), All Rights Reserved
+&copy; 2017 [Mike Works, Inc.](https://mike.works) and Steve Kinney, All Rights Reserved
 
 ###### This material may not be used for workshops, training, or any other form of instructing or teaching developers, without express written consent
 
