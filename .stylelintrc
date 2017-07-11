@@ -1,0 +1,13 @@
+{
+  extends: "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  rules: {
+    "length-zero-no-unit": true,
+    "time-min-milliseconds": 1,
+    "unit-no-unknown": true,
+    "scss/media-feature-value-dollar-variable": "always",
+    "scss/operator-no-unspaced": true
+  }
+}

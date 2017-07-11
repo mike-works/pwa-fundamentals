@@ -1,6 +1,8 @@
+/* eslint-env node */
+
 const extractSass = require('./extract-sass');
 
-module.exports = function (env) {
+module.exports = function () {
   return {
     loaders: [
       {

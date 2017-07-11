@@ -1,3 +1,6 @@
 node_modules
 dist
 yarn-error*
+key.pem
+cert.pem
+tmp

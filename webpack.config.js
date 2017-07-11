@@ -1,3 +1,4 @@
+/* eslint-env node */
 const path = require('path');
 
 const moduleConfig = require('./webpack/module.config');

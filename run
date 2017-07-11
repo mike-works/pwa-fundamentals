@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const Server = require('./server/index');
+
+(new Server).start();

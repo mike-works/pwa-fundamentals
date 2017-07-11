@@ -7,9 +7,11 @@
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
   "license": "none",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server",
+    "watch": "./node_modules/.bin/webpack-dev-server",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
-    "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod"
+    "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
+    "clean": "rm -rf dist/*",
+    "start": "node ./server/index.js"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -29,16 +31,27 @@
     "html-webpack-plugin": "^2.29.0",
     "muicss": "^0.9.17",
     "node-sass": "^4.5.3",
+    "preload-webpack-plugin": "^1.2.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.6",
+    "style-ext-html-webpack-plugin": "^3.4.1",
     "style-loader": "^0.18.2",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-scss": "^1.5.1",
+    "stylelint-webpack-plugin": "^0.8.0",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
-    "@types/react": "^15.0.35"
+    "@types/react": "^15.0.35",
+    "chalk": "^2.0.1",
+    "commander": "^2.11.0",
+    "debug": "^2.6.8",
+    "express": "^4.15.3",
+    "simplehttp2server": "^2.0.0",
+    "sqlite3": "^3.1.8"
   }
 }

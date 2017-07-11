@@ -1,0 +1,13 @@
+@import '_variables';
+
+@mixin large-screens() {
+  @media (min-width: $small-screen-width) {
+    @content;
+  }
+}
+
+@mixin small-screens() {
+  @media (max-width: $small-screen-width) {
+    @content;
+  }
+}

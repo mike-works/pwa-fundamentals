@@ -17,6 +17,8 @@ module.exports = {
   },
   plugins: ['babel', 'promise', 'react'],
   rules: {
+    "quotes": [2, "single", "avoid-escape"],
+    "indent": [2, 2],
     "strict": 0,
     'no-fallthrough': 0,
     "promise/always-return": "error",

@@ -1,0 +1,60 @@
+@import './../../sass/_variables';
+@import './../../sass/_mixins';
+
+#sidedrawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  left: -200px;
+  overflow: auto;
+  background-color: #fff;
+  transition: transform 0.2s;
+  z-index: 100000000;
+
+  &.active {
+    transform: translate(200px);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  > ul {
+    padding-left: 0;
+
+    > li:first-child {
+      padding-top: 15px;
+    }
+  }
+
+  strong {
+    display: block;
+    padding: 15px 22px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    + ul > li {
+      padding: 6px 0;
+    }
+  }
+
+  a {
+    color: white;
+  }
+
+  .brand {
+    padding-left: 20px;
+  }
+
+  @include large-screens {
+    transform: translate(200px);
+
+    .frontend-grocer.hide-sidedrawer & {
+      transform: translate(0);
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import './../../sass/variables';
+@import './../../sass/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateX(0);
+  transition: transform 0.2s;
+
+  a {
+    color: #fff;
+  }
+
+  a:hover,
+  a:focus,
+  a:visited {
+    text-decoration: none;
+  }
+
+  .sidedrawer-toggle {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 38px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: transparent;
+    transition: background-color 0.2s;
+
+    &:hover {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+    }
+  }
+
+  .logo {
+    position: relative;
+    top: 2px;
+  }
+
+  @include large-screens {
+    transform: translateX(200px);
+
+    .frontend-grocer.hide-sidedrawer & {
+      transform: translateX(0);
+    }
+  }
+}
