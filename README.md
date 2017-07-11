@@ -20,7 +20,7 @@
   </a>
 </p>
 <p align='center'>
-This is the example project used for the <a title="Mike.Works" href="https://mike.works">Mike.Works</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
+This is the example project used for the <a title="Mike Works, Inc." href="https://mike.works">Mike</a> and <a href="http://stevekinney.net">Steve's</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
 </p>
 
 # What are the pieces?
@@ -93,7 +93,7 @@ exercises contained within this project to run your own workshops
 
 # Copyright
 
-&copy; 2017 [Mike Works, Inc.](https://mike.works) and Steve Kinney, All Rights Reserved
+&copy; 2017 [Mike Works, Inc.](https://mike.works) and [Steve Kinney](http://www.stevekinney.net), All Rights Reserved
 
 ###### This material may not be used for workshops, training, or any other form of instructing or teaching developers, without express written consent
 
