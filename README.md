@@ -10,7 +10,7 @@
 </p>
 <p align='center'>
   <a href="https://travis-ci.org/mike-north/pwa-workshop" title="Build Status">
-    <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-fundamentals.svg?branch=solutions"/>
+    <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-workshop.svg?branch=solutions"/>
   </a>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
     <img title="Course Outline" src="https://img.shields.io/badge/mike.works-course%20outline-blue.svg"/>
