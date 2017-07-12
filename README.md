@@ -100,28 +100,28 @@ This is a free-standing client/server Progressive Web App system, including
 
 # How to use it
 
-##### Start the Development Server
+#### Start the Development Server
 `./run`
 
 or in HTTP/2 mode (requires a development or production build, and does not watch for changes)
 
 `./run --http2`
 
-##### Build Development Assets in the `/dist` folder
+#### Build Development Assets in the `/dist` folder
 This will be an un-minified version of an exercise, and will include some webpack-specific tooling, intended only for development use
 
 `npm run build:dev`
 
-##### Build Production Assets in the `/dist` folder
+#### Build Production Assets in the `/dist` folder
 This will be an an optimized version of the exercise
 
 `npm run build:dist`
 
-##### Run tests
+#### Run tests
 
 `npm test`
 
-##### Clean old builds
+#### Clean old builds
 
 `npm run clean`
 
