@@ -9,7 +9,7 @@
   </a>
 </p>
 <p align='center'>
-  <a href="https://travis-ci.org/mike-north/pwa-fundamentals" title="Build Status">
+  <a href="https://travis-ci.org/mike-north/pwa-workshop" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-fundamentals.svg?branch=solutions"/>
   </a>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
