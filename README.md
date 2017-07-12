@@ -60,6 +60,10 @@ This will be an an optimized version of the exercise
 
 `npm test`
 
+##### Clean old builds
+
+`npm run clean`
+
 # License
 While the general license for this project is the BSD 3-clause, the exercises
 themselves are proprietary and are licensed on a per-individual basis, usually
