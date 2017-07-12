@@ -14,7 +14,7 @@
     "watch": "./node_modules/.bin/webpack-dev-server",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf dist/* db/development.sqlite",
     "test": "jest",
     "start": "node ./server/index.js"
   },
@@ -60,6 +60,7 @@
     "debug": "^2.6.8",
     "express": "^4.15.3",
     "jest": "^20.0.4",
+    "sequelize": "^4.3.1",
     "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8"
   }

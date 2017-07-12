@@ -4,3 +4,4 @@ yarn-error*
 key.pem
 cert.pem
 tmp
+db/development.sqlite
