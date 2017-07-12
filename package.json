@@ -9,7 +9,7 @@
     "Steve Kinney <hello@stevekinney.net> (https://stevekinney.net)"
   ],
   "private": true,
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE and LICENSE-exercises",
   "scripts": {
     "watch": "./node_modules/.bin/webpack-dev-server",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
