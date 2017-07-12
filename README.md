@@ -9,6 +9,9 @@
   </a>
 </p>
 <p align='center'>
+  <a href="https://greenkeeper.io/" title="Dependencies">
+    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-north/pwa-workshop.svg"/>
+  </a>
   <a href="https://travis-ci.org/mike-north/pwa-workshop" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-workshop.svg?branch=solutions"/>
   </a>
