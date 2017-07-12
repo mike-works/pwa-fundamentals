@@ -5,7 +5,7 @@
 </p>
 <p align='center'>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" target='_blank'>
-    <img height=150 src='https://cloud.githubusercontent.com/assets/558005/25995673/c8d86ce6-3713-11e7-8a18-9c85bcf73fc9.png' />
+    <img height=150 src='https://user-images.githubusercontent.com/558005/28080773-5f563b0c-666d-11e7-82e1-40d7320b73ce.png' />
   </a>
 </p>
 <p align='center'>
