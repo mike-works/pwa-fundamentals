@@ -13,9 +13,10 @@ module.exports = {
     'plugin:react/recommended'
   ],
   env: {
-    browser: true
+    browser: true,
+    "jest/globals": true
   },
-  plugins: ['babel', 'promise', 'react'],
+  plugins: ['babel', 'promise', 'react', 'jest'],
   rules: {
     "quotes": [2, "single", "avoid-escape"],
     "indent": [2, 2],

@@ -17,7 +17,6 @@ import Container from 'muicss/lib/react/container';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.thing = 'he';
     this.state = { drawerShowing: false };
     this.toggleSideDrawer = this.toggleSideDrawer.bind(this);
   }
