@@ -68,19 +68,30 @@ npm install -g <package-name>
 | ✔ | [eslint-plugin-babel](https://github.com/babel/eslint-plugin-babel)  | ^4.0.0 |
 | ✔ | [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)  | ^7.1.0 |
 
-# What are the pieces?
+# Files and Folders
 
-* [Webpack 3](https://webpack.js.org)
-* [Babel](http://babeljs.io/) 7.x, setup with the [babel-preset-env](https://github.com/babel/babel/tree/7.0/packages/babel-preset-env) plugins, compiling to ES5 JavaScript
-* [ESLint](https://github.com/eslint/eslint) for linting JS and JSX
-* [sass-loader](https://github.com/webpack-contrib/sass-loader) for traditional management of [Sass](http://sass-lang.com/) styles
-* [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) so compiled styles are external stylesheets instead of inline style blocks
-* [React](http://facebook.github.io/react/) as a component library
-* [MUI](https://www.muicss.com/) as a lightweight (6.6K) Material Design inspired UI kit
-* [Jest](http://facebook.github.io/jest/) as a testing platform
-* [SimpleHTTP2Server](https://github.com/GoogleChrome/simplehttp2server) as a HTTP/2 proxy (for development only)
-* [SQLite3](https://www.sqlite.org/) - as a lightweight, embedded database (for API)
-* [Express](http://expressjs.com/) - as a HTTP server for our API.
+This is a free-standing client/server Progressive Web App system, including
+
+* A database
+* A REST API
+* A web client, which starts out as a conventional single-page app, and becomes a progressive web app you progress through the workshop
+
+````
+ Project
+ │
+ ├─ client/     📱 React.js web client
+ │  ├─ components/     📊 React components
+ │  ├─ routes/         📊 Top-level React components, each corresponding to a "page" in our app
+ │  ├─ sass/           💅 Global Sass stylesheets
+ │  ├─ app.jsx            React root component  
+ │  ├─ index.js           Web client entry point
+ │  └─ index.ejs          Template for web client index.html
+ │
+ ├─ db/         💾 SQLite databases
+ ├─ dist/       📦 Web client development/production builds
+ ├─ server/     🛒 Node.js API to support the web client
+ └─ webpack/    👷 Build configuration 
+````
 
 # How to use it
 
@@ -108,6 +119,20 @@ This will be an an optimized version of the exercise
 ##### Clean old builds
 
 `npm run clean`
+
+# What are the pieces?
+
+* [Webpack 3](https://webpack.js.org)
+* [Babel](http://babeljs.io/) 7.x, setup with the [babel-preset-env](https://github.com/babel/babel/tree/7.0/packages/babel-preset-env) plugins, compiling to ES5 JavaScript
+* [ESLint](https://github.com/eslint/eslint) for linting JS and JSX
+* [sass-loader](https://github.com/webpack-contrib/sass-loader) for traditional management of [Sass](http://sass-lang.com/) styles
+* [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) so compiled styles are external stylesheets instead of inline style blocks
+* [React](http://facebook.github.io/react/) as a component library
+* [MUI](https://www.muicss.com/) as a lightweight (6.6K) Material Design inspired UI kit
+* [Jest](http://facebook.github.io/jest/) as a testing platform
+* [SimpleHTTP2Server](https://github.com/GoogleChrome/simplehttp2server) as a HTTP/2 proxy (for development only)
+* [SQLite3](https://www.sqlite.org/) - as a lightweight, embedded database (for API)
+* [Express](http://expressjs.com/) - as a HTTP server for our API.
 
 # License
 While the general license for this project is the BSD 3-clause, the exercises
