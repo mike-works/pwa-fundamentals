@@ -42,15 +42,22 @@ This is the example project used for the <a title="Mike Works, Inc." href="https
 ##### Start the Development Server
 `./run`
 
+or in HTTP/2 mode (requires a development or production build, and does not watch for changes)
+`./run --http2`
+
 ##### Build Development Assets in the `/dist` folder
 This will be an un-minified version of an exercise, and will include some webpack-specific tooling, intended only for development use
 
-`npm run build:dev <exercise-name>`
+`npm run build:dev`
 
 ##### Build Production Assets in the `/dist` folder
 This will be an an optimized version of the exercise
 
-`npm run build:dist <exercise-name>`
+`npm run build:dist`
+
+##### Run tests
+
+`npm test`
 
 # License
 While the general license for this project is the BSD 3-clause, the exercises
