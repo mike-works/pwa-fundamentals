@@ -25,6 +25,8 @@ This is the example project used for the <a title="Mike Works, Inc." href="https
 
 # What are the pieces?
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mike-north/pwa-workshop.svg)](https://greenkeeper.io/)
+
 * [Webpack 3](https://webpack.js.org)
 * [Babel](http://babeljs.io/) 7.x, setup with the [babel-preset-env](https://github.com/babel/babel/tree/7.0/packages/babel-preset-env) plugins, compiling to ES5 JavaScript
 * [ESLint](https://github.com/eslint/eslint) for linting JS and JSX
