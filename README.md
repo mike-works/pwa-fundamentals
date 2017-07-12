@@ -30,7 +30,7 @@ This is the example project used for the <a title="Mike Works, Inc." href="https
 
 Please make sure you have the following software installed before arriving at the workshop or beginning the course.
 
-##### General Packages
+#### General Packages
 
 Please make sure you have the following general software installed
 
@@ -40,20 +40,20 @@ Please make sure you have the following general software installed
 | ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 |
 |   | [Yarn](https://yarnpkg.com/)  | >= 0.24 |
 
-##### VS Code Extensions
+#### VS Code Extensions
 
 Additionally, to take advantage of syntax hilighting, static code analysis and other editor features, you'll want to install the latest version of the following VS Code extensions
 
-| Required | Extension |
+| Required | Extension | Notes |
 | ------------- | ------------- |
-| ✔ | [sass-indented](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented) |
-| ✔ | [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) |
-| ✔ | [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) |
-| ✔ | [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) |
-|   | [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) |
-|   | [rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) |
+| ✔ | [sass-indented](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented) | Syntax highlighting and code completion support for [Sass](http://sass-lang.com) stylesheets |
+| ✔ | [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) | Static code analysis for JavaScript and JSX files |
+| ✔ | [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) | Syntax highlighting for [Jest snapshot testing](https://facebook.github.io/jest/docs/snapshot-testing.html) and in-editor feedback of test pass/fail status |
+| ✔ | [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) | Stylesheet linting |
+|   | [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) | Better file and folder icons |
+|   | [rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) | An in-editor REST client, so we can experiment with our API effortlessly |
 
-##### Global Node.js Packages
+#### Global Node.js Packages
 
 Make sure you have these npm packages installed globally. This can be done by running
 
