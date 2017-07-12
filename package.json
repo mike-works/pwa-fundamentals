@@ -8,7 +8,8 @@
     "Mike North <michael.l.north@gmail.com> (https://mike.works)",
     "Steve Kinney <hello@stevekinney.net> (https://stevekinney.net)"
   ],
-  "license": "none",
+  "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "watch": "./node_modules/.bin/webpack-dev-server",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
