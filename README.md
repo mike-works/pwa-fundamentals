@@ -9,6 +9,9 @@
   </a>
 </p>
 <p align='center'>
+  <a href="https://greenkeeper.io/" title="Dependencies">
+    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-north/pwa-workshop.svg"/>
+  </a>
   <a href="https://travis-ci.org/mike-north/pwa-workshop" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-workshop.svg?branch=solutions"/>
   </a>
@@ -24,8 +27,6 @@ This is the example project used for the <a title="Mike Works, Inc." href="https
 </p>
 
 # What are the pieces?
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/mike-north/pwa-workshop.svg)](https://greenkeeper.io/)
 
 * [Webpack 3](https://webpack.js.org)
 * [Babel](http://babeljs.io/) 7.x, setup with the [babel-preset-env](https://github.com/babel/babel/tree/7.0/packages/babel-preset-env) plugins, compiling to ES5 JavaScript
