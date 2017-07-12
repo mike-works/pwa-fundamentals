@@ -1,6 +1,21 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "files.exclude": {
-    "node_modules/**": true
-  }
+    "node_modules/**": true,
+    "tmp/**": true,
+    ".*rc*": true,
+    "*.pem": true,
+    "package-lock.json": true,
+    "yarn.lock": true,
+    ".travis.yml": true,
+    ".gitignore": true,
+    "jest.config.js": true
+  },
+  "vsicons.associations.folders": [
+     { "icon": "binary", "extensions": ["db"], "format": "svg" }
+  ],
+  "vsicons.associations.files": [
+     { "icon": "license", "extensions": ["license-exercises"], "filename": true, "format": "svg" },
+     { "icon": "bat", "extensions": ["run"], "filename": true, "format": "svg" }
+  ]
 }

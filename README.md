@@ -26,6 +26,40 @@
 This is the example project used for the <a title="Mike Works, Inc." href="https://mike.works">Mike</a> and <a href="http://stevekinney.net">Steve's</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
 </p>
 
+# Setup
+
+Please make sure you have the following software installed before arriving at the workshop or beginning the course.
+
+##### General Packages
+
+| Required | Library | Version Range |
+| ------------- | ------------- | ---|
+| ✔ | [Node.js](http://nodejs.com/)  | >= 6.4 |
+| ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 |
+|   | [Yarn](https://yarnpkg.com/)  | >= 0.24 |
+
+Additionally, to take advantage of syntax hilighting, static code analysis and other editor features, you'll want to install the latest version of the following VS Code extensions
+
+##### VS Code Extensions
+
+| Required | Extension |
+| ------------- | ------------- | ---|
+| ✔ | [sass-indented](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented) |
+| ✔ | [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) |
+| ✔ | [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) |
+| ✔ | [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) |
+|   | [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) |
+|   | [rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) |
+
+##### Global Node.js Packages
+
+| Required | Library | Version Range |
+| ------------- | ------------- | ---|
+| ✔ | [babel-eslint](https://github.com/babel/babel-eslint)  | ^7.0.0 |
+| ✔ | [eslint](https://github.com/eslint/eslint) | ^4.0.0 |
+| ✔ | [eslint-plugin-babel](https://github.com/babel/eslint-plugin-babel)  | ^4.0.0 |
+| ✔ | [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)  | ^7.1.0 |
+
 # What are the pieces?
 
 * [Webpack 3](https://webpack.js.org)
