@@ -88,14 +88,14 @@ This is a free-standing client/server Progressive Web App system, including
  │  │
  │  ├─ routes/         🔝 Top-level React components, each corresponding to a "page" in our app
  │  ├─ sass/           💅 Global Sass stylesheets
- │  ├─ app.jsx         🎁 React root component  
+ │  ├─ app.jsx         🎁 React "App" component  
  │  ├─ index.js        🎬 Web client entry point
  │  └─ index.ejs       📄 Template for web client index.html
  │
  ├─ db/                💾 SQLite databases
  ├─ dist/              📦 Web client development/production builds
  ├─ server/            🛒 Node.js API to support the web client
- └─ webpack/           👷 Build configuration 
+ └─ webpack/           ⚙️ Build configuration 
 ````
 
 # How to use it
