@@ -81,11 +81,16 @@ This is a free-standing client/server Progressive Web App system, including
  │
  ├─ client/            📱 React.js web client
  │  ├─ components/     📊 React components
- │  ├─ routes/         📊 Top-level React components, each corresponding to a "page" in our app
+ │  │  │
+ │  │  ├─ my-thing/index.jsx        Component implementation
+ │  │  ├─ my-thing/index.text.js    Component tests
+ │  │  └─ my-thing/styles.scss      Component styles
+ │  │
+ │  ├─ routes/         🔝 Top-level React components, each corresponding to a "page" in our app
  │  ├─ sass/           💅 Global Sass stylesheets
- │  ├─ app.jsx            React root component  
- │  ├─ index.js           Web client entry point
- │  └─ index.ejs          Template for web client index.html
+ │  ├─ app.jsx         🎁 React root component  
+ │  ├─ index.js        🎬 Web client entry point
+ │  └─ index.ejs       📄 Template for web client index.html
  │
  ├─ db/                💾 SQLite databases
  ├─ dist/              📦 Web client development/production builds
