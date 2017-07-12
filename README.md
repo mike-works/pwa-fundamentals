@@ -43,6 +43,7 @@ This is the example project used for the <a title="Mike Works, Inc." href="https
 `./run`
 
 or in HTTP/2 mode (requires a development or production build, and does not watch for changes)
+
 `./run --http2`
 
 ##### Build Development Assets in the `/dist` folder
