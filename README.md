@@ -32,18 +32,20 @@ Please make sure you have the following software installed before arriving at th
 
 ##### General Packages
 
+Please make sure you have the following general software installed
+
 | Required | Library | Version Range |
 | ------------- | ------------- | ---|
 | ✔ | [Node.js](http://nodejs.com/)  | >= 6.4 |
 | ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 |
 |   | [Yarn](https://yarnpkg.com/)  | >= 0.24 |
 
-Additionally, to take advantage of syntax hilighting, static code analysis and other editor features, you'll want to install the latest version of the following VS Code extensions
-
 ##### VS Code Extensions
 
+Additionally, to take advantage of syntax hilighting, static code analysis and other editor features, you'll want to install the latest version of the following VS Code extensions
+
 | Required | Extension |
-| ------------- | ------------- | ---|
+| ------------- | ------------- |
 | ✔ | [sass-indented](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented) |
 | ✔ | [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) |
 | ✔ | [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) |
@@ -52,6 +54,12 @@ Additionally, to take advantage of syntax hilighting, static code analysis and o
 |   | [rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) |
 
 ##### Global Node.js Packages
+
+Make sure you have these npm packages installed globally. This can be done by running
+
+```
+npm install -g <package-name>
+```
 
 | Required | Library | Version Range |
 | ------------- | ------------- | ---|
