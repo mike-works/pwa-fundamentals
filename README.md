@@ -79,7 +79,7 @@ This is a free-standing client/server Progressive Web App system, including
 ````
  Project
  │
- ├─ client/     📱 React.js web client
+ ├─ client/            📱 React.js web client
  │  ├─ components/     📊 React components
  │  ├─ routes/         📊 Top-level React components, each corresponding to a "page" in our app
  │  ├─ sass/           💅 Global Sass stylesheets
@@ -87,10 +87,10 @@ This is a free-standing client/server Progressive Web App system, including
  │  ├─ index.js           Web client entry point
  │  └─ index.ejs          Template for web client index.html
  │
- ├─ db/         💾 SQLite databases
- ├─ dist/       📦 Web client development/production builds
- ├─ server/     🛒 Node.js API to support the web client
- └─ webpack/    👷 Build configuration 
+ ├─ db/                💾 SQLite databases
+ ├─ dist/              📦 Web client development/production builds
+ ├─ server/            🛒 Node.js API to support the web client
+ └─ webpack/           👷 Build configuration 
 ````
 
 # How to use it
