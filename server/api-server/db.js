@@ -33,50 +33,51 @@ async function openDb(name) {
   });
 }
 
+async function ensureDevelopmentDbExists() {
+  return new Promise((resolve, reject) => {
+    fs.exists(dbPath('development'), (itExists) => {
+      if (!itExists) {
+        let stream = fs
+          .createReadStream(dbPath('master'))
+          .pipe(fs.createWriteStream(dbPath('development')));
+        stream.on('finish', function () {
+          resolve();
+        });
+        stream.on('error', function () {
+          reject();
+        });
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
 class Db {
   constructor() {
     this._models = null;
   }
-  async ensureDevelopmentDbExists() {
-    return new Promise((resolve, reject) => {
-      fs.exists(dbPath('development'), (itExists) => {
-        if (!itExists) {
-          let stream = fs
-            .createReadStream(dbPath('master'))
-            .pipe(fs.createWriteStream(dbPath('development')));
-          stream.on('finish', function () {
-            resolve();
-          });
-          stream.on('error', function () {
-            reject();
-          });
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-
   async _connectToDatabase() {
     let conn
     try {
       conn = await openDb('development');
     } catch (err) {
-      process.stderr.write(chalk.red(err));
-      process.exit(0);
+      process.stderr.write(chalk.red(' - Problem connecting to database\n', err));
+      process.exit(1);
     }
     return conn.authenticate()
       .then(() => conn)
       .catch((err) => {
-        process.stderr.write(chalk.red(' - Problem connecting to database\n', err));
-        process.exit(0);
+        process.stderr.write(chalk.red(' - Problem authenticating to database\n', err));
+        process.exit(1);
       });
   }
   async start() {
-    await this.ensureDevelopmentDbExists();
+    await ensureDevelopmentDbExists();
     this.db = await this._connectToDatabase();
-    console.log('models: ', this.models);
+    this.models;
   }
+
   get models() {
     if (this._models === null) {
       this._models = dbModels(this.db);
