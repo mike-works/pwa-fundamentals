@@ -31,7 +31,7 @@ class AssetServer {
       startH2();
       printServerUp('HTTP/2', 5000, 'https');
       process.stdout.write(
-        chalk.white.bgYellow(
+        chalk.black.bgYellow(
           ' - NOTE: you\'ll have to stop this server and restart it to see changes\n'
         )
       );
