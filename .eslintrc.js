@@ -14,6 +14,7 @@ module.exports = {
   ],
   env: {
     browser: true,
+    es6: true,
     "jest/globals": true
   },
   plugins: ['babel', 'promise', 'react', 'jest'],
@@ -22,12 +23,12 @@ module.exports = {
     "indent": [2, 2],
     "strict": 0,
     'no-fallthrough': 0,
+    "react/prop-types": 0,
     "promise/always-return": "error",
     "promise/no-return-wrap": "error",
     "promise/param-names": "error",
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
-    "promise/no-nesting": "warn",
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn"
   }

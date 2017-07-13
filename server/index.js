@@ -1,11 +1,11 @@
 /* eslint-env node */
 const AssetServer = require('./asset-server');
 const ApiServer = require('./api-server');
-const argsProcessor = require('./cli/args');
+// const argsProcessor = require('./cli/args');
 
 class Server {
   constructor() {
-    this.program = argsProcessor(process.argv);
+    // this.program = argsProcessor(process.argv);
     this.assetServer = new AssetServer(this.program);
     this.apiServer = new ApiServer(this.program);
   }
@@ -16,3 +16,4 @@ class Server {
 }
 
 module.exports = Server;
+(new Server).start();

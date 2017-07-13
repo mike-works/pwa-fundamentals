@@ -100,12 +100,16 @@ This is a free-standing client/server Progressive Web App system, including
 
 # How to use it
 
+#### Generate x509 Certificates for serving over HTTPS
+
+`npm run prepcerts`
+
 #### Start the Development Server
-`./run`
+`./run serve`
 
 or in HTTP/2 mode (requires a development or production build, and does not watch for changes)
 
-`./run --http2`
+`./run serve --http2`
 
 #### Build Development Assets in the `/dist` folder
 This will be an un-minified version of an exercise, and will include some webpack-specific tooling, intended only for development use

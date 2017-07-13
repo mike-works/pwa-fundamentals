@@ -23,20 +23,20 @@ const DEFAULT_HTTP2_SERVER_CONFIG = {
     }
   ]
 };
-const H2_CONFIG_PATH = path.join(__dirname, '..', 'tmp', 'h2.config.json');
-const CSS_REGEX = /<link href="(app-[0-9a-f]+.css)" rel="stylesheet">/g
+const H2_CONFIG_PATH = path.join(__dirname, '..', '..', 'tmp', 'h2.config.json');
+// const CSS_REGEX = /<link href="(app-[0-9a-f]+.css)" rel="stylesheet">/g
 const JS_REGEX = /<script type="text\/javascript" src="(app-[0-9a-f]+.js)">/g
 
 function generateConfig() {
   debug('generating server configuration');
-  let html = fs.readFileSync(path.join(__dirname, '..', 'dist', 'index.html')).toString();
-  let [, cssFilename] = CSS_REGEX.exec(html);
+  let html = fs.readFileSync(path.join(__dirname, '..', '..', 'dist', 'index.html')).toString();
+  // let [, cssFilename] = CSS_REGEX.exec(html);
   let [, jsFilename] = JS_REGEX.exec(html);
 
   let cfg = Object.assign({}, DEFAULT_HTTP2_SERVER_CONFIG);
   cfg.headers[0].headers[1].value = cfg.headers[0].headers[1].value
-    .replace('JS', jsFilename)
-    .replace('CSS', cssFilename);
+    .replace('JS', jsFilename);
+  // .replace('CSS', cssFilename);
   fs.writeFileSync(H2_CONFIG_PATH, JSON.stringify(DEFAULT_HTTP2_SERVER_CONFIG, null, ' '), 'UTF8');
 }
 
@@ -49,11 +49,11 @@ function startH2() {
     simplehttp2server,
     ['-config', H2_CONFIG_PATH],
     {
-      cwd: path.join(__dirname, '..', 'dist')
+      cwd: path.join(__dirname, '..', '..', 'dist')
     },
     (err, out) => {
       let stream = err ? process.stderr : process.stdout;
-      stream.log('HTTP/2 Server has stopped', err || out);
+      console.error('HTTP/2 Server has stopped', err, out);
     }
   );
   srv.stdout.pipe(process.stdout);

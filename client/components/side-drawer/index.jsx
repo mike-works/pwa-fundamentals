@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -37,9 +36,5 @@ const SideDrawer = ({ drawerShowing }) => (
     </ul>
   </div>
 );
-
-SideDrawer.propTypes = {
-  drawerShowing: PropTypes.bool.isRequired
-};
 
 export default SideDrawer;

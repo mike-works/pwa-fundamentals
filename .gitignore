@@ -5,3 +5,6 @@ key.pem
 cert.pem
 tmp
 db/development.sqlite
+.DS_Store
+private/*.pem
+!private/README.md

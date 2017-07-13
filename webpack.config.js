@@ -9,7 +9,6 @@ module.exports = function () {
   return {
     entry: {
       app: [
-        'babel-polyfill',
         'react-hot-loader/patch',
         './client/index.js'
       ]
@@ -18,10 +17,14 @@ module.exports = function () {
       colors: true
     },
     resolve: {
-      extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx'],
+      alias: {
+        react: 'preact-compat',
+        'react-dom': 'preact-compat'
+      }
     },
     devServer: devServer(...arguments),
-    devtool: "cheap-module-source-map",
+    devtool: 'cheap-module-source-map',
     output: {
       filename: '[name]-[hash].js',
       path: path.resolve(__dirname, 'dist')

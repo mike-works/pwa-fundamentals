@@ -11,7 +11,7 @@ module.exports = function () {
         use: [{
           loader: 'babel-loader'
         }, {
-          loader: "eslint-loader",
+          loader: 'eslint-loader',
           options: {
             emitError: true
           }
@@ -26,7 +26,7 @@ module.exports = function () {
           }, {
             loader: 'sass-loader',
             options: {
-              includePaths: ["node_modules/muicss/lib/sass"]
+              includePaths: ['node_modules/muicss/lib/sass']
             }
           }]
         })

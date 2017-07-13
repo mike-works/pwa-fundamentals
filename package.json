@@ -14,9 +14,10 @@
     "watch": "./node_modules/.bin/webpack-dev-server",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
-    "clean": "rm -rf dist/* db/development.sqlite",
+    "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "prepcerts": "./run gen-certs && rm -rf dist/*.pem && cp private/*.pem dist/"
   },
   "devDependencies": {
     "@types/react": "^15.0.35",
@@ -35,13 +36,12 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
     "greenkeeper-lockfile": "^1.7.2",
     "html-webpack-plugin": "^2.29.0",
     "muicss": "^0.9.17",
     "node-sass": "^4.5.3",
     "preload-webpack-plugin": "^1.2.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^15.6.1",
@@ -52,16 +52,23 @@
     "stylelint-scss": "^1.5.1",
     "stylelint-webpack-plugin": "^0.8.0",
     "webpack": "^3.1.0",
-    "webpack-dev-server": "^2.5.1"
+    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack-dev-server": "^2.5.1",
+    "webpack-manifest-plugin": "^1.1.2",
+    "worker-loader": "^0.8.1"
   },
   "dependencies": {
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
     "debug": "^2.6.8",
+    "devcert": "^0.3.2",
     "express": "^4.15.3",
     "jest": "^20.0.4",
+    "preact": "^8.2.1",
+    "preact-compat": "^3.16.0",
     "sequelize": "^4.3.1",
     "simplehttp2server": "^2.0.0",
-    "sqlite3": "^3.1.8"
+    "sqlite3": "^3.1.8",
+    "sudo-prompt": "^7.1.0"
   }
 }

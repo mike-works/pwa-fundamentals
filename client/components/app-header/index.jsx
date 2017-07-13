@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './styles.scss';
 
@@ -25,9 +24,5 @@ const AppHeader = ({ doToggle }) => (
     </Appbar>
   </header>
 );
-
-AppHeader.propTypes = {
-  doToggle: PropTypes.func.isRequired
-};
 
 export default AppHeader;

@@ -6,11 +6,21 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
+// var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const extractSass = require('./extract-sass');
 const html = require('./html.config');
 
+
 module.exports = function(env, options) {
-  let plugins = [extractSass, new HtmlWebpackPlugin(html)];
+  let plugins = [extractSass,
+    new HtmlWebpackPlugin(html),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json',
+    })
+    // ,new BundleAnalyzerPlugin()
+  ];
   if (env === 'prod') {
     plugins.push(
       new webpack.LoaderOptionsPlugin({
@@ -49,6 +59,7 @@ module.exports = function(env, options) {
         minRatio: 0.8
       })
     );
+    plugins.push(new StyleExtHtmlWebpackPlugin());
   } else {
     plugins.push(
       new StyleLintPlugin({
