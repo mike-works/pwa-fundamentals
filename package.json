@@ -11,7 +11,7 @@
   "private": true,
   "license": "SEE LICENSE IN LICENSE and LICENSE-exercises",
   "scripts": {
-    "watch": "./node_modules/.bin/webpack-dev-server",
+    "watch": "./node_modules/.bin/webpack-dev-server --https --key ./private/key.pem --cert ./private/cert.pem",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",

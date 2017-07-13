@@ -26,5 +26,5 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "index.html?launcher=true"
+  "start_url": "/"
 }

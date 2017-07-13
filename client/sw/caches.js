@@ -1,5 +1,5 @@
 /* eslint no-console: 0*/
-const CACHE_VERSION = 10;
+const CACHE_VERSION = 15;
 const CACHE_KEY = `FEG-v${CACHE_VERSION}`;
 const CACHE_NAME = (name) => `${CACHE_KEY}-${name}`;
 
@@ -52,9 +52,13 @@ export function prefetchStaticAssets() {
         .then(response => response.json())
         .then((m) => {
           console.log('Asset Manfest is: ', m);
-          return m;
+          let toCache = Object.keys(m)
+            .filter(shouldPrefetchFile)
+            .map((k) => m[k]);
+          toCache.push('/');
+          return cache.addAll(toCache);
         });
-    })
+    });
 }
 
 export function cleanUnusedCaches() {

@@ -13,7 +13,7 @@ const extractSass = require('./extract-sass');
 const html = require('./html.config');
 
 
-module.exports = function(env, options) {
+module.exports = function (env, options) {
   let plugins = [extractSass,
     new HtmlWebpackPlugin(html),
     new ManifestPlugin({
@@ -31,9 +31,9 @@ module.exports = function(env, options) {
     plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         sourceMap:
-          options.devtool &&
-          (options.devtool.indexOf('sourcemap') >= 0 ||
-            options.devtool.indexOf('source-map') >= 0),
+        options.devtool &&
+        (options.devtool.indexOf('sourcemap') >= 0 ||
+          options.devtool.indexOf('source-map') >= 0),
         beautify: false,
         mangle: {
           screw_ie8: true,
@@ -56,7 +56,10 @@ module.exports = function(env, options) {
         algorithm: 'gzip',
         test: /\.(js|html)$/,
         threshold: 10240,
-        minRatio: 0.8
+        minRatio: 0.8,
+        compress: {
+          warnings: false
+        }
       })
     );
     plugins.push(new StyleExtHtmlWebpackPlugin());
