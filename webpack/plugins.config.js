@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 // var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -62,7 +61,6 @@ module.exports = function (env, options) {
         }
       })
     );
-    plugins.push(new StyleExtHtmlWebpackPlugin());
   } else {
     plugins.push(
       new StyleLintPlugin({
@@ -71,13 +69,6 @@ module.exports = function (env, options) {
       })
     );
   }
-  plugins.push(
-    new PreloadWebpackPlugin({
-      rel: 'preload',
-      as: 'script',
-      include: 'all',
-      fileBlacklist: [/\.css/, /\.js.map/]
-    })
-  );
+  plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };

@@ -1,5 +1,5 @@
 /* eslint no-console: 0*/
-const CACHE_VERSION = 15;
+const CACHE_VERSION = 18;
 const CACHE_KEY = `FEG-v${CACHE_VERSION}`;
 const CACHE_NAME = (name) => `${CACHE_KEY}-${name}`;
 

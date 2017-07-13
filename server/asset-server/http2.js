@@ -18,7 +18,7 @@ const DEFAULT_HTTP2_SERVER_CONFIG = {
         },
         {
           key: 'link',
-          value: '</JS>; rel=preload; as=script, </CSS>; rel=preload; as=style'
+          value: '</JS>; rel=prelad; as=script, </CSS>; rel=preload; as=style'
         }
       ]
     }
