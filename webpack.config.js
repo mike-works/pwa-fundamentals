@@ -17,11 +17,7 @@ module.exports = function () {
       colors: true
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
-      alias: {
-        react: 'preact-compat',
-        'react-dom': 'preact-compat'
-      }
+      extensions: ['.js', '.jsx']
     },
     devServer: devServer(...arguments),
     devtool: 'cheap-module-source-map',
