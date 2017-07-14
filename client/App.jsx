@@ -32,7 +32,7 @@ class App extends Component {
           <AppHeader doToggle={this.toggleSideDrawer}></AppHeader>
           <div className="content-wrapper">
             <div className="mui--appbar-height"></div>
-            <Container>
+            <Container fluid={true}>
               <Route exact path="/" component={Home}/>
             </Container>
           </div>

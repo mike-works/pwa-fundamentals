@@ -1,0 +1,45 @@
+.GroceryItem {
+  display: inline-block;
+  height: 220px;
+  width: 180px;
+  overflow: hidden;
+  margin: 10px;
+  position: relative;
+
+  &:first-child {
+    margin-left: -20px;
+  }
+
+  .item-image {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    max-width: 90%;
+  }
+
+  .item-price {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 3px;
+    border-radius: 3px;
+
+    .item-unit {
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-left: 4px;
+    }
+  }
+
+  .item-name {
+    position: absolute;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    width: 90%;
+    white-space: normal;
+  }
+}

@@ -10,9 +10,8 @@ module.exports = function (sequelize) {
     .filter(function (file) {
       return (file.indexOf('.') !== 0) && (file !== 'index.js');
     });
-  
+
   modelFiles.forEach((file) => {
-    debugger;
     let model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });

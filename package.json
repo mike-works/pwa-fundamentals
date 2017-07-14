@@ -62,6 +62,7 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
+    "cors": "^2.8.4",
     "csv-parse": "^1.2.0",
     "debug": "^2.6.8",
     "devcert": "^0.3.2",
@@ -70,7 +71,6 @@
     "sequelize": "^4.3.1",
     "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",
-    "sudo-prompt": "^7.1.0",
     "tmp": "^0.0.31"
   }
 }

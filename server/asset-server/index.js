@@ -18,7 +18,6 @@ function printServerUp(mode, port = 3000, protocol = 'http') {
   );
 }
 
-
 class AssetServer {
   constructor(prog) {
     this.program = prog;
@@ -37,7 +36,7 @@ class AssetServer {
       );
     } else {
       startH1();
-      printServerUp('HTTP/1.1');
+      printServerUp('HTTP/1.1', 3000, 'https');
     }
   }
 }

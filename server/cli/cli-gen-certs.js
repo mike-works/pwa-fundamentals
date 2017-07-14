@@ -2,7 +2,6 @@ const commander = require('commander');
 const pkgJson = require('../../package.json');
 const chalk = require('chalk');
 const getDevelopmentCertificate = require('devcert').default;
-// var sudo = require('sudo-prompt');
 
 const fs = require('fs');
 const path = require('path');

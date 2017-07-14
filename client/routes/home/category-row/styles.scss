@@ -1,0 +1,14 @@
+.CategoryRow {
+  height: 320px;
+  margin-right: -15px;
+  margin-left: -15px;
+
+  .category-name {
+    margin-left: 15px;
+  }
+
+  .grocery-item-list {
+    overflow: auto;
+    white-space: nowrap;
+  }
+}
