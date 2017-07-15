@@ -24,10 +24,8 @@ module.exports = {
     "strict": 0,
     'no-fallthrough': 0,
     "react/prop-types": 0,
-    "promise/always-return": "error",
     "promise/no-return-wrap": "error",
     "promise/param-names": "error",
-    "promise/catch-or-return": "error",
     "promise/no-native": "off",
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn"

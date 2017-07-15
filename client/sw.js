@@ -1,8 +1,12 @@
 /* eslint no-console: 0 */
-import { cleanUnusedCaches, prefetchStaticAssets }  from './sw/caches';
+import { cleanUnusedCaches, prefetchStaticAssets, handleIfPrecached, fetchWithCacheFallback } from './sw/caches';
 
 const INDEX_HTML_PATH = '/';
 const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
+
+function shouldPassThrough(url) {
+  return (url.indexOf('sockjs-node/info') >= 0) || (url.indexOf('chrome-extension') >= 0);
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(prefetchStaticAssets());
@@ -17,12 +21,25 @@ self.addEventListener('fetch', (event) => {
   let isGETRequest = request.method === 'GET';
   let isHTMLRequest = request.headers.get('accept').indexOf('text/html') !== -1;
   let isLocal = new URL(request.url).origin === location.origin;
-
-  if (isGETRequest && isHTMLRequest && isLocal) {
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match(INDEX_HTML_URL))
-    );
+  if (isGETRequest && !shouldPassThrough(request.url)) {
+    if (isHTMLRequest && isLocal) {
+      console.info('SW: HTML request: ', request.url);
+      event.respondWith(
+        fetch(event.request).catch(() => caches.match(INDEX_HTML_URL))
+      );
+    } else {
+      event.respondWith(
+        handleIfPrecached(event.request)
+          .catch(() => {
+            return fetchWithCacheFallback(event.request, 400)
+              .catch((err) => {
+                console.info('Failed: ', event.request.url, err);
+                return fetch(event.request.url);
+              });
+          })
+      );
+    }
   } else {
-    event.respondWith(caches.match(event.request).catch(() => fetch(event.request)));
+    return fetch(event.request);
   }
 });
