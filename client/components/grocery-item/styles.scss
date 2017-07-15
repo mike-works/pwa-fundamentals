@@ -1,7 +1,9 @@
+@import '../../sass/variables';
+
 .GroceryItem {
   display: inline-block;
-  height: 220px;
-  width: 180px;
+  height: $grocery-item-tile-height;
+  width: $grocery-item-tile-width;
   overflow: hidden;
   margin: 10px;
   position: relative;
@@ -37,6 +39,7 @@
 
   .item-name {
     position: absolute;
+    font-size: 1.8rem;
     top: 0;
     background: rgba(255, 255, 255, 0.8);
     width: 90%;

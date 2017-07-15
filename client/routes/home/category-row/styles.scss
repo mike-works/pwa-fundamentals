@@ -1,14 +1,28 @@
+@import '../../../sass/variables';
+
 .CategoryRow {
-  height: 320px;
+  height: $category-row-height;
   margin-right: -15px;
   margin-left: -15px;
 
   .category-name {
-    margin-left: 15px;
+    line-height: $category-row-header-height;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 20px;
   }
 
   .grocery-item-list {
+    padding-left: 40px;
     overflow: auto;
     white-space: nowrap;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .category-details-link a {
+    line-height: $category-row-header-height;
+    margin-right: 5px;
+    display: inline-block;
   }
 }

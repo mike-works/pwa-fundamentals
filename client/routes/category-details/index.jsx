@@ -1,16 +1,15 @@
 import './styles.scss';
+import GroceryItem from '../../components/grocery-item';
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import GroceryItem from '../../../components/grocery-item';
 
-class CategoryRow extends Component {
+class CategoryDetails extends Component {
   constructor(props) {
     super(props);
     this.state = { groceryItems: [] };
   }
   componentDidMount() {
-    fetch(`https://localhost:3100/api/items?category=${this.props.categoryName}`)
+    fetch(`https://localhost:3100/api/items?limit=100&category=${this.props.match.params.id}`)
       .then((resp) => resp.json())
       .then((jsonData) => {
         let groceryItems = jsonData.data;
@@ -25,18 +24,16 @@ class CategoryRow extends Component {
 
   render() {
     let itemComponents = this.state.groceryItems.map((item) => <GroceryItem key={item.id} item={item}/>)
+
     return (
-      <li className='CategoryRow'>
-        <span className="pull-right category-details-link">
-          <Link to={'/category/' + this.props.categoryName}>See More {this.props.categoryName} &gt; </Link>
-        </span>
-        <h2 className='category-name'>{this.props.categoryName}</h2>
-        <ul className="grocery-item-list">
-          {itemComponents}
-        </ul>
-      </li>
+      <div className='CategoryDetails mui--text-center'>
+        <h4 className='category-name'>{this.props.match.params.id}</h4>
+        {itemComponents.length ? itemComponents : <div className='loading'>Loading...</div>}
+      </div>
     )
   }
 }
 
-export default CategoryRow;
+
+
+export default CategoryDetails;

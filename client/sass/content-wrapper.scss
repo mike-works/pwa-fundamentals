@@ -9,10 +9,14 @@
   transition: margin-left 0.2s;
 
   @include large-screens {
-    margin-left: 200px;
+    transform: translateX(0);
 
-    .frontend-grocer.hide-sidedrawer & {
-      margin-left: 0;
+    .frontend-grocer.show-left-sidedrawer & {
+      transform: translateX(200px);
+    }
+
+    .frontend-grocer.show-right-sidedrawer & {
+      transform: translateX(-200px);
     }
   }
 }

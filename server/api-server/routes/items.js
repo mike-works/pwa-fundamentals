@@ -1,5 +1,5 @@
 
-const QUERY_DEFAULTS = { limit: 5, offset: 0 };
+const QUERY_DEFAULTS = Object.freeze({ limit: 10, offset: 0 });
 
 function capitalize(str) {
   return `${str[0].toUpperCase()}${str.substring(1)}`;
@@ -13,7 +13,7 @@ function toTitleCase(rawStr) {
 }
 
 function prepareQuery(rawQuery) {
-  let queryParams = Object.assign(QUERY_DEFAULTS, rawQuery);
+  let queryParams = Object.assign(Object.assign({}, QUERY_DEFAULTS), rawQuery);
   let { limit, offset, category } = queryParams;
   let safeQuery = { limit, offset };
   if (category) {

@@ -1,3 +1,12 @@
 $offwhite: #eee;
 $theme-background: #0288d1;
 $small-screen-width: 768px;
+
+$grocery-item-tile-height: 180px;
+$grocery-item-tile-width: 120px;
+$grocery-item-tile-padding: 15px;
+$grocery-item-tile-margin: 10px;
+
+$category-row-header-height: 32px;
+
+$category-row-height: $category-row-header-height + $grocery-item-tile-height + (2 * $grocery-item-tile-margin) + (2 * $grocery-item-tile-padding);

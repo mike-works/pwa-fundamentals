@@ -23,6 +23,7 @@ module.exports = function () {
     devtool: 'cheap-module-source-map',
     output: {
       filename: '[name]-[hash].js',
+      publicPath: '/',
       path: path.resolve(__dirname, 'dist')
     },
     module: moduleConfig(...arguments),

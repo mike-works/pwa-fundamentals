@@ -20,6 +20,22 @@
     text-decoration: none;
   }
 
+  .cart-toggle svg {
+    position: relative;
+    top: 2px;
+
+    @include large-screens {
+      top: 5px;
+    }
+  }
+
+  .cart-toggle {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
+
+  .cart-toggle,
   .sidedrawer-toggle {
     display: inline-block;
     cursor: pointer;
@@ -45,10 +61,14 @@
   }
 
   @include large-screens {
-    transform: translateX(200px);
+    transform: translateX(0);
 
-    .frontend-grocer.hide-sidedrawer & {
-      transform: translateX(0);
+    .frontend-grocer.show-left-sidedrawer & {
+      transform: translateX(200px);
+    }
+
+    .frontend-grocer.show-right-sidedrawer & {
+      transform: translateX(-200px);
     }
   }
 }
