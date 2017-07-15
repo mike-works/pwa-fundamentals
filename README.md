@@ -6,6 +6,7 @@
 <p align='center'>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" target='_blank'>
     <img height=150 src='https://user-images.githubusercontent.com/558005/28080773-5f563b0c-666d-11e7-82e1-40d7320b73ce.png' />
+    <img width=100 src='https://user-images.githubusercontent.com/558005/28242665-55010010-69ba-11e7-869a-adb94ae026f9.png' />
   </a>
 </p>
 <p align='center'>
