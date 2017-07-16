@@ -73,6 +73,18 @@ npm install -g <package-name>
 | ✔ | [eslint-plugin-babel](https://github.com/babel/eslint-plugin-babel)  | ^4.0.0 |
 | ✔ | [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)  | ^7.1.0 |
 
+
+#### Project setup
+
+Finally, while in the top-level folder of this project, run
+
+```
+npm install
+```
+
+to download all of its dependencies.
+
+
 # Files and Folders
 
 This is a free-standing client/server Progressive Web App system, including
