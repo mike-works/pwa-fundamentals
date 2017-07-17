@@ -43,7 +43,7 @@ Please make sure you have the following general software installed
 | ------------- | ------------- | ---| --- |
 | ✔ | [Node.js](http://nodejs.com/)  | >= 6.4 | [nvm](https://github.com/creationix/nvm) is highly recommended for managing multiple node versions on a single machine |
 | ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 | We'll be using several specific features of the VS Code editor. We can't force you to use it, but you'll miss out if you don't! |
-|   | [Yarn](https://yarnpkg.com/)  | >= 0.24 | An alternative to [npm](https://github.com/npm/npm) |
+| ✔ | [Yarn](https://yarnpkg.com/)  | >= 0.24 | An alternative to [npm](https://github.com/npm/npm) |
 
 #### VS Code Extensions
 
@@ -76,13 +76,11 @@ npm install -g <package-name>
 
 #### Project setup
 
-Finally, while in the top-level folder of this project, run
+Finally, while in the top-level folder of this project, download the and install this project's dependencies by running
 
 ```
-npm install
+yarn
 ```
-
-to download all of its dependencies.
 
 
 # Files and Folders
