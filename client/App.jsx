@@ -15,112 +15,22 @@ import AppFooter from './components/app-footer/';
 import Cart from './components/cart/';
 
 import Container from 'muicss/lib/react/container';
-
-// const TEMP_DATA = [
-//   {
-//     'id': 132,
-//     'groceryItem': {
-//       'id': 132,
-//       'name': '365 Organic Whole Wheat Bread',
-//       'category': 'Bakery',
-//       'imageUrl': '/images/425.jpg',
-//       'price': 3.49,
-//       'unit': 'Lb',
-//       'createdAt': '2017-07-14T09:47:01.756Z',
-//       'updatedAt': '2017-07-14T09:47:01.756Z'
-//     },
-//     'qty': 2
-//   }, {
-//     'id': 140,
-//     'groceryItem': {
-//       'id': 140,
-//       'name': 'Whole Foods Market Cupcakes, Two-Bite, Vanilla',
-//       'category': 'Bakery',
-//       'imageUrl': '/images/454.jpg',
-//       'price': 4.99,
-//       'unit': 'Each',
-//       'createdAt': '2017-07-14T09:47:01.831Z',
-//       'updatedAt': '2017-07-14T09:47:01.831Z'
-//     },
-//     'qty': 2
-//   }, {
-//     'id': 120,
-//     'groceryItem': {
-//       'id': 120,
-//       'name': '365 Whole Wheat Bread',
-//       'category': 'Bakery',
-//       'imageUrl': '/images/424.jpg',
-//       'price': 2.99,
-//       'unit': '',
-//       'createdAt': '2017-07-14T09:47:01.707Z',
-//       'updatedAt': '2017-07-14T09:47:01.707Z'
-//     },
-//     'qty': 1
-//   }, {
-//     'id': 104,
-//     'groceryItem': {
-//       'id': 104,
-//       'name': '365 Organic Sour Cream',
-//       'category': 'Dairy',
-//       'imageUrl': '/images/403.jpg',
-//       'price': 2.99,
-//       'unit': '',
-//       'createdAt': '2017-07-14T09:47:01.570Z',
-//       'updatedAt': '2017-07-14T09:47:01.570Z'
-//     },
-//     'qty': 1
-//   }, {
-//     'id': 130,
-//     'groceryItem': {
-//       'id': 130,
-//       'name': '365 Organic White Quinoa',
-//       'category': 'Frozen',
-//       'imageUrl': '/images/484.jpg',
-//       'price': 4.99,
-//       'unit': '',
-//       'createdAt': '2017-07-14T09:47:01.741Z',
-//       'updatedAt': '2017-07-14T09:47:01.741Z'
-//     },
-//     'qty': 2
-//   }
-// ];
+import CartStore from './cart-store';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { drawerShowing: 'right', cartItems: [] };
+    this.cartStore = new CartStore();
+    this.cartStore.onItemsUpdated = () => {
+      this.setState({cartItems: this.cartStore.items});
+    }
+
+    this.state = { drawerShowing: null, cartItems: this.cartStore.items };
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
     this.closeAllDrawers = this.closeAllDrawers.bind(this);
 
-    this.groceryActions = {
-
-      addItemToCart: (groceryItem) => {
-        let existingCartItem = this.state.cartItems.filter((ci) => ci.id === groceryItem.id)[0];
-        if (existingCartItem) {
-          existingCartItem.qty++;
-          this.setState({ cartItems: this.state.cartItems });
-        } else {
-          let newItem = {
-            id: groceryItem.id,
-            groceryItem,
-            qty: 1
-          };
-          this.setState({ cartItems: this.state.cartItems.concat(newItem) });
-        }
-      },
-      removeItemFromCart: (groceryItem) => {
-        let existingCartItem = this.state.cartItems.filter((ci) => ci.id === groceryItem.id)[0];
-        if (existingCartItem.qty > 1) {
-          existingCartItem.qty--;
-          this.setState({ cartItems: this.state.cartItems });
-        } else {
-          let idx = this.state.cartItems.findIndex((i) => i.id === groceryItem.id);
-          this.state.cartItems.splice(idx, 1);
-          this.setState({cartItems: this.state.cartItems});
-        }
-      }
-    }
+    this.groceryActions = this.cartStore;
 
     this.homeRoute = (props) => <Home groceryActions={this.groceryActions} {...props} />;
     this.categoryRoute = (props) => <CategoryDetails groceryActions={this.groceryActions} {...props} />;    
