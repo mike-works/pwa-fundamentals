@@ -74,7 +74,7 @@ npm install -g <package-name>
 | ✔ | [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)  | ^7.1.0 |
 
 
-#### Project setup
+#### Project setup-
 
 Finally, while in the top-level folder of this project, download the and install this project's dependencies by running
 
@@ -82,6 +82,11 @@ Finally, while in the top-level folder of this project, download the and install
 yarn
 ```
 
+We'll also need some certificates so we can run a development webserver over HTTPS. You can generate them by running
+
+```
+npm run prepcerts
+```
 
 # Files and Folders
 

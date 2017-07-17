@@ -20,6 +20,12 @@ const AppHeader = ({ doLeftToggle, doRightToggle }) => {
     </svg>
   );
 
+  let qrIcon = (
+    <svg fill="#FFFF4C" width="20pt" height="20pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="m24.309 78.371h18.98zm4.7461-14.234h9.4883v9.4883h-9.4883zm23.727-9.4883h4.7461v18.98h-4.7461zm-33.215 28.469h28.469v-28.469h-28.469zm4.7422-4.7461v-18.98h18.98v18.98zm28.473 0h9.4883v4.7461h-9.4922zm23.723-14.234h4.7461v4.7461h-4.7461zm-9.4883-9.4883h14.234v4.7461l-14.234-0.003906zm-4.7461-23.727h9.4883v9.4883h-9.4883zm18.98-9.4883h-28.469v28.469h28.469zm-4.7461 23.723h-18.98v-18.98h18.98l0.003906 18.98zm-56.938 4.7461h28.469v-28.469h-28.469zm4.7422-23.727h18.98v18.98h-18.98zm52.195 52.195h-9.4883v4.7461h14.234v-9.4883h-4.7461zm-14.234-14.234v9.4883h9.4883v-4.7461h-4.7461l0.003906-4.7422zm-33.215-33.215h9.4883v9.4883h-9.4883z" fill-rule="evenodd"/>
+    </svg>
+  );
+
   return (
     <header className='header'>
       <Appbar className='mui--appbar-line-height'>
@@ -29,7 +35,8 @@ const AppHeader = ({ doLeftToggle, doRightToggle }) => {
           <span className="mui--text-title mui--inline-block">
             <Link to="/">Frontend Grocer</Link>
           </span>
-          <a className="cart-toggle" onClick={doRightToggle}>{cartIcon}</a>
+          <a className="appbar-icon qr-reader mui--pull-right" >{qrIcon}</a>
+          <a className="appbar-icon cart-toggle mui--pull-right" onClick={doRightToggle}>{cartIcon}</a>
         </div>
       </Appbar>
     </header>

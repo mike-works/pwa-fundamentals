@@ -20,29 +20,32 @@
     text-decoration: none;
   }
 
-  .cart-toggle svg {
-    position: relative;
-    top: 2px;
+  .appbar-icon {
+    margin-right: 15px;
 
-    @include large-screens {
-      top: 5px;
+    &:last-of-type {
+      margin-right: 5px;
+    }
+
+    svg {
+      position: relative;
+      top: 2px;
+
+      @include large-screens {
+        top: 5px;
+      }
     }
   }
 
-  .cart-toggle {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-  }
-
-  .cart-toggle,
+  .appbar-icon,
   .sidedrawer-toggle {
+    margin-top: 10px;
     display: inline-block;
     cursor: pointer;
     font-size: 20px;
-    line-height: 38px;
-    width: 38px;
-    height: 38px;
+    line-height: 43px;
+    width: 43px;
+    height: 43px;
     border-radius: 50%;
     text-align: center;
     background-color: transparent;

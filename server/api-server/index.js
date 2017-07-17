@@ -5,7 +5,7 @@ var cors = require('cors');
 const path = require('path');
 const https = require('https');
 const router = require('./router');
-const getDevelopmentCertificate = require('devcert').default;
+const getDevelopmentCertificate = require('devcert-with-localhost').default;
 
 class ApiServer {
   constructor(prog) {

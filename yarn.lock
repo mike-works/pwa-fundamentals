@@ -2018,9 +2018,9 @@ detect-node@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
 
-devcert@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/devcert/-/devcert-0.3.2.tgz#01c9acb2dfe357bc7770bc1594178548ae4c2b1c"
+devcert-with-localhost@^0.3.2:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/devcert-with-localhost/-/devcert-with-localhost-0.3.3.tgz#2196c73626c54a25fc252b07f30611de4187b986"
   dependencies:
     "@types/configstore" "^2.1.1"
     "@types/debug" "^0.0.29"
