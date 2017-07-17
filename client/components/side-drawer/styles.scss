@@ -5,60 +5,43 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 200px;
+  width: $sidedrawer-width;
   overflow: auto;
   background-color: #fff;
   transition: transform 0.2s;
   z-index: 100000000;
 
   &.left {
-    transform: translateX(-200px);
+    transform: translateX(-$sidedrawer-width);
 
     &.active {
       transform: translate(0);
     }
 
     @include large-screens {
-      transform: translateX(-200px);
+      transform: translateX(-$sidedrawer-width);
     }
   }
 
   &.right {
-    right: -200px;
+    right: -$sidedrawer-width;
 
     &.active {
-      transform: translateX(-200px);
+      transform: translateX(-$sidedrawer-width);
     }
   }
 
-  ul {
+  .sidedrawer-list {
     list-style: none;
-  }
-
-  > ul {
     padding-left: 0;
 
-    > li:first-child {
-      padding-top: 15px;
+    .sidedrawer-list__item {
+      padding: 15px 22px;
+
+      &:first-child {
+        padding-top: 15px;
+      }
     }
-  }
-
-  strong {
-    display: block;
-    padding: 15px 22px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #e0e0e0;
-    }
-
-    + ul > li {
-      padding: 6px 0;
-    }
-  }
-
-  a {
-    color: white;
   }
 
   .brand {

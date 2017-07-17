@@ -20,6 +20,21 @@
     text-decoration: none;
   }
 
+  .cart-item-count-badge {
+    background: red;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: block;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
   .appbar-icon {
     margin-right: 15px;
 
@@ -67,11 +82,11 @@
     transform: translateX(0);
 
     .frontend-grocer.show-left-sidedrawer & {
-      transform: translateX(200px);
+      transform: translateX($sidedrawer-width);
     }
 
     .frontend-grocer.show-right-sidedrawer & {
-      transform: translateX(-200px);
+      transform: translateX(-$sidedrawer-width);
     }
   }
 }

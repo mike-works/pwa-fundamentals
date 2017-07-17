@@ -12,7 +12,7 @@ import 'file-loader?name=./img/launcher-icon-4x.png!./img/launcher-icon-4x.png';
 
 import { } from 'worker-loader?name=frontend-grocer-sw.js!./sw.js';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render((<App />), document.getElementById('root'));
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./frontend-grocer-sw.js')

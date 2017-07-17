@@ -23,7 +23,9 @@ class Home extends Component {
   }
 
   render() {
-    let categoryRows = this.state.categories.map((c) => <CategoryRow key={c} categoryName={c} className="category-list__item" />)
+    let categoryRows = this.state.categories.map((c) => (
+      <CategoryRow key={c} groceryActions={this.props.groceryActions} categoryName={c} className="category-list__item" />
+    ));
     return (
       <div className='Home'>
         <ul className="category-list">

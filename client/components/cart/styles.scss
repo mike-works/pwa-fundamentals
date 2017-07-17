@@ -1,0 +1,20 @@
+.cart {
+  .cart-items {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .checkout-btn {
+    margin: 10px;
+    background: green;
+    width: calc(100% - 20px);
+    font-weight: bolder;
+
+    .amt {
+      padding: 2px 5px;
+      border-radius: 2px;
+      border: 1px solid lightgreen;
+      background: darken(desaturate(green, 20%), 10%);
+    }
+  }
+}

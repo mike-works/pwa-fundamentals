@@ -1,5 +1,7 @@
 @import '../../sass/variables';
 
+$bottom-tile-height: 36px;
+
 .GroceryItem {
   display: inline-block;
   height: $grocery-item-tile-height;
@@ -19,16 +21,35 @@
     max-width: 90%;
   }
 
-  .item-price {
+  .bottom-tile {
     position: absolute;
-    bottom: 5%;
-    right: 5%;
+    bottom: 0;
+    height: $bottom-tile-height;
+    line-height: $bottom-tile-height;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+
+    &.bottom-tile--right {
+      right: 0;
+      border-top-left-radius: 3px;
+    }
+
+    &.bottom-tile--left {
+      left: 0;
+      border-top-right-radius: 3px;
+    }
+  }
+
+  &:hover .bottom-tile {
+    opacity: 1;
+  }
+
+  .item-price {
     background: green;
     color: white;
     font-weight: bold;
     font-size: 1.4rem;
-    padding: 3px;
-    border-radius: 3px;
+    padding: 0 5px;
 
     .item-unit {
       font-size: 1rem;
@@ -44,5 +65,11 @@
     background: rgba(255, 255, 255, 0.8);
     width: 90%;
     white-space: normal;
+  }
+
+  .add-item-to-cart {
+    margin-bottom: 0;
+    padding: 0 10px;
+    font-size: $bottom-tile-height;
   }
 }

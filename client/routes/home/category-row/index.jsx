@@ -24,7 +24,9 @@ class CategoryRow extends Component {
   }
 
   render() {
-    let itemComponents = this.state.groceryItems.map((item) => <GroceryItem key={item.id} item={item}/>)
+    let itemComponents = this.state.groceryItems.map((item) => (
+      <GroceryItem groceryActions={this.props.groceryActions} key={item.id} item={item}/>
+    ));
     return (
       <li className='CategoryRow'>
         <span className="pull-right category-details-link">

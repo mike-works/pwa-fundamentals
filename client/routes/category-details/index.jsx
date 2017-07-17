@@ -23,7 +23,7 @@ class CategoryDetails extends Component {
   }
 
   render() {
-    let itemComponents = this.state.groceryItems.map((item) => <GroceryItem key={item.id} item={item}/>)
+    let itemComponents = this.state.groceryItems.map((item) => <GroceryItem groceryActions={this.props.groceryActions} key={item.id} item={item}/>)
 
     return (
       <div className='CategoryDetails mui--text-center'>

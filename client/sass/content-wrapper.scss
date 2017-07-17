@@ -12,11 +12,11 @@
     transform: translateX(0);
 
     .frontend-grocer.show-left-sidedrawer & {
-      transform: translateX(200px);
+      transform: translateX($sidedrawer-width);
     }
 
     .frontend-grocer.show-right-sidedrawer & {
-      transform: translateX(-200px);
+      transform: translateX(-$sidedrawer-width);
     }
   }
 }
