@@ -9,6 +9,8 @@ const updateCartItemsRoute = require('./routes/cart/update-items');
 const createOrderRoute = require('./routes/order/create');
 const getOrdersRoute = require('./routes/order/list');
 
+const createPushSubscriptionRoute = require('./routes/push-subscription/create');
+
 module.exports = function (api) {
   let router = express.Router();
   router.get('/grocery/categories', groceryCategoriesRoute(api));
@@ -19,6 +21,8 @@ module.exports = function (api) {
 
   router.get('/orders', getOrdersRoute(api));
   router.post('/order', createOrderRoute(api));
+
+  router.post('/push-subscription', createPushSubscriptionRoute(api));
   return router;
 }
 

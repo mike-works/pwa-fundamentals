@@ -16,6 +16,14 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(cleanUnusedCaches());
 });
 
+self.addEventListener('push', (event) => {
+  let eventData = event.data.json();
+  self.registration.showNotification(eventData.notification.title, {
+    body: eventData.notification.body,
+    icon: '/img/launcher-icon-2x.png'
+  });
+});
+
 self.addEventListener('fetch', (event) => {
   let request = event.request;
   let isGETRequest = request.method === 'GET';

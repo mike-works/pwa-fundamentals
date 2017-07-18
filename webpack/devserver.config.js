@@ -6,6 +6,7 @@ module.exports = function (/*env*/) {
     host: 'localhost',
     historyApiFallback: true,
     noInfo: true,
+    compress: true,
     stats: {
       colors: true
     }

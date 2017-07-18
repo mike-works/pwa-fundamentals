@@ -17,6 +17,7 @@ module.exports = {
     "quotes": [2, "single", "avoid-escape"],
     "indent": [2, 2],
     "strict": 0,
+    "no-console": 0,
     'no-fallthrough': 0
   }
 };

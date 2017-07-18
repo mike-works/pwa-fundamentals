@@ -12,10 +12,55 @@ import { } from 'worker-loader?name=frontend-grocer-sw.js!./sw.js';
 
 ReactDOM.render((<App />), document.getElementById('root'));
 
+function askForNotificationPermission() {
+  return new Promise(function(resolve, reject) {
+    const permissionResult = Notification.requestPermission(function(result) {
+      resolve(result);
+    });
+
+    if (permissionResult) {
+      permissionResult.then(resolve, reject);
+    }
+  })
+    .then(function(permissionResult) {
+      if (permissionResult !== 'granted') {
+        throw new Error('We weren\'t granted permission.');
+      }
+    });
+}
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/')
+  ;
+  const rawData = window.atob(base64);
+  return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+}
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./frontend-grocer-sw.js')
-    .then(() => {
+    .then((registration) => {
       console.log('Service worker registered');
+      askForNotificationPermission().then(() => {
+        const subscribeOptions = {
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(
+            'BEjhXRecX4bqqTs9dsQqJOK9Vu6WWbXbKNucWUQWKdWQeibinW2EEf5FozbAotXxq2kEafSr3BUxmotklIrbY5o'
+          )
+        };
+
+        return registration.pushManager.subscribe(subscribeOptions);
+      }).then(function(pushSubscription) {
+        return fetch('https://localhost:3100/api/push-subscription', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(pushSubscription)
+        });
+      });
       return true;
     })
     .catch((err) => {
