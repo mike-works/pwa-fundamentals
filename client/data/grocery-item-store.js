@@ -34,7 +34,7 @@ export default class GroceryItemStore {
   }
 
   updateItemsForCategory(categoryName, limit = 10) {
-    fetch(`https://localhost:3100/api/grocery-items?category=${categoryName}&limit=${limit}`)
+    fetch(`https://localhost:3100/api/grocery/items?category=${categoryName}&limit=${limit}`)
       .then((resp) => resp.json())
       .then((jsonData) => {
         this._updateItems(jsonData.data);
@@ -46,7 +46,7 @@ export default class GroceryItemStore {
   }
 
   updateCategories() {
-    fetch('https://localhost:3100/api/grocery-categories')
+    fetch('https://localhost:3100/api/grocery/categories')
       .then((resp) => resp.json())
       .then((jsonData) => {
         let categories = jsonData.data.map((item) => item.category);

@@ -1,10 +1,13 @@
 const chalk = require('chalk');
-const Db = require('./db');
 const express = require('express');
-var cors = require('cors');
+const cors = require('cors');
 const path = require('path');
 const https = require('https');
+const bodyParser = require('body-parser');
+
 const router = require('./router');
+const Db = require('./db');
+
 const getDevelopmentCertificate = require('devcert-with-localhost').default;
 
 class ApiServer {
@@ -15,7 +18,7 @@ class ApiServer {
 
   _startApi() {
     this.app = express();
-
+    this.app.use(bodyParser.json());
     this.app.use(cors());
     this.app.use('/api', router(this));
     this.app.use('/images', express.static(path.join(__dirname, '..', 'images')));

@@ -2,25 +2,33 @@
 # GROCERY ITEM CATEGORIES
 ##############################
 
-GET https://localhost:3100/api/categories
+GET https://localhost:3100/api/grocery/categories
 
 ##############################
 # GROCERY ITEMS 
 ##############################
 
-GET https://localhost:3100/api/items
+GET https://localhost:3100/api/grocery/items
 
 ###
 # By default this returns 10 items, but we can ask for more with the limit queryparam
 
-GET https://localhost:3100/api/items?limit=2
+GET https://localhost:3100/api/grocery/items?limit=2
 
 ###
 # Or "offset" the list of results (i.e., for pagination)
 
-GET https://localhost:3100/api/items?offset=10
+GET https://localhost:3100/api/grocery/items?offset=10
 
 ###
 # We can also filter by category
 
-GET https://localhost:3100/api/items?category=fruit
+GET https://localhost:3100/api/grocery/items?category=fruit
+
+
+### Cart
+
+PUT https://localhost:3100/api/cart/items HTTP/1.1
+content-type: application/json
+
+{"data":[{"id":132,"groceryItem":{"id":132,"name":"365 Organic Whole Wheat Bread","category":"Bakery","imageUrl":"/images/425.jpg","price":3.49,"unit":"","createdAt":"2017-07-14T09:47:01.756Z","updatedAt":"2017-07-14T09:47:01.756Z"},"qty":1}]}

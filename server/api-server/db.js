@@ -72,9 +72,15 @@ class Db {
         process.exit(1);
       });
   }
+
+  async transaction(cb) {
+    return this.db.transaction(cb);
+  }
+
   async start() {
     await ensureDevelopmentDbExists();
     this.db = await this._connectToDatabase();
+    this.db.sync();
     this.models;
   }
 

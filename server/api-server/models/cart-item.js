@@ -1,14 +1,19 @@
-
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('grocery-item', {
-    groceryItem: { type: DataTypes.STRING },
-    category: { type: DataTypes.STRING },
-    imageUrl: { type: DataTypes.STRING },
-    price: { type: DataTypes.DOUBLE },
-    unit: { type: DataTypes.STRING }
+  const GroceryItem = require('./grocery-item')(sequelize, DataTypes);
+
+  const CartItem = sequelize.define('cart-item', {
+    qty: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 1,
+      validate: { min: 1, max: 999 }
+    }
   }, {
     indexes: [{
-      fields: ['category']
+      unique: true,
+      fields: ['groceryItemId']
     }]
   });
+  CartItem.belongsTo(GroceryItem, { as: 'groceryItem'});
+  return CartItem;
 }

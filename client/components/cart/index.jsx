@@ -18,7 +18,7 @@ const Cart = ({cartStore}) => {
       </ul>
     );
   }
-  let items = cartItems.map((item) => <CartItem cartStore={cartStore} key={item.id} cartItem={item} />);
+  let items = cartItems.map((item) => <CartItem cartStore={cartStore} key={item.groceryItem.id} cartItem={item} />);
   let grandTotal = cartItems.reduce((tot, item) => {
     return tot + (item.groceryItem.price * item.qty);
   }, 0);
