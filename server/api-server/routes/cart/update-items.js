@@ -1,8 +1,10 @@
 // @ts-check
 
+
 module.exports = function (api) {
   // const GroceryItem = api.db.models['grocery-item'];
   const CartItem = api.db.models['cart-item'];
+  const GroceryItem = api.db.models['grocery-item'];
 
   function divideCartWork(items, allPlainCartItems) {
     let toAdd = null;
@@ -11,9 +13,8 @@ module.exports = function (api) {
 
     let groceryIdsInDbCart = allPlainCartItems.map((x) => x.groceryItemId);
     let itemIds = items.map((i) => i.groceryItem.id);
-
     toAdd = items.filter((d) => groceryIdsInDbCart.indexOf(d.groceryItem.id) < 0);
-    toUpdate = items.filter((d) => groceryIdsInDbCart.indexOf(d.groceryItem.id) > 0);
+    toUpdate = items.filter((d) => groceryIdsInDbCart.indexOf(d.groceryItem.id) >= 0);
     toRemove = groceryIdsInDbCart.filter((id) => itemIds.indexOf(id) < 0);
 
     return { toAdd, toUpdate, toRemove };
@@ -55,7 +56,15 @@ module.exports = function (api) {
 
       })
     }).then(() => {
-      res.json({ data: items })
+      return CartItem.findAll({ include: [{model: GroceryItem, as: 'groceryItem'}] })
+        .then((results) => {
+          let plainResults = results.map((x) => x.get({plain: true}))
+          res.json({data: plainResults});
+          return plainResults;
+        })
+        .catch((err) => {
+          res.json({ error: `Problem fetching data: ${err}` });
+        });
     });
     // return CartItem.findAll({})
     //   .then((results) => {

@@ -23,3 +23,12 @@ button {
 .pull-left {
   float: left;
 }
+
+.badge {
+  padding: 3px 5px;
+  background: slategray;
+  color: white;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-radius: 3px;
+}

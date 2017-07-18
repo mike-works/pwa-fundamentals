@@ -26,9 +26,40 @@ GET https://localhost:3100/api/grocery/items?offset=10
 GET https://localhost:3100/api/grocery/items?category=fruit
 
 
-### Cart
+##############################
+# CURRENT SHOPPING CART
+##############################
+
+# You can set the contents of your shopping cart as follows.
 
 PUT https://localhost:3100/api/cart/items HTTP/1.1
 content-type: application/json
 
-{"data":[{"id":132,"groceryItem":{"id":132,"name":"365 Organic Whole Wheat Bread","category":"Bakery","imageUrl":"/images/425.jpg","price":3.49,"unit":"","createdAt":"2017-07-14T09:47:01.756Z","updatedAt":"2017-07-14T09:47:01.756Z"},"qty":1}]}
+{"data":
+  [
+    {"groceryItem": { "id": 132 }, "qty": 9},
+    {"groceryItem": { "id": 134 }, "qty": 2},
+    {"groceryItem": { "id": 118 }, "qty": 1},
+  ]
+}
+
+##############################
+# ORDER
+##############################
+
+# Get a collection of orders in the system
+
+GET https://localhost:3100/api/orders HTTP/1.1
+
+###
+
+POST https://localhost:3100/api/order HTTP/1.1
+content-type: application/json
+
+{"data":
+  [
+    {"groceryItem": { "id": 132 }, "qty": 9},
+    {"groceryItem": { "id": 134 }, "qty": 2},
+    {"groceryItem": { "id": 118 }, "qty": 1}
+  ]
+}

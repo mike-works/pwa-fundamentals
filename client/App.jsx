@@ -13,10 +13,13 @@ import SideDrawer from './components/side-drawer/';
 import AppHeader from './components/app-header/';
 import AppFooter from './components/app-footer/';
 import Cart from './components/cart/';
+import Orders from './components/orders/';
 
 import Container from 'muicss/lib/react/container';
+
 import CartStore from './data/cart-store';
 import GroceryItemStore from './data/grocery-item-store';
+import OrderStore from './data/order-store';
 
 class App extends Component {
   constructor(props) {
@@ -24,14 +27,20 @@ class App extends Component {
     
     this.cartStore = new CartStore();
     this.groceryItemStore = new GroceryItemStore();
-    
+    this.orderStore = new OrderStore();
+
     this.cartStore.itemListeners.register((newItems) => {
       this.setState({cartItems: newItems});
     });
 
+    this.orderStore.itemListeners.register((newItems) => {
+      this.setState({orders: newItems});
+    });
+
     this.state = {
       drawerShowing: null,
-      cartItems: this.cartStore.items
+      cartItems: this.cartStore.items,
+      orders: this.orderStore.items
     };
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
@@ -74,14 +83,16 @@ class App extends Component {
         <div className={wrapperClassNames.join(' ')}>
           <SideDrawer drawerShowing={this.state.drawerShowing === 'left'}>
             <div className="brand mui--appbar-line-height">
-              <span className="mui--text-title">Frontend Grocer</span>
+              <span className="mui--text-title">📦 Orders</span>
             </div>
             <div className="mui-divider"></div>
-            <ul>
-
-            </ul>
+            <Orders orders={this.state.orders}/>
           </SideDrawer>
           <SideDrawer side={'right'} drawerShowing={this.state.drawerShowing === 'right'}>
+            <div className="brand mui--appbar-line-height">
+              <span className="mui--text-title">🛒 Cart</span>
+            </div>
+            <div className="mui-divider"></div>
             <Cart cartStore={this.cartStore} cartItems={this.state.cartItems} />
           </SideDrawer>
           <AppHeader
