@@ -3,7 +3,7 @@ const express = require('express');
 const groceryItemsRoute = require('./routes/grocery-items');
 const groceryCategoriesRoute = require('./routes/grocery-categories');
 
-const getCartItemsRoute = require('./routes/cart/get-items');
+const getCartItemsRoute = require('./routes/cart/list-items');
 const updateCartItemsRoute = require('./routes/cart/update-items');
 
 const createOrderRoute = require('./routes/order/create');

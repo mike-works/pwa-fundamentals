@@ -93,7 +93,7 @@ class App extends Component {
               <span className="mui--text-title">🛒 Cart</span>
             </div>
             <div className="mui-divider"></div>
-            <Cart cartStore={this.cartStore} cartItems={this.state.cartItems} />
+            <Cart cartStore={this.cartStore} orderStore={this.orderStore} cartItems={this.state.cartItems} />
           </SideDrawer>
           <AppHeader
             numItemsInCart={this.state.cartItems.length}

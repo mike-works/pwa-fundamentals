@@ -19,9 +19,10 @@ module.exports = function (api) {
 
 
     let status = (req.query || {}).status;
-    switch (status.toLowerCase()) {
+    switch ((status || '').toLowerCase()) {
     case 'all': break;
     case undefined:
+    case '':
       queryOptions.where = {
         status: 'pending'
       };

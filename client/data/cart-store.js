@@ -4,7 +4,11 @@ import ListenerSupport from './listener-support';
 
 export default class CartStore {
   constructor() {
-    this._items = this._restoreCart();
+    this._items = [];
+    this._restoreCart().then((newItems) => {
+      this._items = newItems;
+      this.onItemsUpdated();
+    });
     this.itemListeners = new ListenerSupport();
   }
 
@@ -13,13 +17,9 @@ export default class CartStore {
   }
 
   _restoreCart() {
-    fetch('https://localhost:3100/api/cart/items')
+    return fetch('https://localhost:3100/api/cart/items')
       .then((resp) => resp.json())
-      .then((jsonData) => {
-        this._items = [...(jsonData.data || [])];
-        this.onItemsUpdated();
-      });
-    return [];
+      .then((jsonData) =>  [...(jsonData.data || [])]);
   }
 
   _saveCart() {
@@ -31,6 +31,20 @@ export default class CartStore {
       },
       body: JSON.stringify({data: this._items})
     });
+  }
+
+  doCheckout() {
+    return fetch('https://localhost:3100/api/order', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({data: this._items})
+    }).then(this._restoreCart)
+      .then((newItems) => {
+        this._items = newItems;
+        this.onItemsUpdated();
+      });
   }
 
   addItemToCart(groceryItem) {

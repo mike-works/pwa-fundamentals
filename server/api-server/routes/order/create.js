@@ -1,4 +1,6 @@
 // @ts-check
+let moment = require('moment');
+
 
 module.exports = function (api) {
 
@@ -6,30 +8,6 @@ module.exports = function (api) {
   const Order = api.db.models['order'];
   const CartItem = api.db.models['cart-item'];
   const GroceryItem = api.db.models['grocery-item'];
-
-  // function divideCartWork(items, allPlainCartItems) {
-  //   let toAdd = null;
-  //   let toUpdate = null;
-  //   let toRemove = null;
-
-  //   let groceryIdsInDbCart = allPlainCartItems.map((x) => x.groceryItemId);
-  //   let itemIds = items.map((i) => i.groceryItem.id);
-  //   toAdd = items.filter((d) => groceryIdsInDbCart.indexOf(d.groceryItem.id) < 0);
-  //   toUpdate = items.filter((d) => groceryIdsInDbCart.indexOf(d.groceryItem.id) >= 0);
-  //   toRemove = groceryIdsInDbCart.filter((id) => itemIds.indexOf(id) < 0);
-
-  //   return { toAdd, toUpdate, toRemove };
-  // }
-
-  // function addCartItems(items) {
-  //   return Promise.all(items.map((item) => {
-  //     return CartItem.findOrCreate({ where: { groceryItemId: item.groceryItem.id } }).then(([cartItem]) => {
-  //       return cartItem.update({
-  //         qty: item.qty
-  //       });
-  //     });
-  //   }));
-  // }
 
   return function (req, res) {
     
@@ -43,7 +21,10 @@ module.exports = function (api) {
         if (groceryItems.length === 0) {
           return Promise.reject('No items in order!');
         }
-        return Order.create({totalPrice: 0}).then((order) => {
+        return Order.create({
+          name: 'TBD',
+          totalPrice: 0
+        }).then((order) => {
           let totalPrice = 0;
           return Promise.all(groceryItems.map((groceryItem) => {
             let qty = (items.filter((i) => i.groceryItem.id === groceryItem.id)[0]).qty;
@@ -54,11 +35,17 @@ module.exports = function (api) {
               qty
             });
           })).then(() => {
+            let orderName = `Order placed at ${moment(order.createdAt).format('dd, MMM D YY, h:mm a')}`;
             return order.update({
+              name: orderName,
               totalPrice: 0.01 * Math.round(totalPrice * 100)
             });
           });
         });
+      }).then((data) => { 
+        return CartItem.destroy({
+          truncate: true
+        }).then(() => data);
       });
     }).then((o) => {
       return Order.find({where: {id: o.id}, include: [{
