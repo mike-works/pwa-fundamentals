@@ -18,6 +18,7 @@ class ApiServer {
 
   _startApi() {
     this.app = express();
+    this.app.disable('x-powered-by');
     this.app.use(bodyParser.json());
     this.app.use(cors());
     this.app.use('/api', router(this));
