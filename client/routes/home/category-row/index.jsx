@@ -7,25 +7,29 @@ import GroceryItem from '../../../components/grocery-item';
 class CategoryRow extends Component {
   constructor(props) {
     super(props);
-    this.state = { groceryItems: [] };
+    this.state = {
+      groceryItems: this.props.groceryItemStore.itemsForCategory(this.props.categoryName)
+    };
   }
   componentDidMount() {
-    fetch(`https://localhost:3100/api/items?category=${this.props.categoryName}`)
-      .then((resp) => resp.json())
-      .then((jsonData) => {
-        let groceryItems = jsonData.data;
-        this.setState({ groceryItems });
-        return groceryItems;
-      })
-      .catch((err) => {
-        // eslint-disable-next-line
-        console.error('Error fetching grocery items', err);
-      });
+    this._itemUpdateListener = () => {
+      let groceryItems = this.props.groceryItemStore.itemsForCategory(this.props.categoryName);
+      this.setState({ groceryItems });
+    };
+    this.props.groceryItemStore.itemListeners.register(this._itemUpdateListener);
+    this.props.groceryItemStore.updateItemsForCategory(this.props.categoryName, 10);
+  }
+
+  componentWillUnmount() {
+    this.props.groceryItemStore.itemListeners.unregister(this._itemUpdateListener);
   }
 
   render() {
     let itemComponents = this.state.groceryItems.map((item) => (
-      <GroceryItem groceryActions={this.props.groceryActions} key={item.id} item={item}/>
+      <GroceryItem
+        cartStore={this.props.cartStore}
+        key={item.id}
+        item={item}/>
     ));
     return (
       <li className='CategoryRow'>

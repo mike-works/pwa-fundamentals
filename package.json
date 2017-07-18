@@ -72,6 +72,7 @@
     "sequelize": "^4.3.1",
     "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",
-    "tmp": "^0.0.31"
+    "tmp": "^0.0.31",
+    "web-push": "^3.2.2"
   }
 }

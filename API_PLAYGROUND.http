@@ -1,0 +1,26 @@
+##############################
+# GROCERY ITEM CATEGORIES
+##############################
+
+GET https://localhost:3100/api/categories
+
+##############################
+# GROCERY ITEMS 
+##############################
+
+GET https://localhost:3100/api/items
+
+###
+# By default this returns 10 items, but we can ask for more with the limit queryparam
+
+GET https://localhost:3100/api/items?limit=2
+
+###
+# Or "offset" the list of results (i.e., for pagination)
+
+GET https://localhost:3100/api/items?offset=10
+
+###
+# We can also filter by category
+
+GET https://localhost:3100/api/items?category=fruit

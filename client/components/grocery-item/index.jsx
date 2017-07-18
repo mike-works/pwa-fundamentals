@@ -1,3 +1,5 @@
+// @ts-check
+
 import React from 'react';
 
 import './styles.scss';
@@ -6,7 +8,7 @@ function formatPrice(rawPrice) {
   return `$${rawPrice.toFixed(2)}`;
 }
 
-const GroceryItem = ({ item, groceryActions }) => {
+const GroceryItem = ({ item, cartStore }) => {
   let itemUrl = `https://localhost:3100${item.imageUrl}`;
   let price = formatPrice(item.price);
   let unit = item.unit;
@@ -19,7 +21,7 @@ const GroceryItem = ({ item, groceryActions }) => {
         {unit ? <span className='item-unit'>{unit}</span> : ''}
       </span>
       <button onClick={() => {
-        groceryActions.addItemToCart(item)
+        cartStore.addItemToCart(item)
       }} className="add-item-to-cart bottom-tile bottom-tile--left mui-btn mui-btn--accent" >+</button>
     </li>
   )

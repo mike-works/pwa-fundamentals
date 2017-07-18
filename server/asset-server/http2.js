@@ -25,14 +25,14 @@ const DEFAULT_HTTP2_SERVER_CONFIG = {
   ]
 };
 
-// const CSS_REGEX = /<link href="(app-[0-9a-f]+.css)" rel="stylesheet">/g
-const JS_REGEX = /<script type="text\/javascript" src="(app-[0-9a-f]+.js)">/g
+// const CSS_REGEX = /<link href="\/(app-[0-9a-f]+.css)" rel="stylesheet">/g
+const JS_REGEX = /<script type="text\/javascript" src="\/(app-[0-9a-f]+.js)">/g
 
 function generateConfig(configPath) {
   debug('generating server configuration');
   let html = fs.readFileSync(path.join(__dirname, '..', '..', 'dist', 'index.html')).toString();
   // let [, cssFilename] = CSS_REGEX.exec(html);
-  let [, jsFilename] = JS_REGEX.exec(html);
+  let jsFilename = JS_REGEX.exec(html)[1];
 
   let cfg = Object.assign({}, DEFAULT_HTTP2_SERVER_CONFIG);
   cfg.headers[0].headers[1].value = cfg.headers[0].headers[1].value

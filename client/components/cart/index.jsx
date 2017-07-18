@@ -7,7 +7,8 @@ function formatPrice(price) {
   return `$${price.toFixed(2)}`;
 }
 
-const Cart = ({cartItems = [], groceryActions}) => {
+const Cart = ({cartStore}) => {
+  let cartItems = cartStore.items;
   if (cartItems.length === 0) {
     return (
       <ul className='sidedrawer-list'>
@@ -17,7 +18,7 @@ const Cart = ({cartItems = [], groceryActions}) => {
       </ul>
     );
   }
-  let items = cartItems.map((item) => <CartItem groceryActions={groceryActions} key={item.id} cartItem={item} />);
+  let items = cartItems.map((item) => <CartItem cartStore={cartStore} key={item.id} cartItem={item} />);
   let grandTotal = cartItems.reduce((tot, item) => {
     return tot + (item.groceryItem.price * item.qty);
   }, 0);

@@ -8,6 +8,7 @@
   ],
   "vsicons.associations.files": [
      { "icon": "license", "extensions": ["license-exercises"], "filename": true, "format": "svg" },
-     { "icon": "bat", "extensions": ["run"], "filename": true, "format": "svg" }
+     { "icon": "bat", "extensions": ["run"], "filename": true, "format": "svg" },
+     { "icon": "bat", "extensions": ["rest"], "format": "svg" }
   ]
 }

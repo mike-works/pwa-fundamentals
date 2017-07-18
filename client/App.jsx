@@ -15,25 +15,40 @@ import AppFooter from './components/app-footer/';
 import Cart from './components/cart/';
 
 import Container from 'muicss/lib/react/container';
-import CartStore from './cart-store';
+import CartStore from './data/cart-store';
+import GroceryItemStore from './data/grocery-item-store';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    
     this.cartStore = new CartStore();
-    this.cartStore.onItemsUpdated = () => {
-      this.setState({cartItems: this.cartStore.items});
-    }
+    this.groceryItemStore = new GroceryItemStore();
+    
+    this.cartStore.itemListeners.register((newItems) => {
+      this.setState({cartItems: newItems});
+    });
 
-    this.state = { drawerShowing: null, cartItems: this.cartStore.items };
+    this.state = {
+      drawerShowing: null,
+      cartItems: this.cartStore.items
+    };
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
     this.closeAllDrawers = this.closeAllDrawers.bind(this);
 
-    this.groceryActions = this.cartStore;
-
-    this.homeRoute = (props) => <Home groceryActions={this.groceryActions} {...props} />;
-    this.categoryRoute = (props) => <CategoryDetails groceryActions={this.groceryActions} {...props} />;    
+    this.homeRoute = (props) => (
+      <Home
+        cartStore={this.cartStore}
+        groceryItemStore={this.groceryItemStore}
+        {...props} />
+    );
+    this.categoryRoute = (props) => (
+      <CategoryDetails
+        cartStore={this.cartStore}
+        groceryItemStore={this.groceryItemStore}
+        {...props} />
+    );    
   }
 
   toggleLeftDrawer() {
@@ -67,7 +82,7 @@ class App extends Component {
             </ul>
           </SideDrawer>
           <SideDrawer side={'right'} drawerShowing={this.state.drawerShowing === 'right'}>
-            <Cart groceryActions={this.groceryActions} cartItems={this.state.cartItems} />
+            <Cart cartStore={this.cartStore} cartItems={this.state.cartItems} />
           </SideDrawer>
           <AppHeader
             numItemsInCart={this.state.cartItems.length}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import './styles.scss';
 
-const CartItem = ({cartItem, groceryActions}) => {
+const CartItem = ({cartItem, cartStore}) => {
   let itemImgUrl = `https://localhost:3100${cartItem.groceryItem.imageUrl}`;
   let totalPrice = cartItem.qty * cartItem.groceryItem.price;
   function formatPrice(price) {
@@ -12,11 +12,11 @@ const CartItem = ({cartItem, groceryActions}) => {
     <tr className='sidedrawer-list__item cart-item'>
       <td className='cart-item__qty'>
         <button onClick={() => {
-          groceryActions.addItemToCart(cartItem.groceryItem)
+          cartStore.addItemToCart(cartItem.groceryItem)
         }} className="qty-up">▲</button>
         <div className="amt">{cartItem.qty}</div>
         <button onClick={() => {
-          groceryActions.removeItemFromCart(cartItem.groceryItem)
+          cartStore.removeItemFromCart(cartItem.groceryItem)
         }} className="qty-up">▼</button>
       </td>
       <td className='cart-item__img'>

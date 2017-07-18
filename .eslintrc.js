@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "quotes": [2, "single", "avoid-escape"],
     "indent": [2, 2],
+    "no-console": 0,
     "strict": 0,
     'no-fallthrough': 0,
     "react/prop-types": 0,

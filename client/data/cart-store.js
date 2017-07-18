@@ -1,3 +1,6 @@
+// @ts-check
+
+import ListenerSupport from './listener-support';
 
 const TEMP_DATA = [
   {
@@ -70,40 +73,49 @@ const TEMP_DATA = [
 
 export default class CartStore {
   constructor() {
-    this.items = this.restoreCart();
+    this._items = this._restoreCart();
+    this.itemListeners = new ListenerSupport();
   }
 
-  restoreCart() {
+  get items() {
+    return Object.freeze(this._items);
+  }
+
+  _restoreCart() {
     return TEMP_DATA;
+  }
+
+  _saveCart() {
+    this.onItemsUpdated();
   }
 
   addItemToCart(groceryItem) {
     let existingCartItem = this.items.filter((ci) => ci.id === groceryItem.id)[0];
     if (existingCartItem) {
       existingCartItem.qty++;
-      this.onItemsUpdated();
     } else {
       let newItem = {
         id: groceryItem.id,
         groceryItem,
         qty: 1
       };
-      this.items = this.items.concat(newItem);
-      this.onItemsUpdated();
+      this._items = this.items.concat(newItem);
     }
+    this._saveCart();
   }
 
   removeItemFromCart(groceryItem) {
     let existingCartItem = this.items.filter((ci) => ci.id === groceryItem.id)[0];
     if (existingCartItem.qty > 1) {
       existingCartItem.qty--;
-      this.onItemsUpdated();
     } else {
       let idx = this.items.findIndex((i) => i.id === groceryItem.id);
-      this.items.splice(idx, 1);
-      this.onItemsUpdated();
+      this._items.splice(idx, 1);
     }
+    this._saveCart();
   }
 
-  onItemsUpdated() { }
+  onItemsUpdated() {
+    this.itemListeners.fire(this.items);
+  }
 }

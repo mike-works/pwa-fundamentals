@@ -6,25 +6,23 @@ import CategoryRow from './category-row';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { categories: [] };
+    this.state = { categories: this.props.groceryItemStore.categories };
   }
   componentDidMount() {
-    fetch('https://localhost:3100/api/categories')
-      .then((resp) => resp.json())
-      .then((jsonData) => {
-        let categories = jsonData.data.map((item) => item.category);
-        this.setState({ categories });
-        return categories;
-      })
-      .catch((err) => {
-        // eslint-disable-next-line
-        console.error('Error fetching categories', err);
-      });
+    this.props.groceryItemStore.categoryListeners.register((newCategories) => {
+      this.setState({categories: newCategories});
+    })
+    this.props.groceryItemStore.updateCategories();
   }
 
   render() {
     let categoryRows = this.state.categories.map((c) => (
-      <CategoryRow key={c} groceryActions={this.props.groceryActions} categoryName={c} className="category-list__item" />
+      <CategoryRow
+        className="category-list__item"
+        key={c}
+        cartStore={this.props.cartStore}
+        groceryItemStore={this.props.groceryItemStore}
+        categoryName={c} />
     ));
     return (
       <div className='Home'>
