@@ -3,7 +3,7 @@
 .content-wrapper {
   margin-bottom: -160px;
   margin-left: 0;
-  min-height: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
   padding-bottom: 160px;
   transition: margin-left 0.2s;
@@ -19,4 +19,9 @@
       transform: translateX(-$sidedrawer-width);
     }
   }
+}
+
+.bg-white {
+  background: #fff;
+  border: 1px solid #e0e0e0;
 }

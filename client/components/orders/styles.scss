@@ -1,0 +1,20 @@
+.orders-list {
+  .orders-list-item.sidedrawer-list__item {
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 5px;
+
+    &:hover {
+      background: lightyellow;
+    }
+
+    .price {
+      color: green;
+    }
+
+    & > a,
+    & > a:hover {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}

@@ -16,8 +16,32 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(cleanUnusedCaches());
 });
 
+self.addEventListener('notificationclick', function(event) {
+  // event.notification.close();
+  // event.notification
+  console.log(event);
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(self.clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      // if (client.url == 'https://localhost:3000')
+      return client.focus();
+    }
+    if (self.clients.openWindow)
+      return self.clients.openWindow('https://localhost:3000');
+  }));
+});
+
 self.addEventListener('push', (event) => {
   let eventData = event.data.json();
+  // let notification = new Notification();
+  // notification.onclick = function() {
+  //   event.preventDefault(); // prevent the browser from focusing the Notification's tab
+  //   window.open('http://www.mozilla.org', '_blank');
+  // }
   self.registration.showNotification(eventData.notification.title, {
     body: eventData.notification.body,
     icon: '/img/launcher-icon-2x.png'

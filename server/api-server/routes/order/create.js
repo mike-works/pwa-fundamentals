@@ -1,6 +1,17 @@
 // @ts-check
 let moment = require('moment');
 
+function beginNotificationSequence(api, order) {
+  let p = api.notifications
+    .pushWithDelay(2000, {title: order.name, body: 'We\'ve started shopping'});
+  let orderItems = order.getorderItems();
+  process.stdout.write('\n\nzzzITEMS' + JSON.stringify(orderItems) + '\n\n');
+  orderItems.forEach((orderItem) => {
+    p = p.then(() => {
+      return api.notifications.pushWithDelay(1000, {title: order.name, body: `In cart: ${orderItem.qty}x ${orderItem.groceryItem.name}`});
+    });
+  });
+}
 
 module.exports = function (api) {
 
@@ -35,7 +46,7 @@ module.exports = function (api) {
               qty
             });
           })).then(() => {
-            let orderName = `Order placed at ${moment(order.createdAt).format('dd, MMM D YY, h:mm a')}`;
+            let orderName = `Order placed at ${moment(order.createdAt).format('ddd, MMM D YY, h:mm a')}`;
             return order.update({
               name: orderName,
               totalPrice: 0.01 * Math.round(totalPrice * 100)
@@ -48,6 +59,7 @@ module.exports = function (api) {
         }).then(() => data);
       });
     }).then((o) => {
+      beginNotificationSequence(api, o);
       return Order.find({where: {id: o.id}, include: [{
         model: OrderItem,
         as: 'orderItems',

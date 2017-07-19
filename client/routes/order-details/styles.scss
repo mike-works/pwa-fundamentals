@@ -1,0 +1,44 @@
+.order-details {
+  .order-items {
+    margin-top: 20px;
+
+    .order-item {
+      .mui-panel {
+        height: 200px;
+        position: relative;
+
+        .item-name {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.9);
+          padding: 15px;
+          margin-top: 0;
+        }
+
+        .bottom {
+          position: absolute;
+          bottom: 0;
+          font-size: 2rem;
+
+          .item-qty {
+            font-weight: bolder;
+          }
+
+          .item-price {
+            color: green;
+            margin-left: 5px;
+          }
+        }
+
+        .item-img {
+          max-height: 100%;
+          max-width: 100%;
+          margin-left: -15px;
+          margin-right: -15px;
+        }
+      }
+    }
+  }
+}

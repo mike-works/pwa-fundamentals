@@ -22,6 +22,12 @@ export default class OrderStore {
       });
   }
 
+  getOrderById(id) {
+    return fetch(`https://localhost:3100/api/orders/${id}`)
+      .then((resp) => resp.json())
+      .then((jsonData) => jsonData.data);
+  }
+
   onOrdersUpdated() {
     this.itemListeners.fire(this.items);
   }

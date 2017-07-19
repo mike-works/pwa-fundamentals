@@ -4,29 +4,17 @@ const cors = require('cors');
 const path = require('path');
 const https = require('https');
 const bodyParser = require('body-parser');
-const webpush = require('web-push');
 
 const router = require('./router');
 const Db = require('./db');
-
+const NotificationManager = require('./utils/notification');
 const getDevelopmentCertificate = require('devcert-with-localhost').default;
-
-const vapidKeys = {
-  publicKey:
-'BEjhXRecX4bqqTs9dsQqJOK9Vu6WWbXbKNucWUQWKdWQeibinW2EEf5FozbAotXxq2kEafSr3BUxmotklIrbY5o',
-  privateKey: 'SdU7EuFWIRoCr66Igzt0LFhN7RiP65jAZOJOloxh17s'
-};
-
-webpush.setVapidDetails(
-  'mailto:mike@mike.works',
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
-);
 
 class ApiServer {
   constructor(prog) {
     this.program = prog;
     this.db = new Db();
+    this.notifications = null;
   }
 
   _startApi() {
@@ -45,6 +33,7 @@ class ApiServer {
   }
   async start() {
     await this.db.start();
+    this.notifications = new NotificationManager(this);
     this._startApi();
   }
 }

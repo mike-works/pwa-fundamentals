@@ -8,6 +8,7 @@ import './sass/content-wrapper.scss';
 
 import Home from './routes/home/';
 import CategoryDetails from './routes/category-details/';
+import OrderDetails from './routes/order-details/';
 
 import SideDrawer from './components/side-drawer/';
 import AppHeader from './components/app-header/';
@@ -57,7 +58,12 @@ class App extends Component {
         cartStore={this.cartStore}
         groceryItemStore={this.groceryItemStore}
         {...props} />
-    );    
+    );
+    this.orderRoute = (props) => (
+      <OrderDetails
+        orderStore={this.orderStore}
+        {...props} />
+    );
   }
 
   toggleLeftDrawer() {
@@ -103,6 +109,7 @@ class App extends Component {
             <Container fluid={true}>
               <Route exact foo='bar' path="/" component={this.homeRoute} />
               <Route exact path="/category/:id" component={this.categoryRoute} />
+              <Route exact path="/order/:id" component={this.orderRoute} />
             </Container>
           </div>
           <AppFooter></AppFooter>
