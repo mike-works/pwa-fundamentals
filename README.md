@@ -89,6 +89,14 @@ We'll also need some certificates so we can run a development webserver over HTT
 npm run prepcerts
 ```
 
+To start the server, run
+
+```
+./run serve
+```
+
+(Pro tip: If everything looks like it works, but you can't access the page in your browser, make sure you're using *HTTPS*. Try [https://localhost:3000/](https://localhost:3000/).)
+
 # Files and Folders
 
 This is a free-standing client/server Progressive Web App system, including
