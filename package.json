@@ -16,7 +16,7 @@
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
-    "start": "node ./server/index.js",
+    "start": "./run serve",
     "prepcerts": "./run gen-certs && rm -rf dist/*.pem && cp private/*.pem dist/"
   },
   "devDependencies": {
