@@ -112,7 +112,7 @@ This is a free-standing client/server Progressive Web App system, including
  │  ├─ components/     📊 React components
  │  │  │
  │  │  ├─ my-thing/index.jsx        Component implementation
- │  │  ├─ my-thing/index.text.js    Component tests
+ │  │  ├─ my-thing/index.test.js    Component tests
  │  │  └─ my-thing/styles.scss      Component styles
  │  │
  │  ├─ routes/         🔝 Top-level React components, each corresponding to a "page" in our app
