@@ -92,8 +92,7 @@ npm run prepcerts
 To start the server, run
 
 ```
-./run serve # macOS and Linux
-run.bat serve # Windows
+./run serve
 ```
 
 (Pro tip: If everything looks like it works, but you can't access the page in your browser, make sure you're using *HTTPS*. Try [https://localhost:3000/](https://localhost:3000/).)
