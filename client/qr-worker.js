@@ -1,4 +1,7 @@
 import QrCode from 'qrcode-reader';
+import {
+  qrCodeStringToObject
+} from './utils/qrcode';
 
 self.onmessage = ({ data }) => {
   let qr = new QrCode();
@@ -7,15 +10,8 @@ self.onmessage = ({ data }) => {
       self.postMessage({ error });
       return;
     }
-    let [id, name, category, imageUrl, price, unit] = rawResult.result.split(',');
-    self.postMessage({ result: {
-      id,
-      name,
-      category,
-      imageUrl,
-      unit,
-      price: parseFloat(price)
-    }});
+    let result = qrCodeStringToObject(rawResult.result);
+    self.postMessage({ result });
   }
   qr.decode(data);
 }

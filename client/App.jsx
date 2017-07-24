@@ -23,6 +23,8 @@ import CartStore from './data/cart-store';
 import GroceryItemStore from './data/grocery-item-store';
 import OrderStore from './data/order-store';
 
+import { onQrCodeScan } from './utils/qrcode';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -82,20 +84,8 @@ class App extends Component {
     this.setState({ drawerShowing: null });
   }
 
-  beginQrScan(imageBufferData) {
-    return new Promise((resolve, reject) => {
-      let qrWorker = new Worker('/qr-worker.js');
-      qrWorker.postMessage(imageBufferData);
-      qrWorker.onmessage = (qrData) => {
-        if (qrData.data.result) {
-          resolve(qrData.data.result);
-        } else {
-          reject(qrData.data.error);
-        }
-      };
-    }).then((qrData) => {
-      this.cartStore.addItemToCart(qrData);
-    });
+  beginQrScan(imageBuffer) {
+    return onQrCodeScan(imageBuffer, this.cartStore);
   }
 
   render() {

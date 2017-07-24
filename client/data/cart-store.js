@@ -48,7 +48,8 @@ export default class CartStore {
   }
 
   addItemToCart(groceryItem) {
-    let existingCartItem = this._items.filter((ci) => ci.groceryItem.id === groceryItem.id)[0];
+    let existingCartItem = this._items
+      .filter((ci) => `${ci.groceryItem.id}` === `${groceryItem.id}`)[0];
     if (existingCartItem) {
       existingCartItem.qty++;
     } else {

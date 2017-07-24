@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import './styles.scss';
 
 import Appbar from 'muicss/lib/react/appbar';
+import { fileToImageBuffer } from '../../utils/qrcode';
+
 import {
   Link
 } from 'react-router-dom';
@@ -12,47 +14,23 @@ class AppHeader extends Component{
     super(props);
     this.onQrButtonClicked = this.onQrButtonClicked.bind(this);
     this.onQrImageSelected = this.onQrImageSelected.bind(this);
-    this.state = {
-      inputClassName: `input-field-${Math.round(Math.random() * 100000).toString(16)}`
-    }
   }
 
   onQrButtonClicked() {
-    let fileInput = document.getElementsByClassName(this.state.inputClassName)[0];
+    let fileInput = document.getElementsByClassName('qr-input')[0];
     fileInput.click();
   }
 
   onQrImageSelected(evt) {
-    //TODO handle errors properly
-    return new Promise((resolve/*, reject*/) => {
-      let { target: { files } } = evt;
-      let file = files[0];
-      var imageType = /^image\//;
-      if (!imageType.test(file.type)) {
-        throw new Error('File type not valid');
-      }
-      // Read file
-      var reader = new FileReader();
-      reader.addEventListener('load', () => {
-        let img = new Image();
-        let canvas = document.getElementsByClassName('qr-canvas')[0];
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          let ctx = canvas.getContext('2d');
-          ctx.drawImage(img,0,0);
-          let data = ctx.getImageData(0, 0, img.width, img.height);
-          resolve(data);
-        }
-        img.src = event.target.result;
-      }, false);
-
-
-      reader.readAsDataURL(file);
-    }).then((data) => {
-      this.props.doQrScan(data);
-      return data;
-    });
+    let { target: { files } } = evt;
+    let file = files[0];
+    return fileToImageBuffer(file)
+      .then((imageBuffer) => {
+        let fileInput = document.getElementsByClassName('qr-input')[0];
+        fileInput.value = null;
+        this.props.doQrScan(imageBuffer);
+        return imageBuffer;
+      });
   }
 
   render() {
@@ -91,9 +69,8 @@ class AppHeader extends Component{
             </a>
             <a 
               onClick={this.onQrButtonClicked} className="appbar-icon qr-reader mui--pull-right" >
-              {qrIcon}
-              <input className={`qr-input ${this.state.inputClassName}`} type="file" onChange={this.onQrImageSelected}/>
-              <canvas className='qr-canvas'></canvas>
+              {qrIcon}u
+              <input className='qr-input' type="file" onChange={this.onQrImageSelected}/>
             </a>
           </div>
         </Appbar>
