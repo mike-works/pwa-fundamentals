@@ -8,7 +8,7 @@ import 'file-loader?name=./img/launcher-icon-1x.png!./img/launcher-icon-1x.png';
 import 'file-loader?name=./img/launcher-icon-2x.png!./img/launcher-icon-2x.png';
 import 'file-loader?name=./img/launcher-icon-4x.png!./img/launcher-icon-4x.png';
 
-import { } from 'worker-loader?name=frontend-grocer-sw.js!./sw.js';
+import 'worker-loader?name=frontend-grocer-sw.js!./sw.js';
 
 ReactDOM.render((<App />), document.getElementById('root'));
 

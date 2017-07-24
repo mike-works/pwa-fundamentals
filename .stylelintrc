@@ -4,6 +4,7 @@
     "stylelint-scss"
   ],
   rules: {
+    "at-rule-no-unknown": [true, {"ignoreAtRules": ["mixin", "include", "content"]}],
     "length-zero-no-unit": true,
     "time-min-milliseconds": 1,
     "unit-no-unknown": true,

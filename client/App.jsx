@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import './sass/content-wrapper.scss';
+import 'worker-loader?name=qr-worker.js!./qr-worker.js';
 
 import Home from './routes/home/';
 import CategoryDetails from './routes/category-details/';
@@ -21,6 +22,8 @@ import Container from 'muicss/lib/react/container';
 import CartStore from './data/cart-store';
 import GroceryItemStore from './data/grocery-item-store';
 import OrderStore from './data/order-store';
+
+import { onQrCodeScan } from './utils/qrcode';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +49,7 @@ class App extends Component {
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
     this.closeAllDrawers = this.closeAllDrawers.bind(this);
+    this.beginQrScan = this.beginQrScan.bind(this);
 
     this.homeRoute = (props) => (
       <Home
@@ -80,6 +84,10 @@ class App extends Component {
     this.setState({ drawerShowing: null });
   }
 
+  beginQrScan(imageBuffer) {
+    return onQrCodeScan(imageBuffer, this.cartStore);
+  }
+
   render() {
     let wrapperClassNames = ['frontend-grocer'];
     if (this.state.drawerShowing === 'left') wrapperClassNames.push('show-left-sidedrawer');
@@ -103,6 +111,7 @@ class App extends Component {
           </SideDrawer>
           <AppHeader
             numItemsInCart={this.state.cartItems.length}
+            doQrScan={this.beginQrScan}
             doLeftToggle={this.toggleLeftDrawer} doRightToggle={this.toggleRightDrawer}></AppHeader>
           <div className="content-wrapper">
             <div className="mui--appbar-height"></div>
