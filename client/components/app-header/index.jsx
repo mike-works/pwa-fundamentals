@@ -69,7 +69,7 @@ class AppHeader extends Component{
             </a>
             <a 
               onClick={this.onQrButtonClicked} className="appbar-icon qr-reader mui--pull-right" >
-              {qrIcon}u
+              {qrIcon}
               <input className='qr-input' type="file" onChange={this.onQrImageSelected}/>
             </a>
           </div>

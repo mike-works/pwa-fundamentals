@@ -1,3 +1,5 @@
+import QrCode from 'qrcode-reader';
+
 export function qrCodeStringToObject(str) {
   let [id, name, category, imageUrl, price, unit] = str.split(',');
   return {
@@ -38,17 +40,29 @@ export function fileToImageBuffer(file) {
 }
 
 export function onQrCodeScan(imageBuffer, cartStore) {
-  // WEB WORKER SOLUTION
-  return new Promise((resolve, reject) => {
-    let qrWorker = new Worker('/qr-worker.js');
-    qrWorker.postMessage(imageBuffer);
-    qrWorker.onmessage = (qrData) => {
-      if (qrData.data.result) {
-        resolve(qrData.data.result);
-      } else {
-        reject(qrData.data.error);
+  return new Promise((resolve/*, reject*/) => {
+
+    // MAIN THREAD SOLUTION
+    let qr = new QrCode();
+    qr.callback = function(error, rawResult) {
+      if(error) {
+        self.postMessage({ error });
+        return;
       }
-    };
+      let result = qrCodeStringToObject(rawResult.result);
+      resolve(result);
+    }
+    qr.decode(imageBuffer);
+    // // WEB WORKER SOLUTION
+    // let qrWorker = new Worker('/qr-worker.js');
+    // qrWorker.postMessage(imageBuffer);
+    // qrWorker.onmessage = (qrData) => {
+    //   if (qrData.data.result) {
+    //     resolve(qrData.data.result);
+    //   } else {
+    //     reject(qrData.data.error);
+    //   }
+    // };
   }).then((qrData) => {
     cartStore.addItemToCart(qrData);
   });
