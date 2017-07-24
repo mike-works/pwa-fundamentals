@@ -17,7 +17,7 @@
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
     "start": "./run serve",
-    "prepcerts": "./run gen-certs && rm -rf dist/*.pem && cp private/*.pem dist/"
+    "prepcerts": "./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/"
   },
   "devDependencies": {
     "@types/react": "^15.0.35",
