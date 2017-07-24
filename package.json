@@ -2,7 +2,7 @@
   "name": "frontendgrocer",
   "version": "0.0.1",
   "description": "A grocery shopping progressive web app",
-  "main": "server/index.js",
+  "main": "server/cli/cli.js",
   "repository": "https://github.com/mike-north/pwa-workshop.git",
   "contributors": [
     "Mike North <michael.l.north@gmail.com> (https://mike.works)",
@@ -16,7 +16,7 @@
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
-    "start": "node ./server/index.js",
+    "start": "./run serve",
     "prepcerts": "./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/"
   },
   "devDependencies": {
@@ -71,6 +71,7 @@
     "express": "^4.15.3",
     "jest": "^20.0.4",
     "moment": "^2.18.1",
+    "qrcode-reader": "^1.0.2",
     "sequelize": "^4.3.1",
     "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",

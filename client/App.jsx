@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import './sass/content-wrapper.scss';
+import 'worker-loader?name=qr-worker.js!./qr-worker.js';
 
 import Home from './routes/home/';
 import CategoryDetails from './routes/category-details/';
@@ -80,6 +81,23 @@ class App extends Component {
     this.setState({ drawerShowing: null });
   }
 
+  beginQrScan(imageBufferData) {
+    return new Promise((resolve, reject) => {
+      let qrWorker = new Worker('/qr-worker.js');
+      qrWorker.postMessage(imageBufferData);
+      qrWorker.onmessage = (qrData) => {
+        if (qrData.data.result) {
+          resolve(qrData.data.result);
+        } else {
+          reject(qrData.data.error);
+        }
+      };
+    }).then((qrData) => {
+      console.log(qrData);
+      return qrData;
+    });
+  }
+
   render() {
     let wrapperClassNames = ['frontend-grocer'];
     if (this.state.drawerShowing === 'left') wrapperClassNames.push('show-left-sidedrawer');
@@ -103,6 +121,7 @@ class App extends Component {
           </SideDrawer>
           <AppHeader
             numItemsInCart={this.state.cartItems.length}
+            doQrScan={this.beginQrScan}
             doLeftToggle={this.toggleLeftDrawer} doRightToggle={this.toggleRightDrawer}></AppHeader>
           <div className="content-wrapper">
             <div className="mui--appbar-height"></div>
