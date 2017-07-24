@@ -47,6 +47,7 @@ class App extends Component {
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
     this.closeAllDrawers = this.closeAllDrawers.bind(this);
+    this.beginQrScan = this.beginQrScan.bind(this);
 
     this.homeRoute = (props) => (
       <Home
@@ -93,8 +94,7 @@ class App extends Component {
         }
       };
     }).then((qrData) => {
-      console.log(qrData);
-      return qrData;
+      this.cartStore.addItemToCart(qrData);
     });
   }
 
