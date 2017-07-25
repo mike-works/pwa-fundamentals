@@ -41,9 +41,10 @@ Please make sure you have the following general software installed
 
 | Required | Library | Version Range | Notes |
 | ------------- | ------------- | ---| --- |
-| ✔ | [Node.js](http://nodejs.com/)  | >= 6.4 | [nvm](https://github.com/creationix/nvm) is highly recommended for managing multiple node versions on a single machine |
+| ✔ | [Node.js](http://nodejs.com/)  | >= 7.10 | [nvm](https://github.com/creationix/nvm) is highly recommended for managing multiple node versions on a single machine |
 | ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 | We'll be using several specific features of the VS Code editor. We can't force you to use it, but you'll miss out if you don't! |
 | ✔ | [Yarn](https://yarnpkg.com/)  | >= 0.24 | An alternative to [npm](https://github.com/npm/npm) |
+| ✔ | [Firefox](https://www.mozilla.org/en-US/firefox/new/)  | >= 50 | We'll need Firefox briefly in order to create certificates. |
 
 #### VS Code Extensions
 
@@ -88,6 +89,14 @@ We'll also need some certificates so we can run a development webserver over HTT
 npm run prepcerts
 ```
 
+To start the server, run
+
+```
+./run serve
+```
+
+(Pro tip: If everything looks like it works, but you can't access the page in your browser, make sure you're using *HTTPS*. Try [https://localhost:3000/](https://localhost:3000/).)
+
 # Files and Folders
 
 This is a free-standing client/server Progressive Web App system, including
@@ -103,7 +112,7 @@ This is a free-standing client/server Progressive Web App system, including
  │  ├─ components/     📊 React components
  │  │  │
  │  │  ├─ my-thing/index.jsx        Component implementation
- │  │  ├─ my-thing/index.text.js    Component tests
+ │  │  ├─ my-thing/index.test.js    Component tests
  │  │  └─ my-thing/styles.scss      Component styles
  │  │
  │  ├─ routes/         🔝 Top-level React components, each corresponding to a "page" in our app
