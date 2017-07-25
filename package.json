@@ -17,7 +17,8 @@
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
     "start": "./run serve",
-    "prepcerts": "./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/"
+    "prepvapid": "web-push generate-vapid-keys --json > .vapid.json",
+    "prepcerts": "npm run prepvapid && ./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/"
   },
   "devDependencies": {
     "@types/react": "^15.0.35",
@@ -76,6 +77,6 @@
     "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",
     "tmp": "^0.0.31",
-    "web-push": "^3.2.2"
+    "web-push": "^3.0.0"
   }
 }

@@ -72,9 +72,9 @@ npm install -g <package-name>
 | ✔ | [eslint](https://github.com/eslint/eslint) | ^4.0.0 |
 | ✔ | [eslint-plugin-babel](https://github.com/babel/eslint-plugin-babel)  | ^4.0.0 |
 | ✔ | [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react)  | ^7.1.0 |
+| ✔ | [web-push](https://github.com/web-push-libs/web-push)  | ^3.0.0 |
 
-
-#### Project setup-
+#### Project setup
 
 Finally, while in the top-level folder of this project, download the and install this project's dependencies by running
 
@@ -115,7 +115,8 @@ This is a free-standing client/server Progressive Web App system, including
  ├─ db/                💾 SQLite databases
  ├─ dist/              📦 Web client development/production builds
  ├─ server/            🛒 Node.js API to support the web client
- └─ webpack/           ⚙️ Build configuration 
+ ├─ webpack/           ⚙️ Build configuration
+ └─ .vapid.json        🔐 VAPID private and public keys
 ````
 
 # How to use it

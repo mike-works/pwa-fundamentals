@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './app';
+import VAPID from './../.vapid.json';
 
 import 'file-loader?name=web-app-manifest.json!./web-app-manifest.json';
 import 'file-loader?name=./img/launcher-icon-1x.png!./img/launcher-icon-1x.png';
@@ -47,7 +48,7 @@ if ('serviceWorker' in navigator) {
         const subscribeOptions = {
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(
-            'BEjhXRecX4bqqTs9dsQqJOK9Vu6WWbXbKNucWUQWKdWQeibinW2EEf5FozbAotXxq2kEafSr3BUxmotklIrbY5o'
+            VAPID.publicKey
           )
         };
 

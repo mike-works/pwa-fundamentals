@@ -1,24 +1,21 @@
 const webpush = require('web-push');
+const VAPID = require('../../../.vapid');
 
-const triggerPushMsg = function(subscription, dataToSend) {
-  return webpush.sendNotification(subscription, dataToSend)
-    .catch((err) => {
-      if (err.statusCode === 410) {
-        console.log('deleteSubscriptionFromDatabase ', err);
-        // return deleteSubscriptionFromDatabase(subscription._id);
-      } else {
-        console.log('Subscription is no longer valid: ', err);
-      }
-    });
-};
+// const triggerPushMsg = function(subscription, dataToSend) {
+//   return webpush.sendNotification(subscription, dataToSend)
+//     .catch((err) => {
+//       if (err.statusCode === 410) {
+//         console.log('deleteSubscriptionFromDatabase ', err);
+//         // return deleteSubscriptionFromDatabase(subscription._id);
+//       } else {
+//         console.log('Subscription is no longer valid: ', err);
+//       }
+//     });
+// };
 
 let PushSubscription = null;
 
-const vapidKeys = {
-  publicKey:
-'BEjhXRecX4bqqTs9dsQqJOK9Vu6WWbXbKNucWUQWKdWQeibinW2EEf5FozbAotXxq2kEafSr3BUxmotklIrbY5o',
-  privateKey: 'SdU7EuFWIRoCr66Igzt0LFhN7RiP65jAZOJOloxh17s'
-};
+const vapidKeys = VAPID;
 
 webpush.setVapidDetails(
   'mailto:mike@mike.works',

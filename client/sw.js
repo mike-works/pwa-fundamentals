@@ -30,12 +30,40 @@ self.addEventListener('notificationclick', function(event) {
       // if (client.url == 'https://localhost:3000')
       return client.focus();
     }
-    if (self.clients.openWindow)
+    if (self.clients.openWindow) {
       return self.clients.openWindow('https://localhost:3000');
+    }
+  }
+  ));
+});
+
+
+self.addEventListener('notificationclick', function(event) {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(self.clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url == '/' && 'focus' in client)
+        return client.focus();
+    }
+    if (self.clients.openWindow)
+      return self.clients.openWindow('/');
   }));
 });
 
+
 self.addEventListener('push', (event) => {
+  if (event.data.text() === 'terminate') {
+    self.registration.unregister().then((didUnregister) => {
+      console.log('Service worker unregistered; ', didUnregister);
+    });
+  }
   let eventData = event.data.json();
   // let notification = new Notification();
   // notification.onclick = function() {
