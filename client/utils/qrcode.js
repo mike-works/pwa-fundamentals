@@ -53,16 +53,6 @@ export function onQrCodeScan(imageBuffer, cartStore) {
       resolve(result);
     }
     qr.decode(imageBuffer);
-    // // WEB WORKER SOLUTION
-    // let qrWorker = new Worker('/qr-worker.js');
-    // qrWorker.postMessage(imageBuffer);
-    // qrWorker.onmessage = (qrData) => {
-    //   if (qrData.data.result) {
-    //     resolve(qrData.data.result);
-    //   } else {
-    //     reject(qrData.data.error);
-    //   }
-    // };
   }).then((qrData) => {
     cartStore.addItemToCart(qrData);
   });

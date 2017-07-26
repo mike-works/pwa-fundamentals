@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 import './sass/content-wrapper.scss';
-import 'worker-loader?name=qr-worker.js!./qr-worker.js';
 
 import Home from './routes/home/';
 import CategoryDetails from './routes/category-details/';

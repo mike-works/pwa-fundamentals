@@ -6,7 +6,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
-// var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const extractSass = require('./extract-sass');
 const html = require('./html.config');
@@ -18,8 +18,10 @@ module.exports = function (env, options) {
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     })
-    // ,new BundleAnalyzerPlugin()
   ];
+  if (process.env.ANALYZE) {
+    plugins.push(new BundleAnalyzerPlugin())
+  }
   if (env === 'prod') {
     plugins.push(
       new webpack.LoaderOptionsPlugin({
