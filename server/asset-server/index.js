@@ -35,7 +35,7 @@ class AssetServer {
         )
       );
     } else {
-      startH1();
+      startH1(process.env.ASSETS_PLAIN_HTTP || false);
       printServerUp('HTTP/1.1', 3000, 'https');
     }
   }
