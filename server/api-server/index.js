@@ -34,6 +34,7 @@ class ApiServer {
     this.app.use(cors());
     this.app.use('/api', router(this));
     this.app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+    this.app.use('/', express.static(path.join(__dirname, '..', '..', 'dist')));
     if (!this.program.insecure) {
       debug('Attempting to get certificate');
       return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
