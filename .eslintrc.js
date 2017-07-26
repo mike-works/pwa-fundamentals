@@ -23,6 +23,8 @@ module.exports = {
     "indent": [2, 2],
     "no-console": 0,
     "strict": 0,
+    "no-unused-vars": "warn",
+    "no-debugger": "warn",
     'no-fallthrough': 0,
     "react/prop-types": 0,
     "promise/no-return-wrap": "error",
