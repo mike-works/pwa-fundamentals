@@ -1,7 +1,7 @@
 // @ts-check
 
 import ListenerSupport from './listener-support';
-// import { endpoint as API_ENDPOINT } from '../utils/api';
+import { endpoint as API_ENDPOINT } from '../utils/api';
 
 /**
  * A class for keeing track of shopping cart state
@@ -54,7 +54,9 @@ export default class CartStore {
    * @return {Promise<Array<Object>>}
    */
   _restoreCart() {
-    return Promise.resolve([]);
+    return fetch(`${API_ENDPOINT}api/cart/items`)
+      .then((response) => response.json())
+      .then((jsonData) => jsonData.data);
   }
 
   /**
