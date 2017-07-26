@@ -1,6 +1,7 @@
 // @ts-check
 
 import ListenerSupport from './listener-support';
+import { endpoint as API_ENDPOINT } from '../utils/api';
 
 export default class CartStore {
   constructor() {
@@ -17,14 +18,14 @@ export default class CartStore {
   }
 
   _restoreCart() {
-    return fetch('https://localhost:3100/api/cart/items')
+    return fetch(`${API_ENDPOINT}/api/cart/items`)
       .then((resp) => resp.json())
       .then((jsonData) =>  [...(jsonData.data || [])]);
   }
 
   _saveCart() {
     this.onItemsUpdated();
-    fetch('https://localhost:3100/api/cart/items', {
+    fetch(`${API_ENDPOINT}/api/cart/items`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
@@ -34,7 +35,7 @@ export default class CartStore {
   }
 
   doCheckout() {
-    return fetch('https://localhost:3100/api/order', {
+    return fetch(`${API_ENDPOINT}/api/order`, {
       method: 'post',
       headers: {
         'content-type': 'application/json'

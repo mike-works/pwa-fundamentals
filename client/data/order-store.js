@@ -1,6 +1,7 @@
 // @ts-check
 
 import ListenerSupport from './listener-support';
+import { endpoint as API_ENDPOINT } from '../utils/api';
 
 export default class OrderStore {
   constructor() {
@@ -14,7 +15,7 @@ export default class OrderStore {
   }
 
   refresh() {
-    return fetch('https://localhost:3100/api/orders?status=pending')
+    return fetch(`${API_ENDPOINT}/api/orders?status=pending`)
       .then((resp) => resp.json())
       .then((jsonData) => {
         this._items = [...(jsonData.data || [])];
@@ -23,7 +24,7 @@ export default class OrderStore {
   }
 
   getOrderById(id) {
-    return fetch(`https://localhost:3100/api/orders/${id}`)
+    return fetch(`${API_ENDPOINT}/api/orders/${id}`)
       .then((resp) => resp.json())
       .then((jsonData) => jsonData.data);
   }

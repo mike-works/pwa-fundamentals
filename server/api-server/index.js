@@ -10,6 +10,16 @@ const Db = require('./db');
 const NotificationManager = require('./utils/notification');
 const getDevelopmentCertificate = require('devcert-with-localhost').default;
 
+function startAndListen(app, port, protocol = 'https') {
+  return new Promise((resolve) => {
+    app.listen(port, () => {
+      debug(`App server started on ${protocol}://localhost:${port}`);
+      process.stdout.write(chalk.white(` - Starting API on ${protocol}://localhost:${port}\n\n`));
+      resolve();
+    });
+  })
+}
+
 class ApiServer {
   constructor(prog) {
     this.program = prog;
@@ -18,31 +28,21 @@ class ApiServer {
   }
 
   _startApi() {
-    return new Promise((resolve) => {
-      this.app = express();
-      this.app.disable('x-powered-by');
-      this.app.use(bodyParser.json());
-      this.app.use(cors());
-      this.app.use('/api', router(this));
-      this.app.use('/images', express.static(path.join(__dirname, '..', 'images')));
-      if (!process.env.ASSETS_PLAIN_HTTP) {
-        debug('Attempting to get certificate');
-        return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
-          debug('SSL configuration received. Starting app server');
-          https.createServer(ssl, this.app).listen(this.program.apiPort, () => {
-            debug(`App server started on https://localhost:${this.program.apiPort}`);
-            process.stdout.write(chalk.white(` - Starting API on https://localhost:${this.program.apiPort}\n\n`));
-            resolve();
-          });
-        });
-      } else {
-        this.app.listen(this.program.apiPort, () => {
-          debug(`App server started on https://localhost:${this.program.apiPort}`);
-          process.stdout.write(chalk.white(` - Starting API on https://localhost:${this.program.apiPort}\n\n`));
-          resolve();
-        });
-      }
-    })
+    this.app = express();
+    this.app.disable('x-powered-by');
+    this.app.use(bodyParser.json());
+    this.app.use(cors());
+    this.app.use('/api', router(this));
+    this.app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+    if (!this.program.insecure) {
+      debug('Attempting to get certificate');
+      return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
+        debug('SSL configuration received. Starting app server');
+        return startAndListen(https.createServer(ssl, this.app), this.program.apiPort);
+      });
+    } else {
+      return startAndListen(this.app, this.program.apiPort, 'http');
+    }
   }
   async start() {
     await this.db.start();

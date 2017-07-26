@@ -1,6 +1,7 @@
 // @ts-check
 
 import ListenerSupport from './listener-support';
+import { endpoint as API_ENDPOINT } from '../utils/api';
 
 export default class GroceryItemStore {
   constructor() {
@@ -34,7 +35,7 @@ export default class GroceryItemStore {
   }
 
   updateItemsForCategory(categoryName, limit = 10) {
-    fetch(`https://localhost:3100/api/grocery/items?category=${categoryName}&limit=${limit}`)
+    fetch(`${API_ENDPOINT}/api/grocery/items?category=${categoryName}&limit=${limit}`)
       .then((resp) => resp.json())
       .then((jsonData) => {
         this._updateItems(jsonData.data);
@@ -46,7 +47,7 @@ export default class GroceryItemStore {
   }
 
   updateCategories() {
-    fetch('https://localhost:3100/api/grocery/categories')
+    fetch(`${API_ENDPOINT}/api/grocery/categories`)
       .then((resp) => resp.json())
       .then((jsonData) => {
         let categories = jsonData.data.map((item) => item.category);

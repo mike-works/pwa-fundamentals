@@ -1,6 +1,7 @@
 // @ts-check
 
 import React from 'react';
+import { endpoint as API_ENDPOINT } from '../../utils/api';
 
 import './styles.scss';
 
@@ -9,7 +10,7 @@ function formatPrice(rawPrice) {
 }
 
 const GroceryItem = ({ item, cartStore }) => {
-  let itemUrl = `https://localhost:3100${item.imageUrl}`;
+  let itemUrl = `${API_ENDPOINT}${item.imageUrl}`;
   let price = formatPrice(item.price);
   let unit = item.unit;
   return (
