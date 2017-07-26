@@ -7278,7 +7278,7 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   dependencies:
     minimalistic-assert "^1.0.0"
 
-web-push@^3.2.2:
+web-push@^3.0.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.2.2.tgz#d2f7c5590a3037cb50e4442b5117edd6475768a5"
   dependencies:
