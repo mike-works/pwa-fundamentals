@@ -1,1 +1,1 @@
-web: $(which node) ./server/cli/cli.js -- serve --api-port $PORT
+web: $(which node) ./server/cli/cli.js -- serve --api-port $PORT --insecure
