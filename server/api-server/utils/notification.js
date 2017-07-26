@@ -1,5 +1,5 @@
 const webpush = require('web-push');
-const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../.vapid');
+const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../private/vapid');
 
 let PushSubscription = null;
 

@@ -20,7 +20,7 @@
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
     "start": "./run serve",
-    "prepvapid": "web-push generate-vapid-keys --json > .vapid.json",
+    "prepvapid": "web-push generate-vapid-keys --json > ./private/vapid.json",
     "prepcerts": "npm run prepvapid && ./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/"
   },
   "devDependencies": {

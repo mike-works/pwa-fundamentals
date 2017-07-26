@@ -6,6 +6,5 @@ cert.pem
 tmp
 db/development.sqlite
 .DS_Store
-private/*.pem
+private/*
 !private/README.md
-.vapid.json

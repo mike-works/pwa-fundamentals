@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './app';
-import VAPID from './../.vapid.json';
+import VAPID from './../private/vapid.json';
 
 import 'file-loader?name=web-app-manifest.json!./web-app-manifest.json';
 import 'file-loader?name=./img/launcher-icon-1x.png!./img/launcher-icon-1x.png';
