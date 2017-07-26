@@ -1,17 +1,5 @@
 const webpush = require('web-push');
-const VAPID = require('../../../.vapid');
-
-// const triggerPushMsg = function(subscription, dataToSend) {
-//   return webpush.sendNotification(subscription, dataToSend)
-//     .catch((err) => {
-//       if (err.statusCode === 410) {
-//         console.log('deleteSubscriptionFromDatabase ', err);
-//         // return deleteSubscriptionFromDatabase(subscription._id);
-//       } else {
-//         console.log('Subscription is no longer valid: ', err);
-//       }
-//     });
-// };
+const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../.vapid');
 
 let PushSubscription = null;
 
