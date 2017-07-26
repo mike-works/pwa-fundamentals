@@ -1,1 +1,1 @@
-export const endpoint = 'https://localhost:3100';
+export const endpoint = document.head.querySelector('meta[name="fegrocer-api-endpoint"]').content;
