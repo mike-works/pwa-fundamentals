@@ -36,14 +36,14 @@ class App extends Component {
       this.setState({cartItems: newItems});
     });
 
-    this.orderStore.itemListeners.register((newItems) => {
+    this.orderStore.orderListeners.register((newItems) => {
       this.setState({orders: newItems});
     });
 
     this.state = {
       drawerShowing: null,
       cartItems: this.cartStore.items,
-      orders: this.orderStore.items
+      orders: this.orderStore.orders
     };
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
     this.toggleRightDrawer = this.toggleRightDrawer.bind(this);

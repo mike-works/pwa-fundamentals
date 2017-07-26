@@ -8,13 +8,18 @@ class CategoryRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groceryItems: this.props.groceryItemStore.itemsForCategory(this.props.categoryName)
+      groceryItems: []
     };
   }
-  componentDidMount() {
-    this._itemUpdateListener = () => {
-      let groceryItems = this.props.groceryItemStore.itemsForCategory(this.props.categoryName);
+  _updateGroceryItems() {
+    this.props.groceryItemStore.itemsForCategory(this.props.categoryName).then((groceryItems) => {
       this.setState({ groceryItems });
+    });
+  }
+  componentDidMount() {
+    this._updateGroceryItems();
+    this._itemUpdateListener = () => {
+      this._updateGroceryItems();
     };
     this.props.groceryItemStore.itemListeners.register(this._itemUpdateListener);
     this.props.groceryItemStore.updateItemsForCategory(this.props.categoryName, 10);

@@ -10,15 +10,12 @@ const Orders = ({ orders }) => {
         <Link to={`/order/${o.id}`}>
           <p>{o.name}</p>
           <p>
-            
             <span className="mui--pull-right">
               <span className="badge">
                 {o.status}
               </span>
             </span>
-           
             <b className='price'>${o.totalPrice} </b>
-            
           </p>
         </Link>
       </li>

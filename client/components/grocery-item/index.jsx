@@ -10,12 +10,13 @@ function formatPrice(rawPrice) {
 }
 
 const GroceryItem = ({ item, cartStore }) => {
-  let itemUrl = `${API_ENDPOINT}${item.imageUrl}`;
+  let itemUrl = `${API_ENDPOINT}${item.imageUrl.substring(1)}`;
   let price = formatPrice(item.price);
+
   let unit = item.unit;
   return (
     <li className='GroceryItem mui-panel'>
-      <img className='item-image' src={itemUrl} alt={item.name}/>
+      <img className='item-image' src={itemUrl} alt={item.name} />
       <h4 className='item-name'>{item.name}</h4>
       <span className="item-price bottom-tile bottom-tile--right">
         {price}
