@@ -1,9 +1,29 @@
 import QrCode from 'qrcode-reader';
 
-export function qrCodeStringToObject(str) {
-  let [id, name, category, imageUrl, price, unit] = str.split(',');
+/**
+ * Convert QRcode data into a grocery item
+ * 
+ * @example
+ * 
+ *    let qrString = '1,Bananna,Fruit,/images/1.png,3.99,each';
+ *    let groceryItem = qrCodeStringToObject(qrString)
+ *    {
+ *      id: 1,
+ *      name: 'Bananna',
+ *      category: 'Fruit',
+ *      imageUrl: '/images/1.png'
+ *      price: 3.99
+ *      unit: 'each
+ *    }
+ * 
+ * @public
+ * @param {String} qrDataString QR code data
+ * @return {Object} grocery item corresponding to QR code data
+ */
+export function qrCodeStringToObject(qrDataString) {
+  let [id, name, category, imageUrl, price, unit] = qrDataString.split(',');
   return {
-    id,
+    id: parseInt(id, 10),
     name,
     category,
     imageUrl,
@@ -12,6 +32,14 @@ export function qrCodeStringToObject(str) {
   }
 }
 
+/**
+ * Read an image file into an image buffer.
+ * NOTE: This may be important for image processing inside a web worker
+ * 
+ * @public
+ * @param {File} file file for QRcode image (i.e., from an <input type="file" /> )
+ * @return {Promise<ImageData>} image buffer pre-loaded with QRcode image
+ */
 export function fileToImageBuffer(file) {
   return new Promise((resolve /*, reject*/) => {
     var imageType = /^image\//;
@@ -39,10 +67,20 @@ export function fileToImageBuffer(file) {
   });
 }
 
+/**
+ * Take an image buffer that's pre-populated with a QR code image
+ * and process it using the qrcode-reader library. At the end, if all looks
+ * well, add the item represented by the QRcode to the cart.
+ * 
+ * @public
+ * @param {ImageData} imageBuffer 
+ * @param {CartStore} cartStore
+ * @return {Promise}
+ */
 export function onQrCodeScan(imageBuffer, cartStore) {
   return new Promise((resolve/*, reject*/) => {
 
-    // MAIN THREAD SOLUTION
+    // BEGIN MAIN THREAD SOLUTION
     let qr = new QrCode();
     qr.callback = function(error, rawResult) {
       if(error) {
@@ -53,6 +91,8 @@ export function onQrCodeScan(imageBuffer, cartStore) {
       resolve(result);
     }
     qr.decode(imageBuffer);
+    // END MAIN THREAD SOLUTION
+    
   }).then((qrData) => {
     cartStore.addItemToCart(qrData);
   });
