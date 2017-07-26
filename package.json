@@ -8,6 +8,9 @@
     "Mike North <michael.l.north@gmail.com> (https://mike.works)",
     "Steve Kinney <hello@stevekinney.net> (https://stevekinney.net)"
   ],
+  "engines": {
+    "node": "8.2.x"
+  },
   "private": true,
   "license": "SEE LICENSE IN LICENSE and LICENSE-exercises",
   "scripts": {
