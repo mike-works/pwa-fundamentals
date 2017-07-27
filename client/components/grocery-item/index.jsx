@@ -14,10 +14,23 @@ const GroceryItem = ({ item, cartStore }) => {
   let price = formatPrice(item.price);
 
   let unit = item.unit;
+  let schemaData = {
+    '@context': 'http://schema.org',
+    '@type': 'Product',
+    'image': 'dell-30in-lcd.jpg',
+    'name': 'Dell UltraSharp 30" LCD Monitor',
+    'offers': {
+      '@type': 'Offer',
+      'price': '$1495'
+    }
+  };
   return (
     <li className='GroceryItem mui-panel'>
       <img className='item-image' src={itemUrl} alt={item.name} />
       <h4 className='item-name'>{item.name}</h4>
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
       <span className="item-price bottom-tile bottom-tile--right">
         {price}
         {unit ? <span className='item-unit'>{unit}</span> : ''}
