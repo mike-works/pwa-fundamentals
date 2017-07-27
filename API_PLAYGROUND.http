@@ -5,7 +5,7 @@
 GET https://localhost:3100/api/grocery/categories
 
 ##############################
-# GROCERY ITEMS 
+# GROCERY ITEMS
 ##############################
 
 GET https://localhost:3100/api/grocery/items
@@ -40,7 +40,7 @@ content-type: application/json
   [
     {"groceryItem": { "id": 132 }, "qty": 9},
     {"groceryItem": { "id": 134 }, "qty": 2},
-    {"groceryItem": { "id": 118 }, "qty": 1},
+    {"groceryItem": { "id": 118 }, "qty": 1}
   ]
 }
 
