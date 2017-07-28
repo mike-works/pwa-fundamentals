@@ -122,6 +122,15 @@ function fetchApiDataWithFallback(fetchEvent) {
   });
 }
 
+self.addEventListener('push', event => {
+  let { data } = event;
+  let textData = data.text();
+  if (textData === 'TERMINATE') {
+    self.registration.unregister();
+    return;
+  }
+}); 
+
 self.addEventListener('fetch', event => {
   let acceptHeader = event.request.headers.get('accept');
   let requestUrl = new URL(event.request.url);
