@@ -1,7 +1,7 @@
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 const CACHE_PREFIX = `FEG-v${CACHE_VERSION}`;
 
-const ALL_CACHES = {
+export const ALL_CACHES = {
   fallbackImages: cacheName('FALLBACK_IMAGES'),
   prefetch: cacheName('PREFETCH'),
   fallback: cacheName('FALLBACK')
