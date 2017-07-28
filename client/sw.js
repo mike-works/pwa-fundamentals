@@ -1,9 +1,45 @@
 import { precacheStaticAssets, removeUnusedCaches, ALL_CACHES, ALL_CACHES_LIST } from './sw/caches.js';
+import idb from 'idb';
 
-const FALLBACK_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
+const FALLBACK_IMAGE_URLS = [
+  'https://localhost:3100/images/fallback-grocery.png',
+  'https://localhost:3100/images/fallback-bakery.png',
+  'https://localhost:3100/images/fallback-dairy.png',
+  'https://localhost:3100/images/fallback-frozen.png',
+  'https://localhost:3100/images/fallback-fruit.png',
+  'https://localhost:3100/images/fallback-herbs.png',
+  'https://localhost:3100/images/fallback-meat.png',
+  'https://localhost:3100/images/fallback-vegetables.png'
+];
 
 const INDEX_HTML_PATH = '/';
 const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
+
+function groceryItemDb() {
+  return idb.open('groceryitem-store', 1, upgradeDb => {
+    switch(upgradeDb.oldVersion) {
+    case 0: upgradeDb.createObjectStore('grocery-items', {keyPath: 'id'});
+    }
+  })
+}
+
+function downloadGroceryItems() {
+  return groceryItemDb().then(db => {
+    fetch('https://localhost:3100/api/grocery/items?limit=99999')
+      .then((response) => response.json())
+      .then(({ data: groceryItems }) => {
+        let tx = db.transaction('grocery-items', 'readwrite');
+        tx.objectStore('grocery-items').clear();
+        tx.complete.then(() => {
+          let txx = db.transaction('grocery-items', 'readwrite');
+          groceryItems.forEach((groceryItem) => {
+            txx.objectStore('grocery-items').put(groceryItem);            
+          });
+          return txx.complete;
+        });
+      })
+  })
+}
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -11,10 +47,12 @@ self.addEventListener('install', event => {
       // get the fallback image
       caches.open(ALL_CACHES.fallbackImages)
         .then(cache => {
-          cache.add(FALLBACK_IMAGE_URL);
+          cache.addAll(FALLBACK_IMAGE_URLS);
         }),
       // populate the precache stuff
-      precacheStaticAssets()
+      precacheStaticAssets(),
+      // populate IndexedDb with grocery-items
+      downloadGroceryItems()
     ])
   )
 });
@@ -26,19 +64,35 @@ self.addEventListener('activate', (event) => {
   )
 });
 
+function fallbackImageForRequest(request) {
+  let path = new URL(request.url).pathname;
+  //   /images/123.png 
+  let itemId = parseInt(path.substr(path.lastIndexOf('/') + 1, path.lastIndexOf('.')), 10);
+  
+  return groceryItemDb().then(db => {
+    return db
+      .transaction('grocery-items')
+      .objectStore('grocery-items')
+      .get(itemId);
+  }).then((groceryItem) => {
+    let { category } = groceryItem;
+    return caches.match(`https://localhost:3100/images/fallback-${category.toLowerCase()}.png`, { cacheName: ALL_CACHES.fallbackImages });
+  });
+}
+
 function fetchImageOrFallback(fetchEvent) {
   return fetch(fetchEvent.request, { 
     mode: 'cors',
     credentials: 'omit' // in case CORS wildcard headers are present
   }).then(response => {
     if (!response.ok) {
-      return caches.match(FALLBACK_IMAGE_URL, { cacheName: ALL_CACHES.fallbackImages });
+      return fallbackImageForRequest(fetchEvent.request);      
     } else {
       return response;
     }
   }).catch(error => {
     console.error(error);
-    return caches.match(FALLBACK_IMAGE_URL, { cacheName: ALL_CACHES.fallbackImages });
+    return fallbackImageForRequest(fetchEvent.request);
   })
 }
 
