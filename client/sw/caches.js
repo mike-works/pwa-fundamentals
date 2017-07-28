@@ -44,8 +44,8 @@ export function removeUnusedCaches(cacheNamesToKeep) {
 ////////////////////
 // const ASSET_MANIFEST_URL = `${self.location.protocol}//${self.location.host}/asset-manifest.json`;
 // const RESOURCES_TO_PRECACHE = [
-//   /^app.js$/,
-//   /^web-app-manifest.json$/,
+//   /^app\.js$/,
+//   /^web-app-manifest\.json$/,
 //   /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/
 // ];
 
@@ -61,4 +61,12 @@ export function removeUnusedCaches(cacheNamesToKeep) {
 //   for (let i = 0; i < RESOURCES_TO_PRECACHE.length; i++)
 //     if (RESOURCES_TO_PRECACHE[i].test(fileName)) return true;
 //   return false;
+// }
+
+// export function precacheStaticAssets() {
+//   return fetch(ASSET_MANIFEST_URL)
+//     .then((response) => response.json())
+//     .then((assetManifestJson) => {
+//       /* do something with the asset manifest */
+//     });
 // }

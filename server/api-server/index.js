@@ -20,15 +20,11 @@ function startAndListen(app, port, protocol = 'https') {
   })
 }
 
-var whitelist = ['https://localhost:3000', 'https://localhost:5000']
+// var whitelist = ['https://localhost:3000', 'https://localhost:5000']
 var corsOptions = {
   credentials: true,
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    callback(null, true);
   }
 }
 
