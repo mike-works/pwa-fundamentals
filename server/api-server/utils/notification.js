@@ -1,14 +1,14 @@
 const webpush = require('web-push');
-// const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../private/vapid');
+const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../private/vapid');
 
 let PushSubscription = null;
 
-// console.log('VAPID', VAPID)
-// webpush.setVapidDetails(
-//   'mailto:mike@mike.works',
-//   VAPID.publicKey,
-//   VAPID.privateKey
-// );
+console.log('VAPID', VAPID)
+webpush.setVapidDetails(
+  'mailto:mike@mike.works',
+  VAPID.publicKey,
+  VAPID.privateKey
+);
   
 class NotificationManager {
   constructor(api) {
