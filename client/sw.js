@@ -129,6 +129,17 @@ self.addEventListener('push', event => {
     self.registration.unregister();
     return;
   }
+  let eventData = event.data.json();
+  if ('notification' in eventData) {
+    let { notification } = eventData;
+    self.registration.showNotification(
+      notification.title,
+      {
+        body: notification.body,
+        icon: 'https://localhost:3100/img/launcher-icon-4x.png',
+      }
+    )
+  }
 }); 
 
 self.addEventListener('fetch', event => {
