@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './app';
+import App from './App';
 // import VAPID from './../private/vapid.json';
 
 import 'file-loader?name=./img/launcher-icon-1x.png!./img/launcher-icon-1x.png';
