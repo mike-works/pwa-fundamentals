@@ -15,10 +15,10 @@
 </p>
 <p align='center'>
   <a href="https://greenkeeper.io/" title="Dependencies">
-    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-north/pwa-workshop.svg"/>
+    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-north/pwa-fundamentals.svg"/>
   </a>
-  <a href="https://travis-ci.org/mike-north/pwa-workshop" title="Build Status">
-    <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-workshop.svg?branch=solutions"/>
+  <a href="https://travis-ci.org/mike-north/pwa-fundamentals" title="Build Status">
+    <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-fundamentals.svg?branch=solutions"/>
   </a>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
     <img title="Course Outline" src="https://img.shields.io/badge/mike.works-course%20outline-blue.svg"/>
@@ -30,6 +30,9 @@
 <p align='center'>
 This is the example project used for the <a title="Mike Works, Inc." href="https://mike.works">Mike</a> and <a href="http://stevekinney.net">Steve's</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
 </p>
+
+# Are there any documents that go along with this?
+Yes! **[Here are the slides](https://docs.mike.works/pwa-fundamentals)**, and **[here's a course outline](https://mike.works/course/progressive-web-fundamentals-0d74af5)**.
 
 # Setup
 
