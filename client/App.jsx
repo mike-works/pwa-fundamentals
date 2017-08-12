@@ -4,6 +4,8 @@ import {
   Route
 } from 'react-router-dom';
 
+import 'worker-loader?name=./qr-worker.js!./qr-worker.js';
+
 import './sass/content-wrapper.scss';
 
 import Home from './routes/home/';
