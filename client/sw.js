@@ -133,8 +133,18 @@ self.addEventListener('push', event => {
   if (textData === 'TERMINATE') {
     self.registration.unregister();
     return;
-  } else {
-    console.log('PUSH RECEIVED', textData);
+  }
+  console.log('PUSH RECEIVED', textData);
+  let eventData = event.data.json();
+  if ('notification' in eventData) {
+    let { notification } = eventData;
+    self.registration.showNotification(
+      notification.title,
+      {
+        body: notification.body,
+        icon: 'https://localhost:3100/img/launcher-icon-4x.png',
+      }
+    )
   }
 })
 
