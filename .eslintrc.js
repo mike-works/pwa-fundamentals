@@ -17,20 +17,15 @@ module.exports = {
     es6: true,
     "jest/globals": true
   },
-  plugins: ['babel', 'promise', 'react', 'jest'],
+  plugins: ['babel', 'react', 'jest'],
   rules: {
     "quotes": [2, "single", "avoid-escape"],
     "indent": [2, 2],
     "no-console": 0,
     "strict": 0,
-    "no-unused-vars": "warn",
-    "no-debugger": "warn",
+    "no-unused-vars": 0,
+    "no-debugger": 0,
     'no-fallthrough': 0,
-    "react/prop-types": 0,
-    "promise/no-return-wrap": "error",
-    "promise/param-names": "error",
-    "promise/no-native": "off",
-    "promise/no-promise-in-callback": "warn",
-    "promise/no-callback-in-promise": "warn"
+    "react/prop-types": 0
   }
 };

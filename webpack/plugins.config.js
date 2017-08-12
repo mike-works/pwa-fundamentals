@@ -3,7 +3,6 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -63,14 +62,8 @@ module.exports = function (env, options) {
         }
       })
     );
-  } else {
-    plugins.push(
-      new StyleLintPlugin({
-        syntax: 'scss',
-        quiet: false
-      })
-    );
   }
+  // else { }
   plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };
