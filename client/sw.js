@@ -1,17 +1,25 @@
-const FALLBACK_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
+import { precacheStaticAssets, removeUnusedCaches, ALL_CACHES, ALL_CACHES_LIST } from './sw/caches';
 
-const FALLBACK_IMAGES = 'fallback-images';
+const FALLBACK_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
+const FALLBACK_IMAGES = ALL_CACHES.fallbackImages;
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(FALLBACK_IMAGES).then(cache => {
-      return cache.add(FALLBACK_IMAGE_URL)
-    })
+    Promise.all([
+      // Get the fallback image
+      caches.open(FALLBACK_IMAGES).then(cache => {
+        return cache.add(FALLBACK_IMAGE_URL)
+      }),
+      // Populate the precache stuff
+      precacheStaticAssets()
+    ])
   );
 });
 
-self.addEventListener('activate', () => {
-
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    removeUnusedCaches(ALL_CACHES_LIST)
+  );
 });
 
 function fetchImageOrFallback(fetchEvent) {
@@ -30,9 +38,18 @@ self.addEventListener('fetch', event => {
   let requestUrl = new URL(event.request.url);
   let isGroceryImage = acceptHeader.indexOf('image/*') >= 0 && requestUrl.pathname.indexOf('/images/') === 0;
 
-  if (acceptHeader && isGroceryImage) {
-    event.respondWith(
-      fetchImageOrFallback(event)
-    );
-  }
+  event.respondWith(
+    caches.match(event.request, { cacheName: ALL_CACHES.prefetch })
+      .then(response => {
+        // Cache hit! Return the precached response
+        if (response) return response;
+        // Handle grocery images
+        if (acceptHeader && isGroceryImage) {
+          return fetchImageOrFallback(event)
+        } else {
+          // Everything else falls back to the network
+          return fetch(event.request);
+        }
+      })
+  );
 });
