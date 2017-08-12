@@ -24,6 +24,7 @@ import 'file-loader?name=./web-app-manifest.json!./web-app-manifest.json';
 import 'file-loader?name=./apple-touch-icon-180x180.png!./img/apple-touch-icon-180x180.png';
 
 import 'worker-loader?name=./qr-worker.js!./qr-worker.js';
+import 'worker-loader?name=./sw.js!./sw.js';
 
 ReactDOM.render((<App />), document.getElementById('root'));
 
@@ -31,4 +32,8 @@ if (module.hot) {
   module.hot.accept(function () {
     console.log('Accepting the updated printMe module!');
   });
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
 }
