@@ -25,12 +25,24 @@ self.addEventListener('activate', event => {
 function fetchImageOrFallback(fetchEvent) {
   return fetch(fetchEvent.request, {mode: 'cors'})
     .then((response) => {
+      let responseClone = response.clone();
       if (!response.ok){
-        return caches.match(FALLBACK_IMAGE_URL, { cacheName: FALLBACK_IMAGES});
+        return caches.match(FALLBACK_IMAGE_URL);
       }
+      caches.open(ALL_CACHES.fallback).then(cache => {        
+        // Successful response
+        if (response.ok) {
+          // Begin the process of adding the response to the cache
+          cache.put(fetchEvent.request, responseClone);
+        }
+      })
       return response;
     })
-    .catch(() => caches.match(FALLBACK_IMAGE_URL, { cacheName: FALLBACK_IMAGES}));
+    .catch(() => {
+      return caches.match(fetchEvent.request, {cacheName: ALL_CACHES.fallback}).then(response => {
+        return response || caches.match(FALLBACK_IMAGE_URL, { cacheName: FALLBACK_IMAGES});
+      });
+    })
 }
 
 /**
