@@ -52,5 +52,5 @@ let branches = [
 
 let p = Promise.resolve();
 for (let i = 1; i < branches.length; i++) {
-  p.then(() => rebaseBranch(branches[i], branches[i-1]));
+  p = p.then(() => rebaseBranch(branches[i], branches[i-1]));
 }
