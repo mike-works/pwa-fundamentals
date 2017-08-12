@@ -6,7 +6,7 @@ function checkoutBranch(branchName) {
   console.log('CHECKOUT ', branchName);
   return new Promise((resolve, reject) => {
     let gco = exec(`git checkout ${branchName}`, (err, stdout, stderr) => {
-      console.log(branchName, stdout);
+      console.log('complete CHECKOUT ', branchName);
     });
   })
 }
