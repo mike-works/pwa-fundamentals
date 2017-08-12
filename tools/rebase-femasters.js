@@ -35,7 +35,7 @@ let branches = [
   'femasters/1-begin', 'femasters/1-complete',
   'femasters/2-begin', 'femasters/2-complete',
   'femasters/3-begin', 'femasters/3-complete',
-  'femasters/4-begin', 'femasters/4-complete'/*,
+  'femasters/4-begin', 'femasters/4-complete',
   'femasters/5-begin', 'femasters/5-complete',
   'femasters/6-begin', 'femasters/6-complete',
   'femasters/7-begin', 'femasters/7-complete',
@@ -45,7 +45,7 @@ let branches = [
   'femasters/11-begin', 'femasters/11-complete',
   'femasters/12-begin', 'femasters/12-complete',
   'femasters/13-begin', 'femasters/13-complete',
-  'femasters/final'*/
+  'femasters/final'
 ];
 
 let p = Promise.resolve();
