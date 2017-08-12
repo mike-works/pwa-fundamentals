@@ -8,7 +8,7 @@ function checkoutBranch(branchName) {
     console.log('CHECKOUT ', branchName);
     let gco = spawn('git', ['checkout', branchName]);
     gco.stdout.pipe(process.stdout);
-    gco.on('close', () => {
+    gco.on('exit', () => {
       console.log('complete CHECKOUT ', branchName)
       resolve();
     });
@@ -21,7 +21,7 @@ function rebaseOnto(baseBranchName) {
     console.log('REBASE ', baseBranchName);
     let gco = spawn('git', ['rebase', baseBranchName]);
     gco.stdout.pipe(process.stdout);
-    gco.on('close', () => {
+    gco.on('exit', () => {
       console.log('complete REBASE ', baseBranchName)
       resolve();
     });
