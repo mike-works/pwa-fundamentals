@@ -70,6 +70,7 @@ export function precacheStaticAssets() {
       let toPrefetch = Object.keys(assetManifestJson)
         .filter(_shouldPrecacheFile)
         .map(k => assetManifestJson[k]);
+      toPrefetch.push('/');
       return caches.open(ALL_CACHES.prefetch)
         .then(cache => cache.addAll(toPrefetch));
     });

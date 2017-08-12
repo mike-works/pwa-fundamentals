@@ -3,6 +3,9 @@ import { precacheStaticAssets, removeUnusedCaches, ALL_CACHES, ALL_CACHES_LIST }
 const FALLBACK_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
 const FALLBACK_IMAGES = ALL_CACHES.fallbackImages;
 
+const INDEX_HTML_PATH = '/';
+const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
+
 self.addEventListener('install', event => {
   event.waitUntil(
     Promise.all([
@@ -80,6 +83,17 @@ self.addEventListener('fetch', event => {
   let requestUrl = new URL(event.request.url);
   let isGroceryImage = acceptHeader.indexOf('image/*') >= 0 && requestUrl.pathname.indexOf('/images/') === 0;
   let isFromApi = requestUrl.origin.indexOf('localhost:3100') >= 0;
+  let isHTML = event.request.headers.get('accept').indexOf('text/html') !== -1;
+  let isLocal = new URL(event.request.url).origin === location.origin;
+
+  if (isHTML && isLocal) {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => caches.match(INDEX_HTML_URL, { cacheName: ALL_CACHES.prefetch}))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request, { cacheName: ALL_CACHES.prefetch })
       .then(response => {
