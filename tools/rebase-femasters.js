@@ -13,23 +13,21 @@ function checkoutBranch(branchName) {
   })
 }
 
-// function rebaseOnto(baseBranchName) {
-//   console.log('scheduled REBASE ', baseBranchName);
-//   return new Promise((resolve, reject) => {
-//     console.log('REBASE ', baseBranchName);
-//     let gco = spawn('git', ['rebase', baseBranchName]);
-//     gco.stdout.pipe(process.stdout);
-//     gco.on('exit', () => {
-//       console.log('complete REBASE ', baseBranchName)
-//       resolve();
-//     });
-//   });
-// }
+function rebaseOnto(baseBranchName) {
+  console.log('schedule REBASE ', baseBranchName);
+  return new Promise((resolve, reject) => {
+    console.log('begin REBASE ', baseBranchName);
+    exec(`git rebase ${baseBranchName}`, (err, stdout, stderr) => {
+      console.log('complete REBASE ', baseBranchName);
+      resolve();
+    });
+  });
+}
 
 
 function rebaseBranch(branchName, baseBranchName) {
-  return checkoutBranch(branchName);
-  // rebaseOnto(baseBranchName);
+  return checkoutBranch(branchName)
+    .then(() => rebaseOnto(baseBranchName));
 }
 
 let branches = [
