@@ -1,37 +1,31 @@
 // @ts-check
 /* eslint-env node */
-const { spawn } = require('child_process');
+const { spawnSync } = require('child_process');
 
 function checkoutBranch(branchName) {
-  console.log('scheduled CHECKOUT ', branchName);
-  return new Promise((resolve, reject) => {
-    console.log('CHECKOUT ', branchName);
-    let gco = spawn('git', ['checkout', branchName]);
-    gco.stdout.pipe(process.stdout);
-    gco.on('exit', () => {
-      console.log('complete CHECKOUT ', branchName)
-      resolve();
-    });
+  console.log('CHECKOUT ', branchName);
+  let gco = spawnSync('git', ['checkout', branchName], {
+    stdio: process.stdout
   });
 }
 
-function rebaseOnto(baseBranchName) {
-  console.log('scheduled REBASE ', baseBranchName);
-  return new Promise((resolve, reject) => {
-    console.log('REBASE ', baseBranchName);
-    let gco = spawn('git', ['rebase', baseBranchName]);
-    gco.stdout.pipe(process.stdout);
-    gco.on('exit', () => {
-      console.log('complete REBASE ', baseBranchName)
-      resolve();
-    });
-  });
-}
+// function rebaseOnto(baseBranchName) {
+//   console.log('scheduled REBASE ', baseBranchName);
+//   return new Promise((resolve, reject) => {
+//     console.log('REBASE ', baseBranchName);
+//     let gco = spawn('git', ['rebase', baseBranchName]);
+//     gco.stdout.pipe(process.stdout);
+//     gco.on('exit', () => {
+//       console.log('complete REBASE ', baseBranchName)
+//       resolve();
+//     });
+//   });
+// }
 
 
 function rebaseBranch(branchName, baseBranchName) {
-  return checkoutBranch(branchName)
-    .then(() => rebaseOnto(baseBranchName));
+  checkoutBranch(branchName);
+  // rebaseOnto(baseBranchName);
 }
 
 let branches = [
@@ -51,7 +45,6 @@ let branches = [
   'femasters/13-begin', 'femasters/13-complete',
   'femasters/final'*/
 ];
-let p = Promise.resolve();
 for (let i = 1; i < branches.length; i++) {
-  p.then(() => rebaseBranch(branches[i], branches[i-1]));
+  rebaseBranch(branches[i], branches[i-1]);
 }
