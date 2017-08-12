@@ -30,7 +30,6 @@ function rebaseOnto(baseBranchName) {
 
 
 function rebaseBranch(branchName, baseBranchName) {
-  console.log(`rebasing ${branchName} onto ${baseBranchName}`);
   return checkoutBranch(branchName)
     .then(() => rebaseOnto(baseBranchName));
 }
