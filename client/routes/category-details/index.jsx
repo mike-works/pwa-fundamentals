@@ -7,13 +7,17 @@ class CategoryDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groceryItems: this.props.groceryItemStore.itemsForCategory(this.props.match.params.id)
+      groceryItems: []
     };
+  }
+  _updateGroceryItems() {
+    this.props.groceryItemStore.itemsForCategory(this.props.match.params.id).then((groceryItems) => {
+      this.setState({ groceryItems });
+    });
   }
   componentDidMount() {
     this._itemUpdateListener = () => {
-      let groceryItems = this.props.groceryItemStore.itemsForCategory(this.props.match.params.id);
-      this.setState({ groceryItems });
+      this._updateGroceryItems();
     };
     this.props.groceryItemStore.itemListeners.register(this._itemUpdateListener);
     this.props.groceryItemStore.updateItemsForCategory(this.props.match.params.id, 100);
