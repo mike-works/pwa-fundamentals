@@ -3,10 +3,12 @@
 const { exec } = require('child_process');
 
 function checkoutBranch(branchName) {
-  console.log('CHECKOUT ', branchName);
+  console.log('schedule CHECKOUT ', branchName);
   return new Promise((resolve, reject) => {
+    console.log('begin CHECKOUT ', branchName);
     let gco = exec(`git checkout ${branchName}`, (err, stdout, stderr) => {
       console.log('complete CHECKOUT ', branchName);
+      resolve();
     });
   })
 }
