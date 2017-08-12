@@ -89,7 +89,19 @@ export default class CartStore {
    * @return {Promise} 
    */
   doCheckout() {
-    throw 'CartStore#doCheckout Not yet implemented';
+    return fetch(`${API_ENDPOINT}api/order`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ data: this._items })
+    }).then((response) => response.json())
+      .then((jsonData) => jsonData.data)
+      .then(this._restoreCart)
+      .then((newItems) => {
+        this._items = newItems;
+        this._onItemsUpdated();
+      });
   }
 
   /**
