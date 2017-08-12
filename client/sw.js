@@ -36,8 +36,23 @@ function fetchImageOrFallback(fetchEvent) {
 /**
  * @return {Promise<Response>}
  */
-function fetchApiJsonWithFallback(/* fetchEvent */) {
-  return caches.open(ALL_CACHES.fallback).then((/* cache */) => {
+function fetchApiJsonWithFallback(fetchEvent) {
+  return caches.open(ALL_CACHES.fallback).then((cache) => {
+    return fetch(fetchEvent.request)
+      .then(response => {
+        // Clone the response so we can return one and store one
+        let responseClone = response.clone();
+        // Successful response
+        if (response.ok) {
+          // Begin the process of adding the response to the cache
+          cache.put(fetchEvent.request, responseClone);
+        }
+        // Return the original response
+        return response;
+      })
+      .catch(() => {
+        return cache.match(fetchEvent.request);
+      })
     // cache.add or addAll (request or url)
   })
 
@@ -52,7 +67,7 @@ self.addEventListener('fetch', event => {
   let acceptHeader = event.request.headers.get('accept');
   let requestUrl = new URL(event.request.url);
   let isGroceryImage = acceptHeader.indexOf('image/*') >= 0 && requestUrl.pathname.indexOf('/images/') === 0;
-  let isApiJson = false;
+  let isFromApi = requestUrl.origin.indexOf('localhost:3100') >= 0;
   event.respondWith(
     caches.match(event.request, { cacheName: ALL_CACHES.prefetch })
       .then(response => {
@@ -61,7 +76,7 @@ self.addEventListener('fetch', event => {
         // Handle grocery images
         if (acceptHeader && isGroceryImage) {
           return fetchImageOrFallback(event)
-        } else if (isApiJson) {
+        } else if (isFromApi && event.request.method === 'GET') {
           return  fetchApiJsonWithFallback(event)
         } else {
           // Everything else falls back to the network
