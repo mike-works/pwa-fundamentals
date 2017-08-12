@@ -1,12 +1,14 @@
 // @ts-check
 /* eslint-env node */
-const { spawnSync } = require('child_process');
+const { exec } = require('child_process');
 
 function checkoutBranch(branchName) {
   console.log('CHECKOUT ', branchName);
-  let gco = spawnSync('git', ['checkout', branchName], {
-    stdio: process.stdout
-  });
+  return new Promise((resolve, reject) => {
+    let gco = exec(`git checkout ${branchName}`, (err, stdout, stderr) => {
+      console.log(branchName, stdout);
+    });
+  })
 }
 
 // function rebaseOnto(baseBranchName) {
@@ -24,7 +26,7 @@ function checkoutBranch(branchName) {
 
 
 function rebaseBranch(branchName, baseBranchName) {
-  checkoutBranch(branchName);
+  return checkoutBranch(branchName);
   // rebaseOnto(baseBranchName);
 }
 
@@ -45,6 +47,8 @@ let branches = [
   'femasters/13-begin', 'femasters/13-complete',
   'femasters/final'*/
 ];
+
+let p = Promise.resolve();
 for (let i = 1; i < branches.length; i++) {
-  rebaseBranch(branches[i], branches[i-1]);
+  p.then(() => rebaseBranch(branches[i], branches[i-1]));
 }
