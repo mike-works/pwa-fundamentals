@@ -27,6 +27,39 @@ import 'worker-loader?name=./sw.js!./sw.js';
 
 ReactDOM.render((<App />), document.getElementById('root'));
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+let subscribeOptions = {
+  userVisibleOnly: true,
+  applicationServerKey: urlBase64ToUint8Array(
+    VAPID.publicKey
+  )
+}
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('sw.js').then(registration => {
+    return registration.pushManager.subscribe(subscribeOptions)
+      .then((pushSubscription) => {
+        return fetch('https://localhost:3100/api/push-subscription', {
+          method: 'post',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(pushSubscription)
+        })
+      })
+  });
 }
