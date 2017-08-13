@@ -51,7 +51,6 @@ Finally, we’ll use Background Sync to further reduce our app’s dependency on
 * Take a "classic" client-side-rendered single-page app, and make it work offline, without changing a single line of the app's code. 
 * Get hands-on experience with IndexedDb, a worker-friendly nosql database that's built in to most browsers.
 * Build an example of the App-Shell architecture, where large portions of the UI load almost instantly
-* Walk through a proper HTTP/2 server-side rendering setup, by putting a HTTP/2 proxy in front  of node.js
 * Learn what you can do to keep your JavaScript code fast, by taking a look at some aspects of JavaScript engines, and taking advantage of some tools to keep us on the speedy path.
 * And much more...
 
@@ -83,7 +82,6 @@ Additionally, to take advantage of syntax hilighting, static code analysis and o
 | ✔ | [sass-indented](https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented) | Syntax highlighting and code completion support for [Sass](http://sass-lang.com) stylesheets |
 | ✔ | [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) | Static code analysis for JavaScript and JSX files |
 | ✔ | [jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) | Syntax highlighting for [Jest snapshot testing](https://facebook.github.io/jest/docs/snapshot-testing.html) and in-editor test pass/fail statuses |
-| ✔ | [stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) | Stylesheet linting |
 |   | [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) | Better file and folder icons |
 |   | [rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) | An in-editor REST client, so we can experiment with our API effortlessly |
 
