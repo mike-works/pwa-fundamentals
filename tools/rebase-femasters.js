@@ -31,7 +31,7 @@ function rebaseBranch(branchName, baseBranchName) {
 }
 
 let branches = [
-  'master',
+  'femasters/begin',
   'femasters/1-begin', 'femasters/1-complete',
   'femasters/2-begin', 'femasters/2-complete',
   'femasters/3-begin', 'femasters/3-complete',
