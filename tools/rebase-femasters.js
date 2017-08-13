@@ -24,10 +24,21 @@ function rebaseOnto(baseBranchName) {
   });
 }
 
+function forcePush() {
+  console.log('schedule FORCEPUSH ');
+  return new Promise((resolve, reject) => {
+    console.log('begin FORCEPUSH ');
+    exec(`git push --force`, (err, stdout, stderr) => {
+      console.log('complete FORCEPUSH');
+      resolve();
+    });
+  });
+}
 
 function rebaseBranch(branchName, baseBranchName) {
   return checkoutBranch(branchName)
-    .then(() => rebaseOnto(baseBranchName));
+    .then(() => rebaseOnto(baseBranchName))
+    .then(() => forcePush(branchName));
 }
 
 let branches = [
