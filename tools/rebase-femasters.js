@@ -38,7 +38,7 @@ function forcePush() {
 function rebaseBranch(branchName, baseBranchName) {
   return checkoutBranch(branchName)
     .then(() => rebaseOnto(baseBranchName))
-    .then(() => forcePush(branchName));
+    .then(() => forcePush());
 }
 
 let branches = [
