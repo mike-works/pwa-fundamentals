@@ -31,8 +31,14 @@
 This is the example project used for the <a title="Mike Works, Inc." href="https://mike.works">Mike</a> and <a href="http://stevekinney.net">Steve's</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
 </p>
 
+# About This Workshop
+
+Progressive Web Apps become superheroes when they can, while still providing a great baseline experience on less modern browsers.  They're reliable, fast, engaging, and although they can do many of the things users expect from native apps, they don't take up a lot of space, or require a long install process.
+
+In this workshop, we'll begin with a "classic" single page app, that's a bit bulky in size, has a slow initial load, doesn't work offline, and provides a very "basic" mobile web experience. We'll then enhance it in several ways, so that when key technologies are supported in your users' browsers, their experience ends up being substantially better!
+
 # Are there any documents that go along with this?
-Yes! **[Here are the slides](https://docs.mike.works/pwa-fundamentals)**, and **[here's a course outline](https://mike.works/course/progressive-web-fundamentals-0d74af5)**.
+Yes! **[Here are the slides](/docs/Slides.pdf)**, and **[here's a course outline](https://mike.works/course/progressive-web-fundamentals-0d74af5)**.
 
 # Setup
 
