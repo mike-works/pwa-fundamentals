@@ -64,6 +64,6 @@ module.exports = function (env, options) {
     );
   }
   // else { }
-  plugins.push(new StyleExtHtmlWebpackPlugin());
+  // plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };

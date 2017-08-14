@@ -1,0 +1,17 @@
+{
+  "name": "Frontend Grocer",
+  "short_name": "FEGrocer",
+  "start_url": ".",
+  "theme_color": "#2196F3",
+  "background_color": "#2196F3",
+  "display": "standalone",
+  "icons": [{
+    "src": "/img/launcher-icon-4x.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  } , {
+    "src": "/img/launcher-icon-512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
