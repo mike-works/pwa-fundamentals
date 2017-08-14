@@ -68,7 +68,15 @@ export default class CartStore {
    */
   _saveCart() {
     this._onItemsUpdated();
-    return Promise.resolve(this.items);
+    return fetch(`${API_ENDPOINT}api/cart/items`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ data: this.items})
+    })
+      .then((response) => response.json())
+      .then((jsonData) => jsonData.data);
   }
 
   /**
@@ -79,7 +87,27 @@ export default class CartStore {
    * @return {Promise} 
    */
   doCheckout() {
-    throw 'CartStore#doCheckout Not yet implemented'
+    return fetch(`${API_ENDPOINT}api/order`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ data: this.items})
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          // Server error but request completed
+          alert('error');
+        }
+      })
+      .then((jsonData) => jsonData.data)
+      .then(this._restoreCart)
+      .then((newItems) => {
+        this._items = newItems;
+        this._onItemsUpdated();
+      });
   }
 
   /**
