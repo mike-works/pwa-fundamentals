@@ -2,6 +2,17 @@
 
 import ListenerSupport from './listener-support';
 import { endpoint as API_ENDPOINT } from '../utils/api';
+import idb from 'idb';
+
+function cartItemDb() {
+  return idb.open('cartItemDb', 1, upgradeDb => {
+    switch (upgradeDb.oldVersion) {
+    case 0:
+      // initially set the DB up
+      upgradeDb.createObjectStore('cart-items', {keyPath: 'groceryItem.id'});
+    }
+  })
+}
 
 /**
  * A class for keeing track of shopping cart state
@@ -54,12 +65,33 @@ export default class CartStore {
    * @return {Promise<Array<Object>>}
    */
   _restoreCart() {
-    return fetch(`${API_ENDPOINT}api/cart/items`)
-      .then((response) => {
-        if (response.ok) return response.json();
-        else throw new Error('Problem fetching cart data');
-      })
-      .then((jsonData) => jsonData.data);
+    let dbPromise = cartItemDb();
+    return dbPromise.then(db => {
+      let tx = db.transaction('cart-items', 'readonly');
+      let idbStore = tx.objectStore('cart-items');
+      return idbStore.getAll();
+    }).then((items) => {
+      if (navigator.onLine)
+        fetch(`${API_ENDPOINT}api/cart/items`)
+          .then((response) => {
+            if (response.ok) return response.json();
+            else throw new Error('Problem fetching cart data');
+          })
+          .then(jsonData => jsonData.data)
+          .then(cartItems => {
+            return dbPromise.then(db => {
+              let txx = db.transaction('cart-items', 'readwrite');
+              let iidbStore = txx.objectStore('cart-items');
+              return Promise.all(
+                cartItems.map(ci => iidbStore.put(ci))
+              ).then(() => cartItems);
+            }).then((cartItems) => {
+              this._items = cartItems;
+              this._onItemsUpdated();
+            });
+          });
+      return items;
+    });
   }
 
   /**
@@ -71,14 +103,26 @@ export default class CartStore {
    */
   _saveCart() {
     this._onItemsUpdated();
-    return fetch(`${API_ENDPOINT}api/cart/items`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ data: this._items })
-    }).then((response) => response.json())
-      .then((jsonData) => jsonData.data);
+    return cartItemDb().then(db => {
+      let tx = db.transaction('cart-items', 'readwrite');
+      let idbStore = tx.objectStore('cart-items');
+      return Promise.all(
+        this._items.map(ci => idbStore.put(ci))
+      ).then(() => {
+        if (navigator.onLine) {
+          return db.transaction('cart-items').objectStore('cart-items').getAll().then(dbItems => {
+            return fetch(`${API_ENDPOINT}api/cart/items`, {
+              method: 'PUT',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify({ data: dbItems})
+            }).then((response) => response.json())
+              .then((jsonData) => jsonData.data);
+          });
+        }
+      });
+    });
   }
 
   /**

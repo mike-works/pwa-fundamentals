@@ -10,13 +10,21 @@ function formatPrice(price) {
 class Cart extends Component {
   constructor(props) {
     super(props);
-    this.state = { checkoutConfirmVisible: false };
+    this.state = { checkoutConfirmVisible: false, confirmButtonEnabled: false };
   }
   confirmCheckout() {
     this.setState({checkoutConfirmVisible: true});
   }
   cancelConfirmCheckout() {
     this.setState({checkoutConfirmVisible: false});
+  }
+  componentDidMount() {
+    this._task = setInterval(() => {
+      this.setState({confirmButtonEnabled: navigator.onLine});
+    }, 2000);
+  }
+  componentWillUnmount() {
+    clearInterval(this._task);
   }
   render() {
     let cartStore = this.props.cartStore;
@@ -43,7 +51,7 @@ class Cart extends Component {
 
     let checkoutButton = (
       <div className='checkout-btn-container'>
-        <button className='checkout-btn mui-btn mui-btn--accent'
+        <button disabled={!this.state.confirmButtonEnabled} className='checkout-btn mui-btn mui-btn--accent'
           onClick={() => {
             this.confirmCheckout();
           }}>
