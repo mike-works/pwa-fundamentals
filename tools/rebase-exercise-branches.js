@@ -37,6 +37,7 @@ const EXERCISE_SETS = {
     'linkedin/13-begin', 'linkedin/13-complete',
     'linkedin/14-begin', 'linkedin/14-complete',
     'linkedin/15-begin', 'linkedin/15-complete',
+    'linkedin/16-begin', 'linkedin/16-complete',
     'linkedin/final'
   ]
 };
