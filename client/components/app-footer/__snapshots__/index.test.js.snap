@@ -9,11 +9,11 @@ exports[`AppFooter renders as expected 1`] = `
   >
     🙌 I built this in a 
     <a
-      href="https://frontendmasters.com"
+      href="https://go/training-schedule"
       rel="noopener noreferrer"
       target="_blank"
     >
-      Frontend Masters
+      LinkedIn
     </a>
      PWA course.
   </div>
