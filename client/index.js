@@ -18,7 +18,15 @@ import 'file-loader?name=./apple-touch-icon-152x152.png!./img/apple-touch-icon-1
 import 'file-loader?name=./apple-touch-icon-180x180.png!./img/apple-touch-icon-180x180.png';
 
 import 'worker-loader?name=./qrcode-worker.js!./qrcode-worker.js';
+import 'worker-loader?name=./service-worker.js!./service-worker.js';
 
 import 'file-loader?name=./web-app.json!./web-app-manifest.json';
 
 ReactDOM.render((<App />), document.getElementById('root'));
+
+if ('serviceWorker' in navigator) {
+  // browser supports service worker stuff
+  navigator.serviceWorker.register('/service-worker.js');
+} else {
+  // browser does not support service worker stuff
+}
