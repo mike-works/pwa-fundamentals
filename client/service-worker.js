@@ -47,7 +47,11 @@ function respondWithGroceryImage(fetchEvt) {
 
 function getGroceryImage(fetchEvt) {
   return respondWithGroceryImage(fetchEvt)
-    .catch(() => caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }))
+    .catch(() => {
+      caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }).then(resp => {
+        return resp || caches.match('https://localhost:3100/images/fallback-grocery.png');
+      })
+    })
 }
 
 function respondWithApiJson(fetchEvt) {
