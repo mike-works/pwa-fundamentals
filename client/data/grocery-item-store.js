@@ -2,6 +2,25 @@
 
 import ListenerSupport from './listener-support';
 import { endpoint as API_ENDPOINT } from '../utils/api';
+import idb from 'idb';
+
+function groceryItemDb() {
+  /* eslint-disable no-case-declarations */
+  return idb.open('groceryitem-store', 2, upgradeDb => {
+    switch (upgradeDb.oldVersion) {
+    // deliberately allow fall-through case blocks
+    case 0:
+      // initial setup
+      upgradeDb.createObjectStore('grocery-items', { keyPath: 'id' });
+    case 1:
+      // add category index
+      let tx = upgradeDb.transaction;
+      let store = tx.objectStore('grocery-items');
+      store.createIndex('groceryCategory', 'category');
+    }
+  })
+  /* eslint-enable no-case-declarations */
+}
 
 /**
  * A class for keeping track of grocery item state
@@ -102,17 +121,34 @@ export default class GroceryItemStore {
    * @return {Promise<ReadonlyArray<Object>>}
    */
   updateItemsForCategory(categoryName, limit = 10) {
-    return fetch(`${API_ENDPOINT}api/grocery/items?category=${categoryName}&limit=${limit}`)
-      .then((resp) => resp.json())
-      .then((jsonData) => {
-        this._updateItems(jsonData.data);
-        this._onItemsUpdated();
-        return this.items;
-      })
-      .catch((err) => {
-        console.error('Error fetching grocery items', err);
-        return this.items;
+    return groceryItemDb().then(db => {
+      let p;
+      if (navigator.onLine) {
+        p = fetch(`${API_ENDPOINT}api/grocery/items?category=${categoryName}&limit=${limit}`)
+          .then((resp) => resp.json())
+          .then(({ data }) => {
+            let tx = db.transaction('grocery-items', 'readwrite');
+            let itemStore = tx.objectStore('grocery-items');
+            let catIndex = itemStore.index('groceryCategory');    
+            return Promise.all(
+              data.map(gi => itemStore.put(gi))
+            ).then(() => data);
+          })
+      } else p = Promise.resolve();
+      return p.then(() => {
+        let _tx = db.transaction('grocery-items', 'readonly');
+        let _itemStore = _tx.objectStore('grocery-items');
+        let _catIndex = _itemStore.index('groceryCategory');
+        return _catIndex.getAll(categoryName, limit);
       });
+    }).then((data) => {
+      this._updateItems(data);
+      this._onItemsUpdated();
+      return this.items;
+    }).catch((err) => {
+      console.error('Error fetching grocery items', err);
+      return this.items;
+    });
   }
 
   /**

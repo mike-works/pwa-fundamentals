@@ -9,14 +9,36 @@ const INDEX_HTML_PATH = '/';
 const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
 
 function groceryItemDb() {
-  return idb.open('groceryitem-store', 1, upgradeDb => {
-    switch(upgradeDb.oldVersion) {
+  /* eslint-disable no-case-declarations */
+  return idb.open('groceryitem-store', 2, upgradeDb => {
+    switch (upgradeDb.oldVersion) {
     // deliberately allow fall-through case blocks
     case 0:
       // initial setup
       upgradeDb.createObjectStore('grocery-items', { keyPath: 'id' });
+    case 1:
+      // add category index
+      let tx = upgradeDb.transaction;
+      let store = tx.objectStore('grocery-items');
+      store.createIndex('groceryCategory', 'category');
     }
   })
+  /* eslint-enable no-case-declarations */
+}
+
+function getCategoryNameFromUrl(urlString) {
+  let url = new URL(urlString);
+  // Unless we're dealing with this API endpoint, forget it
+  if (url.pathname !== '/api/grocery/items') return null;
+  let queryParams = url.search
+    .substring(1) // leave out the leading ?
+    .split('&') // break into key-value pairs
+    .map(kvPair => kvPair.split('=')) // "key=val" => ['key', 'val']
+    .reduce((hash, pair) => { // [['key', 'val']] => {key: 'val}
+      hash[pair[0]] = pair[1];
+      return hash;
+    }, {});
+  return queryParams.category || null;
 }
 
 /**
@@ -115,7 +137,22 @@ function fetchApiJsonWithFallback(fetchEvent) {
         return response;
       })
       .catch(() => {
-        return cache.match(fetchEvent.request);
+        return cache.match(fetchEvent.request).then((resp) => {
+          return resp || groceryItemDb()
+            .then(db => {
+              let tx = db.transaction('grocery-items', 'readonly');
+              let groceryItemStore = tx.objectStore('grocery-items');
+              let catIndex = groceryItemStore.index('groceryCategory');
+              let catName = getCategoryNameFromUrl(fetchEvent.request.url);
+              return catName ? catIndex.getAll(catName) : null;
+            }).then(items => {
+              console.log(items);
+              if (!items) return Promise.resolve('no-match');
+              return new Response(JSON.stringify({ data: items }), {
+                headers: { 'Content-Type': 'application/json', 'FromServiceWorker': 'true ' }
+              });
+            });
+        });
       })
     // cache.add or addAll (request or url)
   })
