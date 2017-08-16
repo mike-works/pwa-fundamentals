@@ -17,7 +17,7 @@ self.addEventListener('activate', activateEvt => {
   )
 });
 
-function fetchWithTimeout(req, options, backup, timeout=1000) {
+function fetchWithTimeout(req, options, backup, timeout=10000) {
   return new Promise((resolve, reject) => {
     fetch(req, { mode: 'cors' }).then((response) => {
       clearTimeout(task);
@@ -30,15 +30,39 @@ function fetchWithTimeout(req, options, backup, timeout=1000) {
 }
 
 function respondWithGroceryImage(fetchEvt) {
-  return fetchWithTimeout(
+  return fetch(
     fetchEvt.request,
-    { mode: 'cors' },
-    () => caches.match('https://localhost:3100/images/fallback-grocery.png')
+    { mode: 'cors' }//,
+    // () => caches.match('https://localhost:3100/images/fallback-grocery.png')
   ).then(response => {
-    return response.ok
-      ? response
-      : caches.match('https://localhost:3100/images/fallback-grocery.png')
+    if (response.ok) {
+      let respClone = response.clone();
+      return caches.open(ALL_CACHES.fallback)
+        .then(cache => cache.put(fetchEvt.request, respClone))
+        .then(() => response); // return to app
+    }
+    else return caches.match('https://localhost:3100/images/fallback-grocery.png')
   });
+}
+
+function getGroceryImage(fetchEvt) {
+  return respondWithGroceryImage(fetchEvt)
+    .catch(() => caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }))
+}
+
+function respondWithApiJson(fetchEvt) {
+  return fetch(fetchEvt.request)
+    .then(resp => {
+      if (resp.ok) { // 200
+        let respClone = resp.clone();
+        return caches.open(ALL_CACHES.fallback)
+          .then(cache => cache.put(fetchEvt.request, respClone))
+          .then(() => resp); // return to app
+      } else return resp; // 500, 404, return to app
+    })
+    .catch(() => { // no network connection
+      return caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback });
+    })
 }
 
 self.addEventListener('fetch', fetchEvt => {
@@ -49,9 +73,13 @@ self.addEventListener('fetch', fetchEvt => {
   let requestUrl = new URL(request.url);
   // is a GET request
   let isGet = request.method === 'GET';
+
   let isGroceryImage = 
     acceptHeader.indexOf('image/*') >= 0 && // if it's an image
     requestUrl.pathname.indexOf('/images/') === 0;
+
+  let isApiJSON = requestUrl.pathname.startsWith('/api/');
+
   if (isGet) {
     fetchEvt.respondWith(
       //
@@ -59,7 +87,9 @@ self.addEventListener('fetch', fetchEvt => {
         if (resp) return resp; // precache
         else if (isGroceryImage) {
           // grocery images
-          return respondWithGroceryImage(fetchEvt);
+          return getGroceryImage(fetchEvt);
+        } else if (isApiJSON) {
+          return respondWithApiJson(fetchEvt);
         } else {
           // all other things
           return fetch(fetchEvt.request);
