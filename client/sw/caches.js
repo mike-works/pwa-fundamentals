@@ -1,4 +1,4 @@
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE_PREFIX = `FEG-v${CACHE_VERSION}`;
 
 export const ALL_CACHES = {
@@ -42,12 +42,12 @@ export function removeUnusedCaches(cacheNamesToKeep) {
 ////////////////////
 // PREFETCH CACHE //
 ////////////////////
-// const ASSET_MANIFEST_URL = `${self.location.protocol}//${self.location.host}/asset-manifest.json`;
-// const RESOURCES_TO_PRECACHE = [
-//   /^app\.js$/,
-//   /^web-app-manifest\.json$/,
-//   /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/
-// ];
+const ASSET_MANIFEST_URL = `${self.location.protocol}//${self.location.host}/asset-manifest.json`;
+const RESOURCES_TO_PRECACHE = [
+  /^app\.js$/,
+  /^web-app-manifest\.json$/,
+  /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/
+];
 
 /**
  * Check whether a given filename represents a resource
@@ -57,16 +57,31 @@ export function removeUnusedCaches(cacheNamesToKeep) {
  * @param {string} fileName 
  * @return {boolean}
  */
-// function _shouldPrecacheFile(fileName) {
-//   for (let i = 0; i < RESOURCES_TO_PRECACHE.length; i++)
-//     if (RESOURCES_TO_PRECACHE[i].test(fileName)) return true;
-//   return false;
-// }
+function _shouldPrecacheFile(fileName) {
+  for (let i = 0; i < RESOURCES_TO_PRECACHE.length; i++)
+    if (RESOURCES_TO_PRECACHE[i].test(fileName)) return true;
+  return false;
+}
 
-// export function precacheStaticAssets() {
-//   return fetch(ASSET_MANIFEST_URL)
-//     .then((response) => response.json())
-//     .then((assetManifestJson) => {
-//       /* do something with the asset manifest */
-//     });
-// }
+export function precacheStaticAssets() {
+  return fetch(ASSET_MANIFEST_URL)
+    .then((response) => response.json())
+    .then((assetManifestJson) => {
+      // get the canonical names of the assets
+      let assetNames = Object.keys(assetManifestJson)
+        .filter(_shouldPrecacheFile) // figure out what to keep
+        .map(k => {
+          let raw = assetManifestJson[k];
+          if (raw.startsWith('.')) {
+            return raw.substring(1);
+          } else {
+            return `/${raw}`;
+          }
+        }) // get the full filenames
+      // open (get or create) the prefetch cache
+      return caches.open(ALL_CACHES.prefetch).then(cache => {
+        // add everything we're allowed to pre-cache in install event
+        return cache.addAll(assetNames);
+      });
+    });
+}
