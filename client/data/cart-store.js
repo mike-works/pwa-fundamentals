@@ -73,8 +73,8 @@ export default class CartStore {
                 );
               })
               .then(() => apiItems);
-          }).then((apiItems) => {
-            this._items = apiItems; // use the value as the contents of the cart
+          }).then((apiStuff) => {
+            this._items = apiStuff; // use the value as the contents of the cart
             this._onItemsUpdated();  // notify anyone who may care about cart contents changing   
           });
       return dbStore.getAll();
@@ -134,7 +134,7 @@ export default class CartStore {
         }
       })
       .then((jsonData) => jsonData.data)
-      .then(this._restoreCart)
+      .then(() => this._restoreCart)
       .then((newItems) => {
         this._items = newItems;
         this._onItemsUpdated();

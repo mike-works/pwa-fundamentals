@@ -22,11 +22,45 @@ import 'worker-loader?name=./service-worker.js!./service-worker.js';
 
 import 'file-loader?name=./web-app.json!./web-app-manifest.json';
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 ReactDOM.render((<App />), document.getElementById('root'));
 
 if ('serviceWorker' in navigator) {
+  let subscriptionOptions = {
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(
+      VAPID.publicKey
+    )
+  };
+
   // browser supports service worker stuff
-  navigator.serviceWorker.register('/service-worker.js');
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(registration => {
+      return registration.pushManager.subscribe(subscriptionOptions);
+    })
+    .then(pushSubscription => {
+      return fetch('https://localhost:3100/api/push-subscription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pushSubscription.toJSON())
+      });
+    });
 } else {
   // browser does not support service worker stuff
 }

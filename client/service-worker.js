@@ -222,3 +222,8 @@ self.addEventListener('fetch', fetchEvt => {
     );
   }
 });
+
+self.addEventListener('push', pushEvt => {
+  let txt = pushEvt.data.text();
+  console.log(`💁 ${txt}`);
+});
