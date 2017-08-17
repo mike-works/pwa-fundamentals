@@ -32,6 +32,19 @@ function fetchWithTimeout(req, options, backup, timeout=10000) {
   })
 }
 
+function getGroceryCategoryFromUrl(url) {
+  //TODO
+}
+
+/**
+ * 
+ * @param {string} url 
+ * @return {Promise<Response>} grocery image fallback response
+ */
+function respondWithGroceryFallback(url) {
+  return {hello: 'world'};//caches.match('https://localhost:3100/images/fallback-grocery.png');
+}
+
 function respondWithGroceryImage(fetchEvt) {
   return fetch(
     fetchEvt.request,
@@ -45,7 +58,7 @@ function respondWithGroceryImage(fetchEvt) {
         .then(() => response); // return to app
     }
     else{
-      return caches.match('https://localhost:3100/images/fallback-grocery.png');
+      return respondWithGroceryFallback(fetchEvt.request.url);
     } 
   });
 }
@@ -54,7 +67,7 @@ function getGroceryImage(fetchEvt) {
   return respondWithGroceryImage(fetchEvt)
     .catch(() => {
       return caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }).then(resp => {
-        return resp || caches.match('https://localhost:3100/images/fallback-grocery.png');
+        return resp ||  respondWithGroceryFallback(fetchEvt.request.url);
       });
     });
 }
