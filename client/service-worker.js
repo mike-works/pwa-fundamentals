@@ -223,7 +223,42 @@ self.addEventListener('fetch', fetchEvt => {
   }
 });
 
+self.addEventListener('notificationclick', function(event) {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(self.clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url == 'https://localhost:3000/' && 'focus' in client)
+        return client.focus();
+    }
+    if (self.clients.openWindow)
+      return self.clients.openWindow('https://localhost:3000/');
+  }));
+});
+
 self.addEventListener('push', pushEvt => {
   let txt = pushEvt.data.text();
   console.log(`💁 ${txt}`);
+  let logo = 'https://localhost:3100/img/launcher-icon-2x.png';
+  try {
+    //{"notification":{"title":"Order placed at Thu, Aug 17 17, 4:19 pm","body":"We've started shopping"}}
+    let jsonData = pushEvt.data.json();
+    if ('notification' in jsonData) {
+      let {notification} = jsonData;
+      pushEvt.waitUntil(
+        self.registration.showNotification(notification.title, {
+          body: notification.body,
+          image: logo
+        })
+      );
+    }
+  } catch(e) {
+    console.log('not json');
+  }
 });
