@@ -2,6 +2,7 @@
 
 import ListenerSupport from './listener-support';
 import { endpoint as API_ENDPOINT } from '../utils/api';
+import { getDb } from '../data/db';
 
 /**
  * A class for keeing track of shopping cart state
@@ -54,9 +55,30 @@ export default class CartStore {
    * @return {Promise<Array<Object>>}
    */
   _restoreCart() {
-    return fetch(`${API_ENDPOINT}api/cart/items`)
-      .then((response) => response.json())
-      .then((jsonData) => jsonData.data);
+    return getDb().then(db => {
+      let tx = db.transaction('cart', 'readonly');
+      let dbStore = tx.objectStore('cart');
+      if (navigator.onLine)
+        fetch(`${API_ENDPOINT}api/cart/items`)
+          .then((response) => response.json())
+          .then(({data: apiItems}) => {
+            let _tx = db.transaction('cart', 'readwrite');
+            let _dbStore = _tx.objectStore('cart');
+            return _dbStore
+              .clear()
+              .then(() => {
+                return Promise.all(
+                  apiItems
+                    .map(ci => _dbStore.put(ci))
+                );
+              })
+              .then(() => apiItems);
+          }).then((apiItems) => {
+            this._items = apiItems; // use the value as the contents of the cart
+            this._onItemsUpdated();  // notify anyone who may care about cart contents changing   
+          });
+      return dbStore.getAll();
+    });
   }
 
   /**
@@ -68,15 +90,24 @@ export default class CartStore {
    */
   _saveCart() {
     this._onItemsUpdated();
-    return fetch(`${API_ENDPOINT}api/cart/items`, {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ data: this.items})
+    return getDb().then(db => {
+      let tx = db.transaction('cart', 'readwrite');
+      let dbStore = tx.objectStore('cart');
+      return Promise.all(
+        this.items.map(item => dbStore.put(item))
+      );
+    }).then(() => {
+      if (navigator.onLine) 
+        return fetch(`${API_ENDPOINT}api/cart/items`, {
+          method: 'put',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ data: this.items})
+        })
+          .then((response) => response.json())
+          .then((jsonData) => jsonData.data);
     })
-      .then((response) => response.json())
-      .then((jsonData) => jsonData.data);
   }
 
   /**
