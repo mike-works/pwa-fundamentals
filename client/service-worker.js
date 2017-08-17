@@ -1,5 +1,8 @@
 import { ALL_CACHES, ALL_CACHES_LIST, precacheStaticAssets, removeUnusedCaches } from './sw/caches';
 
+const INDEX_HTML_PATH = '/';
+const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
+
 self.addEventListener('install', installEvt => {
   installEvt.waitUntil(
     Promise.all([
@@ -41,17 +44,19 @@ function respondWithGroceryImage(fetchEvt) {
         .then(cache => cache.put(fetchEvt.request, respClone))
         .then(() => response); // return to app
     }
-    else return caches.match('https://localhost:3100/images/fallback-grocery.png')
+    else{
+      return caches.match('https://localhost:3100/images/fallback-grocery.png');
+    } 
   });
 }
 
 function getGroceryImage(fetchEvt) {
   return respondWithGroceryImage(fetchEvt)
     .catch(() => {
-      caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }).then(resp => {
+      return caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback }).then(resp => {
         return resp || caches.match('https://localhost:3100/images/fallback-grocery.png');
-      })
-    })
+      });
+    });
 }
 
 function respondWithApiJson(fetchEvt) {
@@ -69,6 +74,12 @@ function respondWithApiJson(fetchEvt) {
     })
 }
 
+function handleIndexHTML(fetchEvent) {
+  return fetch(fetchEvent.request).catch(() => {
+    return caches.match('/')
+  });
+}
+
 self.addEventListener('fetch', fetchEvt => {
   let { request } = fetchEvt;
   // Get the Accept header from the request
@@ -84,7 +95,16 @@ self.addEventListener('fetch', fetchEvt => {
 
   let isApiJSON = requestUrl.pathname.startsWith('/api/');
 
+  let isHTMLRequest = request.headers.get('accept').indexOf('text/html') !== -1;
+  let isLocal = new URL(request.url).origin === location.origin;
+
   if (isGet) {
+
+    if (isHTMLRequest && isLocal) {
+      fetchEvt.respondWith(handleIndexHTML(fetchEvt));
+      return;
+    }
+
     fetchEvt.respondWith(
       //
       caches.match(request, { cacheName: ALL_CACHES.prefetch }).then(resp => {

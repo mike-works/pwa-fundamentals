@@ -45,6 +45,7 @@ export function removeUnusedCaches(cacheNamesToKeep) {
 const ASSET_MANIFEST_URL = `${self.location.protocol}//${self.location.host}/asset-manifest.json`;
 const RESOURCES_TO_PRECACHE = [
   /^app\.js$/,
+  /^app\.css$/,
   /^web-app-manifest\.json$/,
   /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/
 ];
@@ -79,6 +80,7 @@ export function precacheStaticAssets() {
           }
         }) // get the full filenames
       // open (get or create) the prefetch cache
+      assetNames.push('/');
       return caches.open(ALL_CACHES.prefetch).then(cache => {
         // add everything we're allowed to pre-cache in install event
         return cache.addAll(assetNames);
