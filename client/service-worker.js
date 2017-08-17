@@ -107,18 +107,69 @@ function getGroceryImage(fetchEvt) {
     });
 }
 
+/**
+ * 
+ * @param {URL} url 
+ */
+function getQueryParamsFromUrl(url) {
+  return url.search // ?a=b&c=d
+    .substring(1) // leave out the leading ?
+    .split('&') // break into key-value pairs
+    .map(kvPair => kvPair.split('=')) // "key=val" => ['key', 'val']
+    .reduce((hash, pair) => { // [['key', 'val']] => {key: 'val}
+      hash[pair[0]] = pair[1];
+      return hash;
+    }, {});
+}
+
+/**
+ * 
+ * @param {string} urlString 
+ */
+function generateGroceryItemJson(urlString) {
+  /*
+    we'll arrrive here if we're being asked
+    for grocery item json that we didn't cache
+    by seeing it in a previous fetch
+  */
+  let url = new URL(urlString);
+  // Unless we're dealing with this API endpoint, forget it
+  if (url.pathname !== '/api/grocery/items') return null;
+
+  return getDb().then(db => {
+    let tx = db.transaction('grocery-items', 'readonly');
+    let store = tx.objectStore('grocery-items');
+    let qp = getQueryParamsFromUrl(url);
+    let catIdx = store.index('categoryIndex');
+    debugger;
+    return catIdx.getAll(qp.category, qp.limit || 10)
+      .then(catItems => {
+        return new Response(
+          JSON.stringify(
+            {data: catItems}
+          )
+        );
+      });
+  });
+}
+
 function respondWithApiJson(fetchEvt) {
-  return fetch(fetchEvt.request)
+  let { request } = fetchEvt;
+  return fetch(request)
     .then(resp => {
       if (resp.ok) { // 200
         let respClone = resp.clone();
         return caches.open(ALL_CACHES.fallback)
-          .then(cache => cache.put(fetchEvt.request, respClone))
+          .then(cache => cache.put(request, respClone))
           .then(() => resp); // return to app
       } else return resp; // 500, 404, return to app
     })
     .catch(() => { // no network connection
-      return caches.match(fetchEvt.request, { cacheName: ALL_CACHES.fallback });
+      return caches.match(request, { cacheName: ALL_CACHES.fallback })
+        .then((resp) => {
+          if (resp) return resp;
+          else return generateGroceryItemJson(request.url);
+        });
     })
 }
 
