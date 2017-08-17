@@ -1,15 +1,33 @@
 import { ALL_CACHES, ALL_CACHES_LIST, precacheStaticAssets, removeUnusedCaches } from './sw/caches';
+import { getDb } from './data/db';
 
 const INDEX_HTML_PATH = '/';
 const INDEX_HTML_URL = new URL(INDEX_HTML_PATH, self.location).toString();
+
+function populateGroceryItemsInDB() {
+  fetch('https://localhost:3100/api/grocery/items?limit=99999')
+    .then(response => response.json())
+    .then(({ data: groceryItems }) => {
+      return getDb().then(db => {
+        let tx = db.transaction('grocery-items', 'readwrite');
+        let store = tx.objectStore('grocery-items');
+        return Promise.all(
+          groceryItems.map(gi => store.put(gi))
+        );
+      });
+    });
+}
 
 self.addEventListener('install', installEvt => {
   installEvt.waitUntil(
     Promise.all([
       caches.open(ALL_CACHES.fallbackImages).then(cache => {
-        return cache.add('https://localhost:3100/images/fallback-grocery.png')
+        return cache.addAll(['fruit', 'herbs', 'bakery', 'dairy', 'vegetables', 'meat']
+          .map(cat => `https://localhost:3100/images/fallback-${cat}.png`)
+        );
       }),
-      precacheStaticAssets()
+      precacheStaticAssets(),
+      populateGroceryItemsInDB()
     ])
   );
 });
@@ -33,7 +51,21 @@ function fetchWithTimeout(req, options, backup, timeout=10000) {
 }
 
 function getGroceryCategoryFromUrl(url) {
-  //TODO
+  // '/images/148.jpg'
+  let lastSlash = url.lastIndexOf('/');
+  let lastDot = url.lastIndexOf('.');
+  let idString = url.substring(lastSlash + 1, lastDot);
+  let id = parseInt(idString, 10);
+  return getDb().then(db => {
+    let tx = db.transaction('grocery-items', 'readonly');
+    let store = tx.objectStore('grocery-items');
+    return store.get(id)
+      .then(g => g.category);
+    // return store.get(id)
+    //   .then(record => {
+    //     return record ? record.category : 'grocery'
+    //   });
+  });
 }
 
 /**
@@ -42,7 +74,10 @@ function getGroceryCategoryFromUrl(url) {
  * @return {Promise<Response>} grocery image fallback response
  */
 function respondWithGroceryFallback(url) {
-  return {hello: 'world'};//caches.match('https://localhost:3100/images/fallback-grocery.png');
+  return getGroceryCategoryFromUrl(url)
+    .then(category => {
+      return caches.match(`https://localhost:3100/images/fallback-${category.toLowerCase()}.png`);
+    });
 }
 
 function respondWithGroceryImage(fetchEvt) {
