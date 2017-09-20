@@ -3,6 +3,10 @@
   "files.exclude": {
     "node_modules/**": true
   },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
   "vsicons.associations.folders": [
      { "icon": "binary", "extensions": ["db"], "format": "svg" }
   ],
