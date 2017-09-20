@@ -9,7 +9,7 @@
     "Steve Kinney <hello@stevekinney.net> (https://stevekinney.net)"
   ],
   "engines": {
-    "node": "7.10.x"
+    "node": ">= 7.10.x"
   },
   "private": true,
   "license": "SEE LICENSE IN LICENSE and LICENSE-exercises",
