@@ -63,7 +63,7 @@
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.5.1",
     "webpack-manifest-plugin": "^1.1.2",
-    "worker-loader": "^0.8.1"
+    "worker-loader": "^1.0.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
