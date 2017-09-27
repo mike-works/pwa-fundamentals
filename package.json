@@ -52,7 +52,7 @@
     "preload-webpack-plugin": "^2.0.0",
     "qrcode-reader": "^1.0.2",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-hot-loader": "next",
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^15.6.1",
