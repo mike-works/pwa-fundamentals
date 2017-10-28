@@ -63,7 +63,10 @@ module.exports = function (env, options) {
       })
     );
   }
-  // else { }
+  else {
+    plugins.push(new webpack.NamedModulesPlugin());
+    plugins.push(new webpack.HotModuleReplacementPlugin());
+  }
   plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };

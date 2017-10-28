@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
 const dbModels = require('./models');
-
+const debug = require('debug')('db');
 
 const PROJECT_ROOT_PATH = path.join(__dirname, '..', '..');
 
@@ -21,6 +21,7 @@ function openDb(name) {
       }
       let sequelize = new Sequelize({
         dialect: 'sqlite',
+        logging: debug,
         pool: {
           max: 5,
           min: 0,

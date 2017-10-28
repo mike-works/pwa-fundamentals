@@ -1,2 +1,15 @@
 #!/bin/bash
-$(which node) ./server/cli/cli.js "$@"
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+if [ $1 = "serve" ]
+then
+  echo -e "⛔️  ERROR: ./run serve is deprectated"
+  echo -e "   Please use '${YELLOW}npm run watch${NC}' instead"
+fi
+
+if [ $1 = "gen-certs" ]
+then
+  echo -e "⛔️  ERROR: ./run gen-certs is deprectated"
+  echo -e "   Please use '${YELLOW}npm run gen-certs${NC}' instead"
+fi

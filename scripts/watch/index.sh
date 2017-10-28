@@ -1,1 +1,0 @@
-concurrently --names "API,UI" -c "bgBlue.bold, bgMagenta.bold" "npm run watch:api" "npm run watch:ui"

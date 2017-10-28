@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const express = require('express');
 const webpack = require('webpack');
+const path = require('path');
 const webpackConfig = require('../../webpack.config');
 
 let app = express();
@@ -41,15 +42,22 @@ function httpConnection(req, res) {
 }
 
 const compiler = webpack(webpackConfig());
-
+const hotMiddleware = require('webpack-hot-middleware')(compiler);
 const webpackMiddleware = webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: '/',
+  hot: true,
   stats: {
     colors: true
   },
 });
 
 app.use(webpackMiddleware);
+app.get('*', function(req, res){
+  let pth = path.join(__dirname, '..', '..', 'dist', 'index.html');
+  res.write(webpackMiddleware.fileSystem.readFileSync(pth));
+  res.end();
+});
+app.use(hotMiddleware);
 
 process.stdout.write(chalk.yellow(' 💻  UI is served on https://localhost:3000\n'));
