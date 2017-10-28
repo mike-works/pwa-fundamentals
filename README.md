@@ -118,8 +118,8 @@ npm run prepcerts
 
 To start the server, run
 
-```
-./run serve
+```sh
+npm run watch
 ```
 
 (Pro tip: If everything looks like it works, but you can't access the page in your browser, make sure you're using *HTTPS*. Try [https://localhost:3000/](https://localhost:3000/).)
@@ -162,11 +162,19 @@ This is a free-standing client/server Progressive Web App system, including
 `npm run prepcerts`
 
 #### Start the Development Server
-`./run serve`
 
-or in HTTP/2 mode (requires a development or production build, and does not watch for changes)
+To start the development server, run
 
-`./run serve --http2`
+```sh
+npm run watch
+```
+
+If you want, you can start the API and UI independently, by running
+
+```sh
+npm run watch:api # API only
+npm run watch:ui # UI only
+```
 
 #### Build Development Assets in the `/dist` folder
 This will be an un-minified version of an exercise, and will include some webpack-specific tooling, intended only for development use

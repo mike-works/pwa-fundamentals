@@ -9,7 +9,7 @@ module.exports = function () {
   return {
     entry: {
       app: [
-        'react-hot-loader/patch',
+        'webpack-hot-middleware/client',
         './client/index.js'
       ]
     },

@@ -1,9 +1,22 @@
+const chalk = require('chalk');
+const path = require('path');
 const webpush = require('web-push');
-const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../../../private/vapid');
+let VAPID;
+if ( process.env.VAPID ) {
+  VAPID = JSON.parse(process.env.VAPID);
+} else {
+  let pth = path.join(__dirname, '..', '..', '..', 'private', 'vapid');
+  try {
+    VAPID = require(pth);
+  } catch(err) {
+    process.stderr.write(chalk.bgRed.white('ERROR!: VAPID keys could not be loaded'));
+    process.stderr.write(chalk.red(`  ↪ Expected to find keys in ${pth}.json\n    Make sure to run `) + chalk.yellow('npm run prepvapid') + chalk.red(' which should create this file for you'));
+    process.exit(1);
+  }
+}
 
 let PushSubscription = null;
 
-console.log('VAPID', VAPID)
 webpush.setVapidDetails(
   'mailto:mike@mike.works',
   VAPID.publicKey,
