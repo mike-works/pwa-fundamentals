@@ -25,7 +25,7 @@
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
     "test": "jest",
     "prepvapid": "web-push generate-vapid-keys --json > ./private/vapid.json",
-    "prepcerts": "npm run prepvapid && ./run gen-certs && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/",
+    "prepcerts": "npm run prepvapid && node ./server/gen-certs.js && rm -rf dist/*.pem && mkdir -p dist && cp private/*.pem dist/",
     "heroku-postbuild": "npm run build:prod"
   },
   "devDependencies": {
