@@ -10,17 +10,14 @@ const Db = require('./db');
 const NotificationManager = require('./utils/notification');
 const getDevelopmentCertificate = require('devcert-with-localhost').default;
 
-function startAndListen(app, port, protocol = 'https') {
+function startAndListen(app, port) {
   return new Promise((resolve) => {
     app.listen(port, () => {
-      debug(`App server started on ${protocol}://localhost:${port}`);
-      process.stdout.write(chalk.white(` - Starting API on ${protocol}://localhost:${port}\n\n`));
       resolve();
     });
   })
 }
 
-// var whitelist = ['https://localhost:3000', 'https://localhost:5000']
 var corsOptions = {
   credentials: true,
   origin: function (origin, callback) {
@@ -29,8 +26,7 @@ var corsOptions = {
 }
 
 class ApiServer {
-  constructor(prog) {
-    this.program = prog;
+  constructor() {
     this.db = new Db();
     this.notifications = null;
   }
@@ -43,22 +39,23 @@ class ApiServer {
     this.app.use('/api', router(this));
     this.app.use('/images', express.static(path.join(__dirname, '..', 'images')));
     this.app.use('/', express.static(path.join(__dirname, '..', '..', 'dist')));
-    if (!this.program.insecure) {
-      debug('Attempting to get certificate');
-      return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
-        debug('SSL configuration received. Starting app server');
-        return startAndListen(https.createServer(ssl, this.app), this.program.apiPort);
-      });
-    } else {
-      return startAndListen(this.app, this.program.apiPort, 'http');
-    }
+    debug('Attempting to get certificate');
+    return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
+      debug('SSL configuration received. Starting app server');
+      return startAndListen(https.createServer(ssl, this.app), 3100);
+    });
   }
-  async start() {
-    await this.db.start();
-    this.notifications = new NotificationManager(this);
-    await this._startApi();
-    debug('api has started');
+  start() {
+    return this.db.start()
+      .then(() => {
+        this.notifications = new NotificationManager(this);
+      })
+      .then(() => this._startApi())
+      .then(() => {
+        process.stdout.write(chalk.magenta('💻  API has started on https://localhost:3100/api'));
+      });
   }
 }
 
-module.exports = ApiServer;
+let api = new ApiServer();
+api.start();

@@ -3,7 +3,7 @@ const VAPID = process.env.VAPID ? JSON.parse(process.env.VAPID) : require('../..
 
 let PushSubscription = null;
 
-console.log('VAPID', VAPID)
+// console.log('VAPID', VAPID)
 webpush.setVapidDetails(
   'mailto:mike@mike.works',
   VAPID.publicKey,

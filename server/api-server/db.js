@@ -11,7 +11,7 @@ function dbPath(name) {
   return path.join(PROJECT_ROOT_PATH, 'db', `${name}.sqlite`);
 }
 
-async function openDb(name) {
+function openDb(name) {
   let databasePath = dbPath(name);
 
   return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ async function openDb(name) {
   });
 }
 
-async function ensureDevelopmentDbExists() {
+function ensureDevelopmentDbExists() {
   return new Promise((resolve, reject) => {
     fs.exists(dbPath('development'), (itExists) => {
       if (!itExists) {
@@ -57,31 +57,36 @@ class Db {
   constructor() {
     this._models = null;
   }
-  async _connectToDatabase() {
-    let conn
-    try {
-      conn = await openDb('development');
-    } catch (err) {
+  _connectToDatabase() {
+    return openDb('development').then(conn => {
+      return conn.authenticate()
+        .then(() => conn)
+        .catch((err) => {
+          process.stderr.write(chalk.red(' - Problem authenticating to database\n', err));
+          process.exit(1);
+        });
+    }).catch(err => {
       process.stderr.write(chalk.red(' - Problem connecting to database\n', err));
       process.exit(1);
-    }
-    return conn.authenticate()
-      .then(() => conn)
-      .catch((err) => {
-        process.stderr.write(chalk.red(' - Problem authenticating to database\n', err));
-        process.exit(1);
-      });
+    });
   }
 
-  async transaction(cb) {
+  transaction(cb) {
     return this.db.transaction(cb);
   }
 
-  async start() {
-    await ensureDevelopmentDbExists();
-    this.db = await this._connectToDatabase();
-    this.db.sync();
-    this.models;
+  start() {
+    return ensureDevelopmentDbExists()
+      .then(() => this._connectToDatabase())
+      .then(db => {
+        this.db = db;
+        process.stdout.write(chalk.blue('📦  Updating database'));
+        return this.db.sync();
+      })
+      .then(() => {
+        process.stdout.write(chalk.blue('   Database update complete ✅'));
+        this.models;
+      });
   }
 
   get models() {
