@@ -72,6 +72,7 @@ Please make sure you have the following general software installed
 | ✔ | [Visual Studio Code](https://code.visualstudio.com/)  | >= 1.14 | We'll be using several specific features of the VS Code editor. We can't force you to use it, but you'll miss out if you don't! |
 | ✔ | [Yarn](https://yarnpkg.com/)  | >= 0.24 | An alternative to [npm](https://github.com/npm/npm) |
 | ✔ | [Firefox](https://www.mozilla.org/en-US/firefox/new/)  | >= 50 | We'll need Firefox briefly in order to create certificates. |
+| ✔ | [SQLite 3](http://sqlite.com/)  | >= 3 | Embedded database |
 
 #### VS Code Extensions
 
