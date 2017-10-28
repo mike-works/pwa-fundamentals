@@ -13,7 +13,7 @@ function dbPath(name) {
 
 function openDb(name) {
   let databasePath = dbPath(name);
-
+  process.stdout.write(chalk.yellow(`📂  Opening database ${databasePath}`));
   return new Promise((resolve, reject) => {
     fs.exists(databasePath, (itExists) => {
       if (!itExists) {
@@ -82,11 +82,12 @@ class Db {
       .then(db => {
         this.db = db;
         process.stdout.write(chalk.blue('📦  Updating database'));
-        return this.db.sync();
+        return this.db.sync({ force: true }).catch((e) => {
+          process.stderr.write('Problem synchronizing database', e);
+        });
       })
       .then(() => {
         process.stdout.write(chalk.blue('   Database update complete ✅'));
-        this.models;
       });
   }
 

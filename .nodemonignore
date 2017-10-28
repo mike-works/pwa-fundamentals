@@ -1,7 +1,0 @@
-/node_modules/*
-/db/*
-package.json
-/.vscode/*
-/dist/*
-/docs/*
-/private/*

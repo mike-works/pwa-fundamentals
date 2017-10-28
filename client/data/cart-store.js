@@ -55,7 +55,10 @@ export default class CartStore {
    */
   _restoreCart() {
     return fetch(`${API_ENDPOINT}api/cart/items`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        else throw new Error('Problem fetching cart data');
+      })
       .then((jsonData) => jsonData.data);
   }
 

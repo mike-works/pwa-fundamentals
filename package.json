@@ -14,12 +14,12 @@
   "private": true,
   "license": "SEE LICENSE IN LICENSE and LICENSE-exercises",
   "scripts": {
-    "watch:api": "./node_modules/.bin/nodemon server/api-server/index.js",
-    "watch:ui": "./node_modules/.bin/nodemon server/asset-server/index.js",
+    "watch:api": "./node_modules/.bin/nodemon -e js --watch ./server/api-server server/api-server/index.js",
+    "watch:ui": "./node_modules/.bin/nodemon -e js --watch ./server/asset-server server/asset-server/index.js",
     "watch": "concurrently --names 'API,UI' -c 'bgBlue,bgMagenta' 'npm run watch:api' 'npm run watch:ui'",
     "start:api": "node server/api-server/index.js",
     "start:ui": "node server/asset-server/index.js",
-    "start": "concurrently --names 'API,UI' -c 'bgBlue.bold, bgMagenta.bold' 'npm run start:api' 'npm run start:ui'",
+    "start": "concurrently --names 'API,UI' -c 'bgBlue,bgMagenta' 'npm run start:api' 'npm run start:ui'",
     "build:dev": " ./node_modules/.bin/webpack --config webpack.config.js --env dev",
     "build:prod": " ./node_modules/.bin/webpack --config webpack.config.js --env prod",
     "clean": "rm -rf dist/* db/development.sqlite && npm run prepcerts",
@@ -29,8 +29,10 @@
     "heroku-postbuild": "npm run build:prod"
   },
   "devDependencies": {
+    "@types/express": "^4.0.39",
     "@types/react": "^16.0.18",
     "@types/react-dom": "^16.0.2",
+    "@types/sequelize": "^4.0.78",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.1",

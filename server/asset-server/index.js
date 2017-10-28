@@ -79,7 +79,12 @@ const webpackMiddleware = webpackDevMiddleware(compiler, {
 });
 
 app.use(webpackMiddleware);
-app.get('*', function(req, res){
+app.get('*', function(req, res, next) {
+  let accept = req.headers.accept || '';
+  if (accept.indexOf('text/html') < 0) {
+    next();
+    return;
+  }
   let pth = path.join(__dirname, '..', '..', 'dist', 'index.html');
   res.write(webpackMiddleware.fileSystem.readFileSync(pth));
   res.end();

@@ -3,7 +3,7 @@ module.exports = function (api) {
   const CartItem = api.db.models['cart-item'];
   const GroceryItem = api.db.models['grocery-item'];
 
-  return function (req, res) {
+  let handler = function (req, res) {
     // let queryOptions = prepareQuery(req.query || {});
     
     return CartItem.findAll({ include: [{model: GroceryItem, as: 'groceryItem'}] })
@@ -13,7 +13,10 @@ module.exports = function (api) {
         return plainResults;
       })
       .catch((err) => {
+        res.status(500);
         res.json({ error: `Problem fetching data: ${err}` });
+        throw err;
       });
   }
+  return handler;
 }

@@ -20,6 +20,7 @@ module.exports = function (sequelize) {
     if ('associate' in db[modelName]) {
       db[modelName].associate(db);
     }
+    db[modelName].sync();
   });
 
   db.sequelize = sequelize;

@@ -13,6 +13,7 @@ module.exports = function (sequelize, DataTypes) {
       unique: true,
       fields: ['groceryItemId']
     }]
+    
   });
   CartItem.belongsTo(GroceryItem, { as: 'groceryItem'});
   return CartItem;
