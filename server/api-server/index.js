@@ -43,6 +43,8 @@ class ApiServer {
     return getDevelopmentCertificate('frontend-grocer', { installCertutil: true }).then((ssl) => {
       debug('SSL configuration received. Starting app server');
       return startAndListen(https.createServer(ssl, this.app), 3100);
+    }).catch(() => {
+      throw 'WTF!';
     });
   }
   start() {
