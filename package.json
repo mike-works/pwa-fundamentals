@@ -72,17 +72,14 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "chalk": "^2.0.1",
-    "commander": "^2.11.0",
     "concurrently": "^3.5.0",
     "cors": "^2.8.4",
     "debug": "^3.0.0",
     "devcert-with-localhost": "^0.3.2",
     "express": "^4.15.3",
-    "http-proxy": "^1.16.2",
     "idb": "^2.0.3",
     "moment": "^2.18.1",
     "sequelize": "^4.3.1",
-    "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",
     "tmp": "^0.0.33",
     "web-push": "^3.0.0"
