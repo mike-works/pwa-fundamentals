@@ -27,7 +27,7 @@ getDevelopmentCertificate('frontend-grocer', { installCertutil: true })
 
     fs.chmodSync(CERT_PATH, '0400');
     fs.chmodSync(CERT_KEY_PATH, '0400');
-    return true;
+    process.exit(0);
   }).catch((err) => {
     process.stderr.write(chalk.red(`   ↪ There was a problem automatically generating X.509 certificates for HTTPS! You may want to consult the "Manually Generating Certificates" section of the README\n${err}\n`));
     process.exit(1);
