@@ -1,6 +1,6 @@
 {
   "name": "frontendgrocer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A grocery shopping progressive web app",
   "main": "server/cli/cli.js",
   "repository": "https://github.com/mike-north/pwa-workshop.git",
