@@ -62,6 +62,10 @@ Yes! **[Here are the slides](/docs/Slides.pdf)**, and **[here's a course outline
 
 Please make sure you have the following software installed before arriving at the workshop or beginning the course.
 
+#### Git setup
+
+You will need to have [git-lfs](https://git-lfs.github.com/) installed and initialized to properly clone this repo. To do so, [install git-lfs](https://git-lfs.github.com/) and run `git lfs install`. You can then proceed to cloning this repo.
+
 #### General Packages
 
 Please make sure you have the following general software installed
