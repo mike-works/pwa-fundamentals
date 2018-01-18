@@ -19,8 +19,8 @@ module.exports = {
   },
   plugins: ['babel', 'react', 'jest'],
   rules: {
-    "quotes": [2, "single", "avoid-escape"],
-    "indent": [2, 2],
+    "quotes": 0,
+    "indent": 0,
     "no-console": 0,
     "strict": 0,
     "no-unused-vars": 0,
