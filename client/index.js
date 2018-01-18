@@ -17,6 +17,8 @@ import 'file-loader?name=./apple-touch-icon-120x120.png!./img/apple-touch-icon-1
 import 'file-loader?name=./apple-touch-icon-144x144.png!./img/apple-touch-icon-144x144.png';
 import 'file-loader?name=./apple-touch-icon-152x152.png!./img/apple-touch-icon-152x152.png';
 import 'file-loader?name=./apple-touch-icon-180x180.png!./img/apple-touch-icon-180x180.png';
+import 'file-loader?name=./manifest.json!./manifest.json';
+import 'worker-loader?name=./qrwork.js!./qrwork.js';
 
 ReactDOM.render((<App />), document.getElementById('root'));
 

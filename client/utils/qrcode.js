@@ -1,5 +1,3 @@
-import QrCode from 'qrcode-reader';
-
 /**
  * Convert QRcode data into a grocery item
  * 
@@ -80,17 +78,27 @@ export function fileToImageBuffer(file) {
 export function onQrCodeScan(imageBuffer, cartStore) {
   return new Promise((resolve/*, reject*/) => {
 
+    
+    // BEGIN PARALLEL THREAD SOLUTION
+    let w = new Worker('/qrwork.js');
+
+    w.postMessage({buffer: imageBuffer});
+    w.onmessage = (e) => {
+      resolve(e.data);
+
+    };
+    // END PARALLEL THREAD SOLUTION
     // BEGIN MAIN THREAD SOLUTION
-    let qr = new QrCode();
-    qr.callback = function(error, rawResult) {
-      if(error) {
-        self.postMessage({ error });
-        return;
-      }
-      let result = qrCodeStringToObject(rawResult.result);
-      resolve(result);
-    }
-    qr.decode(imageBuffer);
+    // let qr = new QrCode();
+    // qr.callback = function(error, rawResult) {
+    //   if(error) {
+    //     self.postMessage({ error });
+    //     return;
+    //   }
+    //   let result = qrCodeStringToObject(rawResult.result);
+    //   resolve(result);
+    // }
+    // qr.decode(imageBuffer);
     // END MAIN THREAD SOLUTION
     
   }).then((qrData) => {
