@@ -52,6 +52,24 @@ function genericGroceryImageResponse() {
 }
 
 /**
+ * 
+ * @param {RequestInfo} requestInfo 
+ * @param {RequestInit} requestOptions 
+ * @returns {Promise<Response>}
+ */
+function fetchAndCache(requestInfo, requestOptions) {
+  return fetch(requestInfo, requestOptions).then(resp => {
+    let response = resp.clone();
+    if (response.ok) {
+      caches.open(ALL_CACHES.fallback).then(cache => {
+        cache.put(requestInfo, response);
+      })
+    }
+    return resp;
+  })
+}
+
+/**
  * @param {FetchEvent} evt
  * @return {Promise<Response>}
  */
@@ -62,7 +80,7 @@ function handleGroceryImageRequest(evt) {
     req = evt.request.url.replace('54', 'NOT_FOUND');
   }
   // Try the original request
-  let attempt = fetch(req, { mode: 'cors' })
+  let attempt = fetchAndCache(req, { mode: 'cors' })
     .then(resp => { // A - Request completed
       // Fetch for grocery image worked!
       if (resp.ok) return resp;
@@ -111,7 +129,7 @@ self.addEventListener('fetch', evt => {
         return cache.match(evt.request).then(resp => {
           if (resp) return resp;
           console.log('NOT CACHED ->', evt.request.url);
-          return fetch(evt.request); 
+          return fetchAndCache(evt.request); 
         })
       })
     );

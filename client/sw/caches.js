@@ -1,4 +1,4 @@
-const CACHE_VERSION = 3;
+const CACHE_VERSION = 4;
 const CACHE_PREFIX = `FEG-v${CACHE_VERSION}`;
 
 export const ALL_CACHES = {
