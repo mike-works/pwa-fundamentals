@@ -1,4 +1,3 @@
-// @ts-check
 import { precacheStaticAssets, ALL_CACHES, removeUnusedCaches } from '../sw/caches';
 
 let counts = {
@@ -106,7 +105,10 @@ self.addEventListener('activate', evt => {
 
 
 self.addEventListener('fetch', evt => {
-  let acceptHeader = evt.request.headers.get('accept');
+  let { request } = evt;
+  let acceptHeader = request.headers.get('accept');
+  let isHTMLRequest = request.headers.get('accept').indexOf('text/html') >= 0;
+  let isLocal = new URL(request.url).origin === location.origin;
   // VERY COMMON to have a lot of booleans that look like this
   // IF the accept header looks like it's for an image
   //    (thanks <img src=?> !)
@@ -121,7 +123,9 @@ self.addEventListener('fetch', evt => {
    * types of resources. Never put the logic for a resource
    * type here directly.
    */
-  if (isGroceryImage) { // If it's a grocery image
+  if (isHTMLRequest && isLocal) {
+    //TODO: Respond with html from cache
+  } else if (isGroceryImage) { // If it's a grocery image
     evt.respondWith(handleGroceryImageRequest(evt));
   } else {
     evt.respondWith(

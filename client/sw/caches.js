@@ -78,7 +78,7 @@ export function precacheStaticAssets() {
         // get the values out of the asset manifest for the (filtered) keys
         .map(k => assetManifestJson[k])
       // Open the "prefetch" cache,
-      
+      urls.push('');
       console.log('TO PREFETCH', urls);
       return caches.open(ALL_CACHES.prefetch)
         // and add all urls that are appropriate
