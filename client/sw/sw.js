@@ -10,6 +10,12 @@ let counts = {
 const FALLBACK_IMAGE_CACHE_NAME = 'fallback-images-1';
 const FALLBACK_GROCERY_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
 
+function timeout(n) {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(`Timed out after ${n}ms`), n);
+  });
+}
+
 self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
   console.log('installing', counts.install++);
   evt.waitUntil( // Don't finish install until this is done
@@ -20,7 +26,10 @@ self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
         return cache.add(FALLBACK_GROCERY_IMAGE_URL)
       }),
       // 2. 
-      precacheStaticAssets()
+      Promise.race([precacheStaticAssets().then(d => {
+        console.log("PRECACHE SUCCESS!");
+        return d;
+      }), timeout(5000)])
     ])
   );
 });
@@ -100,7 +109,9 @@ self.addEventListener('fetch', evt => {
     evt.respondWith(
       caches.open(ALL_CACHES.prefetch).then(cache => {
         return cache.match(evt.request).then(resp => {
-          return resp || fetch(evt.request); 
+          if (resp) return resp;
+          console.log('NOT CACHED ->', evt.request.url);
+          return fetch(evt.request); 
         })
       })
     );
