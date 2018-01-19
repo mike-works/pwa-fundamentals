@@ -67,6 +67,6 @@ module.exports = function (env, options) {
     plugins.push(new webpack.NamedModulesPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
-  plugins.push(new StyleExtHtmlWebpackPlugin());
+  // plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };

@@ -1,4 +1,6 @@
 // @ts-check
+import { precacheStaticAssets, ALL_CACHES, removeUnusedCaches } from '../sw/caches';
+
 let counts = {
   install: 0,
   activate: 0,
@@ -8,14 +10,18 @@ let counts = {
 const FALLBACK_IMAGE_CACHE_NAME = 'fallback-images-1';
 const FALLBACK_GROCERY_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
 
-self.addEventListener('install', evt => {
+self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
   console.log('installing', counts.install++);
   evt.waitUntil( // Don't finish install until this is done
-    // Open the correct cache (creates if doesn't exist)
-    caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
-      // Add the generic grocery fallback to the cache
-      return cache.add(FALLBACK_GROCERY_IMAGE_URL)
-    })
+    Promise.all([
+      //1. Open the correct cache (creates if doesn't exist)
+      caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+        // Add the generic grocery fallback to the cache
+        return cache.add(FALLBACK_GROCERY_IMAGE_URL)
+      }),
+      // 2. 
+      precacheStaticAssets()
+    ])
   );
 });
 
@@ -67,6 +73,10 @@ function handleGroceryImageRequest(evt) {
   return Promise.race([timeout, attempt]);
 }
 
+self.addEventListener('activate', evt => {
+  evt.waitUntil(removeUnusedCaches([FALLBACK_IMAGE_CACHE_NAME, ALL_CACHES.prefetch]))
+})
+
 
 self.addEventListener('fetch', evt => {
   let acceptHeader = evt.request.headers.get('accept');
@@ -82,10 +92,18 @@ self.addEventListener('fetch', evt => {
   /**
    * Kick out to our single-purpose functions for various
    * types of resources. Never put the logic for a resource
-   * type here directly
+   * type here directly.
    */
   if (isGroceryImage) { // If it's a grocery image
     evt.respondWith(handleGroceryImageRequest(evt));
-  } // else if precache
+  } else {
+    evt.respondWith(
+      caches.open(ALL_CACHES.prefetch).then(cache => {
+        return cache.match(evt.request).then(resp => {
+          return resp || fetch(evt.request); 
+        })
+      })
+    );
+  }
   // else network
 });

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE_PREFIX = `FEG-v${CACHE_VERSION}`;
 
 export const ALL_CACHES = {
@@ -45,8 +45,10 @@ export function removeUnusedCaches(cacheNamesToKeep) {
 const ASSET_MANIFEST_URL = `${self.location.protocol}//${self.location.host}/asset-manifest.json`;
 const RESOURCES_TO_PRECACHE = [
   /^app\.js$/,
+  /^app\.css$/,
   /^web-app-manifest\.json$/,
-  /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/
+ /^img\/[\w0-9\-_]+.(png|jpg|gif|bmp)$/,
+ /^apple-touch-icon-[\w0-9\-_]+.(png|jpg|gif|bmp)$/
 ];
 
 /**
@@ -65,8 +67,21 @@ function _shouldPrecacheFile(fileName) {
 
 export function precacheStaticAssets() {
   return fetch(ASSET_MANIFEST_URL)
-    .then((response) => response.json())
+    .then((response) =>  response.json())
     .then((assetManifestJson) => {
-      /* do something with the asset manifest */
+
+      let urls =
+        // Get all the keys from the json asset manifest
+        Object.keys(assetManifestJson)
+        // filter for only those keys we should prefetch
+        .filter(_shouldPrecacheFile)
+        // get the values out of the asset manifest for the (filtered) keys
+        .map(k => assetManifestJson[k])
+      // Open the "prefetch" cache,
+      
+      console.log('TO PREFETCH', urls);
+      return caches.open(ALL_CACHES.prefetch)
+        // and add all urls that are appropriate
+        .then(cache => cache.addAll(urls.map(u => `/${u}`)));
     });
 }
