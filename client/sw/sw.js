@@ -1,13 +1,22 @@
+// @ts-check
 let counts = {
   install: 0,
   activate: 0,
   fetch: 0
 };
 
+const FALLBACK_IMAGE_CACHE_NAME = 'fallback-images-1';
+const FALLBACK_GROCERY_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
+
 self.addEventListener('install', evt => {
   console.log('installing', counts.install++);
-  // self.skipWaiting();
-
+  evt.waitUntil( // Don't finish install until this is done
+    // Open the correct cache (creates if doesn't exist)
+    caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+      // Add the generic grocery fallback to the cache
+      return cache.add(FALLBACK_GROCERY_IMAGE_URL)
+    })
+  );
 });
 
 self.addEventListener('activate', evt => {
@@ -16,12 +25,15 @@ self.addEventListener('activate', evt => {
 });
 
 const GROCERY_IMAGE_URL_REGEX = /https:\/\/localhost:3100\/images\/[0-9]+.jpg/;
-const FALLBACK_GROCERY_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
 /**
  * @returns {Promise<Response>}
  */
 function genericGroceryImageResponse() {
-  return fetch(FALLBACK_GROCERY_IMAGE_URL); 
+  // part 0 solution
+  // return fetch(FALLBACK_GROCERY_IMAGE_URL); 
+  return caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+    return cache.match(FALLBACK_GROCERY_IMAGE_URL);
+  });
 }
 
 /**
@@ -30,10 +42,12 @@ function genericGroceryImageResponse() {
  */
 function handleGroceryImageRequest(evt) {
   let req = evt.request;
+  // 404 HACK -- damage the url for 54.jpg
   if (evt.request.url.endsWith('/images/54.jpg')) {
     req = evt.request.url.replace('54', 'NOT_FOUND');
   }
-  return fetch(req, { mode: 'cors' })
+  // Try the original request
+  let attempt = fetch(req, { mode: 'cors' })
     .then(resp => { // A - Request completed
       // Fetch for grocery image worked!
       if (resp.ok) return resp;
@@ -43,6 +57,14 @@ function handleGroceryImageRequest(evt) {
     .catch(e => { // B - Couldn't complete request
       return genericGroceryImageResponse();
     });
+  let timeout = new Promise(res => {
+    setTimeout(() => {
+      genericGroceryImageResponse().then(resp => {
+        res(resp);
+      });
+    }, 1000);
+  });
+  return Promise.race([timeout, attempt]);
 }
 
 
@@ -64,7 +86,6 @@ self.addEventListener('fetch', evt => {
    */
   if (isGroceryImage) { // If it's a grocery image
     evt.respondWith(handleGroceryImageRequest(evt));
-  } // else if (isJSON) 
-  // else if (isIndexDotHTML)
-  // Else 
+  } // else if precache
+  // else network
 });
