@@ -10,13 +10,22 @@ const FALLBACK_IMAGE_CACHE_NAME = 'fallback-images-1';
 const FALLBACK_GROCERY_IMAGE_URL = 'https://localhost:3100/images/fallback-grocery.png';
 
 function timeout(n) {
-  return new Promise((_, reject) => {
-    setTimeout(() => reject(`Timed out after ${n}ms`), n);
+  let task;
+  let p = new Promise((_, reject) => {
+    task = setTimeout(() => {
+      throw new Error(`Timed out after ${n}ms`);
+    }, n);
   });
+  p.clear = function() {
+    console.log('Ticking clock has stopped');
+    clearTimeout(task);
+  }
+  return p;
 }
 
 self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
   console.log('installing', counts.install++);
+  let time = timeout(5000);
   evt.waitUntil( // Don't finish install until this is done
     Promise.all([
       //1. Open the correct cache (creates if doesn't exist)
@@ -27,8 +36,9 @@ self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
       // 2. 
       Promise.race([precacheStaticAssets().then(d => {
         console.log("PRECACHE SUCCESS!");
+        time.clear();
         return d;
-      }), timeout(5000)])
+      }), time])
     ])
   );
 });
@@ -59,12 +69,16 @@ function genericGroceryImageResponse() {
 function fetchAndCache(requestInfo, requestOptions) {
   return fetch(requestInfo, requestOptions).then(resp => {
     let response = resp.clone();
-    if (response.ok) {
+    if (resp.ok) {
       caches.open(ALL_CACHES.fallback).then(cache => {
         cache.put(requestInfo, response);
       })
     }
     return resp;
+  })
+  .catch(() => {
+    return caches.open(ALL_CACHES.fallback)
+      .then(cache => cache.match(requestInfo))
   })
 }
 
@@ -124,15 +138,33 @@ self.addEventListener('fetch', evt => {
    * type here directly.
    */
   if (isHTMLRequest && isLocal) {
-    //TODO: Respond with html from cache
+    evt.respondWith(
+      caches.open(ALL_CACHES.prefetch).then(cache =>{
+        return cache.match('/').then(cacheResp => {
+          return fetch(evt.request.url).then(fetchResp => {
+            if (fetchResp.ok) {
+              console.log('🎉 html network OK');
+              return fetchResp
+            } else {
+              console.log('🎉 html network NOT OK');
+              return cacheResp;
+            }
+          }).catch(() => {
+            console.log('🎉 html network failed');
+            return cacheResp
+          });
+        })
+      })
+    );
   } else if (isGroceryImage) { // If it's a grocery image
     evt.respondWith(handleGroceryImageRequest(evt));
   } else {
     evt.respondWith(
+      // prefetch check
       caches.open(ALL_CACHES.prefetch).then(cache => {
-        return cache.match(evt.request).then(resp => {
-          if (resp) return resp;
-          console.log('NOT CACHED ->', evt.request.url);
+        return cache.match(evt.request).then(prefetchResp => {
+          if (prefetchResp) return prefetchResp;
+          console.log('NOT PREFETCH CACHED ->', evt.request.url);
           return fetchAndCache(evt.request); 
         })
       })
