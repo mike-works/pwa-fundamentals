@@ -21,10 +21,44 @@ import 'file-loader?name=./manifest.json!./manifest.json';
 import 'worker-loader?name=./qrwork.js!./qrwork.js';
 import 'worker-loader?name=./sw.js!./sw/sw.js';
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+
 if ('serviceWorker' in navigator) {
   // Okay, the browser supports service workers.
   navigator.serviceWorker.register('/sw.js')
   .then(registration => {
+    console.log(VAPID);
+    let subscribeOptions = {
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(
+        VAPID.publicKey
+      )
+    };
+    navigator.serviceWorker.ready.then(registration => {
+      registration.pushManager.subscribe(subscribeOptions).then(pushSubs => {
+        fetch('https://localhost:3100/api/push-subscription', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(pushSubs.toJSON())
+        });
+      });
+    })
     // The service worker is registered.
   })
 }

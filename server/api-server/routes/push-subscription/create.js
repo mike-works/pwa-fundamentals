@@ -1,11 +1,12 @@
 module.exports = function (api) {
   const PushSubscription = api.db.models['push-subscription'];
-
+  
   return function (req, res) {
     let { endpoint, keys } = req.body;
     PushSubscription.destroy({
       truncate: true
     }).then(() => {
+      console.log('REQ=', req);
       return PushSubscription.create({endpoint, keys: JSON.stringify(keys)}).then((ps) => {
         let record = ps.get({plain: true});
         record.keys = JSON.parse(record.keys);      

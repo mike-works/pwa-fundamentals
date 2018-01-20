@@ -1,4 +1,5 @@
 import { precacheStaticAssets, ALL_CACHES, removeUnusedCaches } from '../sw/caches';
+import idb from 'idb';
 
 let counts = {
   install: 0,
@@ -23,6 +24,43 @@ function timeout(n) {
   return p;
 }
 
+function getDb() {
+  return idb.open('GrocerDb', 1, upgrade => {
+    // upgrade it
+    switch (upgrade.oldVersion) {
+      case 0:
+        upgrade.createObjectStore('groceryItems', { keyPath: 'id'});
+    }
+  });
+}
+
+/**
+ * @returns {Promise<any>}
+ */
+function populateGroceryItemDb() {
+  // open (create if needed) database
+  let dataUrl = 'https://localhost:3100/api/grocery/items?limit=99999';
+  let groceryItems;
+  return fetch(dataUrl)
+    .then(resp => resp.json())
+    .then(({ data: items }) => {
+      groceryItems = items;
+      return getDb()
+    })
+    .then(db => {
+      let tx = db.transaction('groceryItems','readwrite');
+      let store = tx.objectStore('groceryItems');
+      return Promise.all(groceryItems.map(i => store.put(i)));
+    });
+}
+
+function precacheGroceryFallbackImages() {
+  return caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+    return cache.addAll(['bakery', 'dairy', 'frozen', 'fruit', 'herbs', 'meat', 'vegetables', 'grocery']
+      .map(n => `https://localhost:3100/images/fallback-${n}.png`))
+  })
+}
+
 self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
   console.log('installing', counts.install++);
   let time = timeout(5000);
@@ -38,7 +76,11 @@ self.addEventListener('install', /** @type {ExtendableEvent} */(evt) => {
         console.log("PRECACHE SUCCESS!");
         time.clear();
         return d;
-      }), time])
+      }), time]),
+      // 3. Populate indexedDb with grocery item data
+      populateGroceryItemDb(),
+      // 4. PrecacheGroceryFallback
+      precacheGroceryFallbackImages()
     ])
   );
 });
@@ -48,17 +90,58 @@ self.addEventListener('activate', evt => {
   // self.clients.claim();
 });
 
-const GROCERY_IMAGE_URL_REGEX = /https:\/\/localhost:3100\/images\/[0-9]+.jpg/;
+const GROCERY_IMAGE_URL_REGEX = /https:\/\/localhost:3100\/images\/([0-9]+).jpg/;
 /**
  * @returns {Promise<Response>}
  */
-function genericGroceryImageResponse() {
+function genericGroceryImageResponse(groceryItemId) {
   // part 0 solution
   // return fetch(FALLBACK_GROCERY_IMAGE_URL); 
-  return caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
-    return cache.match(FALLBACK_GROCERY_IMAGE_URL);
-  });
+  ////// ONE FALLBACK FOR ALL
+  // return caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+  //   return cache.match(FALLBACK_GROCERY_IMAGE_URL);
+  // });
+  return getDb().then(db => {
+    let tx = db.transaction('groceryItems','readwrite');
+    let store = tx.objectStore('groceryItems');
+    return store.get(parseInt(groceryItemId, 10)).then(groceryItem => {
+      let cat = groceryItem.category.toLowerCase();
+      return caches.open(FALLBACK_IMAGE_CACHE_NAME).then(cache => {
+        return cache.match(FALLBACK_GROCERY_IMAGE_URL.replace('grocery', cat));
+      });
+    })
+  })
 }
+
+self.addEventListener('push', (evt) => {
+  let pushData = evt.data;
+  console.log('received push', pushData.text());
+  let { notification } = pushData.json();
+  self.registration.showNotification(notification.title, {
+    icon: 'https://localhost:3000/img/launcher-icon-1x.png',
+    tag: 'order-status',
+    renotify: true
+  });
+});
+
+self.addEventListener('notificationclick', function(event) {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(self.clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url == 'https://localhost:3000/' && 'focus' in client)
+        return client.focus();
+    }
+    if (self.clients.openWindow)
+      return self.clients.openWindow('https://localhost:3000/');
+  }));
+});
 
 /**
  * 
@@ -88,24 +171,26 @@ function fetchAndCache(requestInfo, requestOptions) {
  */
 function handleGroceryImageRequest(evt) {
   let req = evt.request;
+  let groceryId = GROCERY_IMAGE_URL_REGEX.exec(evt.request.url)[1];
+  console.log("FALLBACK FOR ", groceryId);
   // 404 HACK -- damage the url for 54.jpg
-  if (evt.request.url.endsWith('/images/54.jpg')) {
-    req = evt.request.url.replace('54', 'NOT_FOUND');
-  }
+  // if (evt.request.url.endsWith('/images/54.jpg')) {
+  //   req = evt.request.url.replace('54', '09127486912');
+  // }
   // Try the original request
   let attempt = fetchAndCache(req, { mode: 'cors' })
     .then(resp => { // A - Request completed
       // Fetch for grocery image worked!
       if (resp.ok) return resp;
       // Fetch for grocery image: 4xx, 5xx status code
-      return genericGroceryImageResponse();
+      return genericGroceryImageResponse(groceryId);
     })
     .catch(e => { // B - Couldn't complete request
-      return genericGroceryImageResponse();
+      return genericGroceryImageResponse(groceryId);
     });
   let timeout = new Promise(res => {
     setTimeout(() => {
-      genericGroceryImageResponse().then(resp => {
+      genericGroceryImageResponse(groceryId).then(resp => {
         res(resp);
       });
     }, 1000);

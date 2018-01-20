@@ -81,6 +81,7 @@
     "idb": "^2.0.3",
     "moment": "^2.19.1",
     "sequelize": "^4.19.0",
+    "simplehttp2server": "^2.0.0",
     "sqlite3": "^3.1.8",
     "web-push": "^3.0.0"
   }
