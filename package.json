@@ -52,7 +52,7 @@
     "jest": "^22.0.4",
     "muicss": "^0.9.28",
     "node-sass": "^4.5.3",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.14.12",
     "qrcode-reader": "^1.0.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
