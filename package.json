@@ -43,7 +43,7 @@
     "eslint": "^4.10.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-jest": "^21.7.1",
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.0",
