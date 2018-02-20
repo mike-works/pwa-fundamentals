@@ -34,7 +34,7 @@
     "@types/react-dom": "^16.0.2",
     "@types/sequelize": "^4.0.78",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
