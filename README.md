@@ -11,10 +11,10 @@
 
 <p align='center'>
   <a href="https://greenkeeper.io/" title="Dependencies">
-    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-north/pwa-fundamentals.svg"/>
+    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-works/pwa-fundamentals.svg"/>
   </a>
-  <a href="https://travis-ci.org/mike-north/pwa-fundamentals" title="Build Status">
-    <img title="Build Status" src="https://travis-ci.org/mike-north/pwa-fundamentals.svg?branch=solutions"/>
+  <a href="https://travis-ci.org/mike-works/pwa-fundamentals" title="Build Status">
+    <img title="Build Status" src="https://travis-ci.org/mike-works/pwa-fundamentals.svg?branch=solutions"/>
   </a>
   <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
     <img title="Course Outline" src="https://img.shields.io/badge/mike.works-course%20outline-blue.svg"/>
