@@ -81,7 +81,7 @@
     "express": "^4.16.0",
     "idb": "^2.0.3",
     "moment": "^2.19.3",
-    "sequelize": "^4.19.0",
+    "sequelize": "^4.37.8",
     "sqlite3": "^3.1.8",
     "web-push": "^3.0.0"
   }
