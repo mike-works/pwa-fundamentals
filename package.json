@@ -79,7 +79,7 @@
     "debug": "^3.1.0",
     "devcert-with-localhost": "^0.3.2",
     "express": "^4.16.0",
-    "idb": "^2.0.3",
+    "idb": "^2.1.2",
     "moment": "^2.19.3",
     "sequelize": "^4.19.0",
     "sqlite3": "^3.1.8",
