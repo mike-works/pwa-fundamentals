@@ -1,0 +1,30 @@
+{
+  "short_name": "FE Grocer",
+  "name": "Frontend Grocer",
+  "theme_color": "#2196F3",
+  "background_color": "#EEE",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/img/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/img/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/img/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/launcher-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "."
+}
