@@ -8,3 +8,4 @@ db/development.sqlite
 .DS_Store
 private/*
 !private/README.md
+.history

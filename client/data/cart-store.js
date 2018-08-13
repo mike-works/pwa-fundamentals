@@ -54,7 +54,7 @@ export default class CartStore {
    * @return {Promise<Array<Object>>}
    */
   _restoreCart() {
-    return fetch(`${API_ENDPOINT}api/cart/items`)
+    return fetch(`${API_ENDPOINT}api/cart/items`, { method: 'PUT' })
       .then((response) => {
         if (response.ok) return response.json();
         else throw new Error('Problem fetching cart data');
@@ -71,7 +71,15 @@ export default class CartStore {
    */
   _saveCart() {
     this._onItemsUpdated();
-    return Promise.resolve(this.items);
+    return fetch(`${API_ENDPOINT}api/cart/items`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ data: this.items })
+    }).then(res => res.json())
+      .then(res => res.data)
+      .catch(error => console.error(error));
   }
 
   /**
@@ -93,7 +101,7 @@ export default class CartStore {
     // check to see if this grocery item is already in the cart
     let existingCartItem = this._items
       .filter((ci) => `${ci.groceryItem.id}` === `${groceryItem.id}`)[0];
-    
+
     if (existingCartItem) {
       // if it's already in the cart, increment its quantity
       existingCartItem.qty++;
@@ -119,9 +127,9 @@ export default class CartStore {
     // find an existing object in the cart corresponding to this grocery item
     let existingCartItem = this._items
       .filter((ci) => ci.groceryItem.id === groceryItem.id)[0];
-    
+
     if (!existingCartItem) return; // nothing was in the cart to begin with
-    
+
     // if the existing item found has a quantity > 1
     if (existingCartItem.qty > 1) {
       // decrement the quantity

@@ -27,17 +27,17 @@ import { onQrCodeScan } from './utils/qrcode';
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
     this.cartStore = new CartStore();
     this.groceryItemStore = new GroceryItemStore();
     this.orderStore = new OrderStore();
 
     this.cartStore.itemListeners.register((newItems) => {
-      this.setState({cartItems: newItems});
+      this.setState({ cartItems: newItems });
     });
 
     this.orderStore.orderListeners.register((newItems) => {
-      this.setState({orders: newItems});
+      this.setState({ orders: newItems });
     });
 
     this.state = {
@@ -99,7 +99,7 @@ class App extends Component {
               <span className="mui--text-title">📦 Orders</span>
             </div>
             <div className="mui-divider"></div>
-            <Orders orders={this.state.orders}/>
+            <Orders orders={this.state.orders} />
           </SideDrawer>
           <SideDrawer side={'right'} drawerShowing={this.state.drawerShowing === 'right'}>
             <div className="brand mui--appbar-line-height">
