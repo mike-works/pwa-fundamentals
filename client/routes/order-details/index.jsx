@@ -18,7 +18,7 @@ class OrderDetails extends Component {
   componentDidMount() {
     this._updateOrder(this.props.match.params.id);
   }
-  componentWillReceiveProps(nextProps) {
+  componentDidReceiveProps(nextProps) {
     if (this.props.match.params.id !== nextProps.match.params.id) {
       this._updateOrder(nextProps.match.params.id);
     }
