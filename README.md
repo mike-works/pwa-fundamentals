@@ -10,23 +10,21 @@
 </p>
 
 <p align='center'>
-  <a href="https://greenkeeper.io/" title="Dependencies">
-    <img title="Greenkeeper" src="https://badges.greenkeeper.io/mike-works/pwa-fundamentals.svg"/>
-  </a>
   <a href="https://travis-ci.org/mike-works/pwa-fundamentals" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-works/pwa-fundamentals.svg?branch=solutions"/>
   </a>
-  <a href="https://mike.works/course/progressive-web-fundamentals-0d74af5" title="Modern JavaScript">
-    <img title="Course Outline" src="https://img.shields.io/badge/mike.works-course%20outline-blue.svg"/>
-  </a>
-  <a href="https://docs.mike.works/pwa-fundamentals" title="Slides">
-    <img title="Slides" src="https://img.shields.io/badge/mike.works-slides-blue.svg"/>
+  <a href="https://github.com/mike-works/pwa-fundamentals/releases" title="Version">
+    <img title="Version" src="https://img.shields.io/github/tag/mike-works/pwa-fundamentals.svg" />
   </a>
 </p>
 <p align='center'>
 This is the example project used for the <a title="Mike Works, Inc." href="https://mike.works">Mike</a> and <a href="http://stevekinney.net">Steve's</a> <a title="PWA Fundamentals" href="https://mike.works/course/progressive-web-fundamentals-0d74af5">PWA Fundamentals</a> course.
 </p>
 
+# Course outline and slides
+ * [View course outline here](https://mike.works/course/progressive-web-fundamentals-0d74af5)
+ * [View slides here](https://docs.mike.works/pwa-fundamentals)
+ 
 # About This Workshop
 
 Progressive Web Apps become superheroes when they can, while still providing a great baseline experience on less modern browsers.  They're reliable, fast, engaging, and although they can do many of the things users expect from native apps, they don't take up a lot of space, or require a long install process.
@@ -53,10 +51,6 @@ Finally, we’ll use Background Sync to further reduce our app’s dependency on
 * Build an example of the App-Shell architecture, where large portions of the UI load almost instantly
 * Learn what you can do to keep your JavaScript code fast, by taking a look at some aspects of JavaScript engines, and taking advantage of some tools to keep us on the speedy path.
 * And much more...
-
-
-# Are there any documents that go along with this?
-Yes! **[Here are the slides](/docs/Slides.pdf)**, and **[here's a course outline](https://mike.works/course/progressive-web-fundamentals-0d74af5)**.
 
 # Setup
 
