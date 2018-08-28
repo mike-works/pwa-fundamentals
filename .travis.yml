@@ -4,12 +4,16 @@ cache:
     - ~/.npm
 notifications:
   email: false
+install: npm install --skip-optional
 node_js:
   - '10'
   - '9'
   - '8'
   - '6'
 after_success:
+  - nvm install 10
+  - nvm use 10
+  - npm install
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
