@@ -63,7 +63,7 @@
     "react-test-renderer": "^16.4.2",
     "sass-loader": "^6.0.7",
     "style-ext-html-webpack-plugin": "^3.4.7",
-    "style-loader": "^0.20.3",
+    "style-loader": "^0.22.1",
     "travis-deploy-once": "^5.0.2",
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
