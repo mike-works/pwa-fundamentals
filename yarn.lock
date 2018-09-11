@@ -3651,11 +3651,11 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-env-ci@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/env-ci/-/env-ci-2.1.1.tgz#73c42c0f3ee4813457210a8440a2ee1bbea0102a"
+env-ci@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/env-ci/-/env-ci-2.4.0.tgz#1ceacee17a6860fffa04436cea586d15534b4c4d"
   dependencies:
-    execa "^0.10.0"
+    execa "^1.0.0"
     java-properties "^0.2.9"
 
 eol@^0.8.1:
@@ -9050,9 +9050,9 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.7.5"
 
-semantic-release@^15.9.12:
-  version "15.9.12"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.9.12.tgz#7a6321ac2765a804165d05e3a5b1cdc2628aef59"
+semantic-release@^15.9.14:
+  version "15.9.14"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.9.14.tgz#108fa88649e318b85f728adc9375b12d68075726"
   dependencies:
     "@semantic-release/commit-analyzer" "^6.0.0"
     "@semantic-release/error" "^2.2.0"
@@ -9062,7 +9062,7 @@ semantic-release@^15.9.12:
     aggregate-error "^1.0.0"
     cosmiconfig "^5.0.1"
     debug "^3.1.0"
-    env-ci "^2.0.0"
+    env-ci "^2.4.0"
     execa "^1.0.0"
     figures "^2.0.0"
     find-versions "^2.0.0"
