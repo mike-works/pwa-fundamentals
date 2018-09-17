@@ -68,7 +68,7 @@
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^3.0.2",
     "webpack-dev-middleware": "^2.0.0",
-    "webpack-dev-server": "^2.0.0",
+    "webpack-dev-server": "^3.1.8",
     "webpack-hot-middleware": "^2.22.3",
     "webpack-manifest-plugin": "^2.0.0",
     "worker-loader": "^2.0.0"
