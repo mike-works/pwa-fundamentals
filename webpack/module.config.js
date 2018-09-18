@@ -4,7 +4,7 @@ const extractSass = require('./extract-sass');
 
 module.exports = function () {
   return {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
