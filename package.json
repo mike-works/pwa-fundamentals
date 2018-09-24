@@ -67,7 +67,7 @@
     "travis-deploy-once": "^5.0.7",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-dev-middleware": "^2.0.0",
+    "webpack-dev-middleware": "^3.3.0",
     "webpack-dev-server": "^2.0.0",
     "webpack-hot-middleware": "^2.22.3",
     "webpack-manifest-plugin": "^2.0.0",
