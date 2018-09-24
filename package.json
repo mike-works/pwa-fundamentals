@@ -74,7 +74,7 @@
     "worker-loader": "^2.0.0"
   },
   "optionalDependencies": {
-    "semantic-release": "^15.9.15",
+    "semantic-release": "^15.9.16",
     "@mike-works/workshop-semantic-release-config": "^1.0.0"
   },
   "dependencies": {
