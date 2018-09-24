@@ -37,7 +37,7 @@
     "@types/sequelize": "^4.27.24",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^8.0.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "compression-webpack-plugin": "^2.0.0",
