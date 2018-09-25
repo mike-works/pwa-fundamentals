@@ -7,12 +7,10 @@ const devServer = require('./webpack/devserver.config');
 
 module.exports = function () {
   return {
-    entry: {
-      app: [
-        'webpack-hot-middleware/client',
-        './client/index.js'
-      ]
-    },
+    entry: [
+      'webpack-hot-middleware/client',
+      './client/index.js'
+    ],
     stats: {
       colors: true
     },
