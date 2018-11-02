@@ -56,7 +56,7 @@
     "node-sass": "^4.9.3",
     "nodemon": "^1.18.3",
     "qrcode-reader": "^1.0.4",
-    "react": "^16.4.2",
+    "react": "^16.6.0",
     "react-dom": "^16.5.0",
     "react-hot-loader": "^4.3.8",
     "react-router-dom": "^4.3.1",
