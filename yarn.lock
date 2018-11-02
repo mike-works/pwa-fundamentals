@@ -6828,9 +6828,9 @@ ms@^2.0.0, ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
-muicss@^0.9.39:
-  version "0.9.39"
-  resolved "https://registry.yarnpkg.com/muicss/-/muicss-0.9.39.tgz#d669cb48ce0c11503cf8c1c43770d714b564ef95"
+muicss@^0.9.41:
+  version "0.9.41"
+  resolved "https://registry.yarnpkg.com/muicss/-/muicss-0.9.41.tgz#052eb3c0ebdf032a6f60e7ccd2b9c8cacfd5f882"
   dependencies:
     react-addons-shallow-compare "^15.6.2"
 
