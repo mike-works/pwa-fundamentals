@@ -81,7 +81,7 @@
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "concurrently": "^4.0.1",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "debug": "^4.0.1",
     "devcert-with-localhost": "^0.3.2",
     "express": "^4.16.3",
