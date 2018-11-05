@@ -41,7 +41,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "compression-webpack-plugin": "^2.0.0",
-    "css-loader": "^1.0.0",
+    "css-loader": "^1.0.1",
     "eslint": "^5.5.0",
     "eslint-loader": "^2.1.0",
     "eslint-plugin-babel": "^5.2.0",
