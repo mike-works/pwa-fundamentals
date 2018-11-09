@@ -31,6 +31,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
+    "@mike-works/js-lib-renovate-config": "^2.0.0",
     "@types/express": "^4.16.0",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
@@ -74,8 +75,8 @@
     "worker-loader": "^2.0.0"
   },
   "optionalDependencies": {
-    "semantic-release": "^15.10.6",
-    "@mike-works/workshop-semantic-release-config": "^1.0.0"
+    "@mike-works/workshop-semantic-release-config": "^1.0.0",
+    "semantic-release": "^15.10.6"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
