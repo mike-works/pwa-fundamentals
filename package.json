@@ -90,6 +90,6 @@
     "moment": "2.22.2",
     "sequelize": "4.38.1",
     "sqlite3": "4.0.2",
-    "web-push": "3.3.2"
+    "web-push": "3.3.3"
   }
 }

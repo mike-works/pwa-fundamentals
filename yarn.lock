@@ -11985,10 +11985,10 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-push@3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.3.2.tgz#7a8f8b77c8cb1875b02a53e45d7bc277a3d05368"
-  integrity sha512-ExPr0dz/IGthbHQqvoZYKsDodEgvET7lyRRuBvC4EjVixlSV7c7jxRRBTVop1XhcbXsBacQTTsA5BJ7/8+x4WA==
+web-push@3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.3.3.tgz#8dc7c578dd1243ceb5a8377389424e87ea9b15cc"
+  integrity sha512-Om4CNZpyzHP3AtGZpbBavCO7I9oCS9CFY2VDfTj/cFx2gm+mAtyK2OlKd6qu9pwCdZTyYanUiyhT0JSrs0ypHQ==
   dependencies:
     asn1.js "^5.0.0"
     http_ece "1.0.5"
