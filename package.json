@@ -31,7 +31,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0",
+    "babel-core": "^7.0.0-bridge",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "@mike-works/js-lib-renovate-config": "2.0.0",
