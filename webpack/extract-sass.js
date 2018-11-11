@@ -2,6 +2,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = new ExtractTextPlugin({
-  filename: '[name]-[contenthash].css',
+  filename: '[name]-[hash].css',
   disable: process.env.NODE_ENV === 'development'
 });

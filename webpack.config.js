@@ -5,15 +5,13 @@ const moduleConfig = require('./webpack/module.config');
 const plugins = require('./webpack/plugins.config');
 const devServer = require('./webpack/devserver.config');
 
-module.exports = function () {
+module.exports = function() {
   return {
-    entry: [
-      'webpack-hot-middleware/client',
-      './client/index.js'
-    ],
+    entry: ['webpack-hot-middleware/client', './client/index.js'],
     stats: {
       colors: true
     },
+    mode: 'development',
     resolve: {
       extensions: ['.js', '.jsx']
     },
