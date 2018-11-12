@@ -10229,10 +10229,10 @@ send@0.16.2:
     range-parser "~1.2.0"
     statuses "~1.4.0"
 
-sequelize@4.41.1:
-  version "4.41.1"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.41.1.tgz#03dc3a1e675aeef5a4ee07d7a9206edce5800e5d"
-  integrity sha512-8LqFgM3SovWk+FOQDIJphUi7462dFIAUD4TUDKy1PU7tWve4x1p0PdeKOXUmDkqtBoHtj1neSsRNcoC2eE6uHQ==
+sequelize@4.41.2:
+  version "4.41.2"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.41.2.tgz#bb9ba30d72e9eeb883c9861cd0e2cac672010883"
+  integrity sha512-8vPf2R0o9iEmtzkqNzwFdblO+0Mu+RNxOdLeYGGqWGlp3cushLpQucAeSGPQgf2hQVZP5yOCM1ouZKTQ5FTlvA==
   dependencies:
     bluebird "^3.5.0"
     cls-bluebird "^2.1.0"
