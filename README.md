@@ -181,7 +181,7 @@ This will be an un-minified version of an exercise, and will include some webpac
 
 This will be an an optimized version of the exercise
 
-`npm run build:dist`
+`npm run build:prod`
 
 #### Run tests
 
