@@ -1320,10 +1320,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/sequelize@4.27.31":
-  version "4.27.31"
-  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.27.31.tgz#6365455eb126fcbd3110373ac10dc83d32859e96"
-  integrity sha512-Toqr7ETevM3uewzG3ALHcnFuKOlj1xSsAebQpBDwIdysGSqc5rRPM3EhKVfUc8/aMWTsHnFySGZ7r3JugLDkMg==
+"@types/sequelize@4.27.32":
+  version "4.27.32"
+  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.27.32.tgz#0f42e75e8d7b485cece3561b2d097c11d0e8fdbc"
+  integrity sha512-M4iFjZLXDdjqnyKaxz9I5XlVFr4/WBvFYyd8oLU5YsKcXGeppMl6nNo9EBsdDgOOirJcyH2JkJEUhbhegZ6MqA==
   dependencies:
     "@types/bluebird" "*"
     "@types/continuation-local-storage" "*"
