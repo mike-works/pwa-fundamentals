@@ -36,14 +36,11 @@ module.exports = function(env, options) {
     );
     plugins.push(
       new CompressionPlugin({
-        asset: '[path].gz',
+        filename: '[path].gz',
         algorithm: 'gzip',
         test: /\.(js|html)$/,
         threshold: 10240,
         minRatio: 0.8,
-        compress: {
-          warnings: false
-        }
       })
     );
   } else {
