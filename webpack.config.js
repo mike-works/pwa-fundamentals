@@ -5,13 +5,15 @@ const moduleConfig = require('./webpack/module.config');
 const plugins = require('./webpack/plugins.config');
 const devServer = require('./webpack/devserver.config');
 
-module.exports = function() {
+module.exports = function(env) {
+  const mode = (env === 'dev') ? 'development' : 'production';
+
   return {
     entry: ['webpack-hot-middleware/client', './client/index.js'],
     stats: {
       colors: true
     },
-    mode: 'development',
+    mode,
     resolve: {
       extensions: ['.js', '.jsx']
     },
