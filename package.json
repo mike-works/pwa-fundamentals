@@ -31,7 +31,6 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
-    "babel-core": "7.0.0-bridge.0",
     "@babel/preset-env": "7.1.6",
     "@babel/preset-react": "7.0.0",
     "@mike-works/js-lib-renovate-config": "2.0.0",
@@ -39,6 +38,7 @@
     "@types/react": "16.7.9",
     "@types/react-dom": "16.0.11",
     "@types/sequelize": "4.27.32",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
@@ -70,6 +70,7 @@
     "travis-deploy-once": "5.0.9",
     "webpack": "4.26.1",
     "webpack-bundle-analyzer": "3.0.3",
+    "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "3.4.0",
     "webpack-dev-server": "3.1.10",
     "webpack-hot-middleware": "2.24.3",
