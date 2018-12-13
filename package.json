@@ -90,7 +90,7 @@
     "devcert-with-localhost": "0.3.3",
     "express": "4.16.4",
     "idb": "2.1.3",
-    "moment": "2.22.2",
+    "moment": "2.23.0",
     "sequelize": "4.42.0",
     "sqlite3": "4.0.4",
     "web-push": "3.3.3"
