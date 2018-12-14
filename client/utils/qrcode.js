@@ -48,7 +48,7 @@ export function fileToImageBuffer(file) {
     }
     // Read file
     var reader = new FileReader();
-    reader.addEventListener('load', () => {
+    reader.addEventListener('load', (event) => {
       let img = new Image();
       let canvas = document.createElement('canvas');
       img.onload = () => {
