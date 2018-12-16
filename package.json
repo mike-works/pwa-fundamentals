@@ -79,7 +79,7 @@
   },
   "optionalDependencies": {
     "@mike-works/workshop-semantic-release-config": "1.0.0",
-    "semantic-release": "15.13.0"
+    "semantic-release": "15.13.1"
   },
   "dependencies": {
     "body-parser": "1.18.3",
