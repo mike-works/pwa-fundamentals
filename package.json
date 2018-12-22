@@ -86,7 +86,7 @@
     "chalk": "2.4.1",
     "concurrently": "4.1.0",
     "cors": "2.8.5",
-    "debug": "4.1.0",
+    "debug": "4.1.1",
     "devcert-with-localhost": "0.3.3",
     "express": "4.16.4",
     "idb": "2.1.3",
