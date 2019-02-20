@@ -72,7 +72,7 @@
     "webpack-bundle-analyzer": "3.0.4",
     "webpack-cli": "3.2.3",
     "webpack-dev-middleware": "3.6.0",
-    "webpack-dev-server": "3.1.14",
+    "webpack-dev-server": "3.2.0",
     "webpack-hot-middleware": "2.24.3",
     "webpack-manifest-plugin": "2.0.4",
     "worker-loader": "2.0.0"
