@@ -56,7 +56,7 @@
     "jest-cli": "24.5.0",
     "muicss": "0.9.41",
     "node-sass": "4.11.0",
-    "nodemon": "1.18.10",
+    "nodemon": "1.18.11",
     "qrcode-reader": "1.0.4",
     "react": "16.8.4",
     "react-dom": "16.8.4",
