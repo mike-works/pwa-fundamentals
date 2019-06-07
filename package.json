@@ -63,7 +63,7 @@
     "react-hot-loader": "4.8.8",
     "react-router-dom": "5.0.1",
     "react-test-renderer": "16.8.6",
-    "regenerator-runtime": "0.13.1",
+    "regenerator-runtime": "0.13.2",
     "sass-loader": "7.1.0",
     "style-ext-html-webpack-plugin": "4.0.1",
     "style-loader": "0.23.1",
