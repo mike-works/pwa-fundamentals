@@ -61,7 +61,7 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-hot-loader": "4.8.8",
-    "react-router-dom": "5.0.0",
+    "react-router-dom": "5.0.1",
     "react-test-renderer": "16.8.4",
     "regenerator-runtime": "0.13.1",
     "sass-loader": "7.1.0",
