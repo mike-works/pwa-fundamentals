@@ -54,7 +54,7 @@
     "html-webpack-plugin": "4.0.0-beta.5",
     "jest": "24.8.0",
     "jest-cli": "24.8.0",
-    "muicss": "0.9.41",
+    "muicss": "0.9.42",
     "node-sass": "4.12.0",
     "nodemon": "1.19.1",
     "qrcode-reader": "1.0.4",
