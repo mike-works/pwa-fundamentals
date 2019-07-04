@@ -65,7 +65,7 @@
     "react-test-renderer": "16.8.6",
     "regenerator-runtime": "0.13.2",
     "sass-loader": "7.1.0",
-    "style-ext-html-webpack-plugin": "4.0.1",
+    "style-ext-html-webpack-plugin": "4.1.0",
     "style-loader": "0.23.1",
     "travis-deploy-once": "5.0.11",
     "webpack": "4.35.2",
