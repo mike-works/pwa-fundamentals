@@ -31,7 +31,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.5.2",
+    "@babel/preset-env": "7.5.3",
     "@babel/preset-react": "7.0.0",
     "@mike-works/js-lib-renovate-config": "2.0.0",
     "@types/express": "4.17.0",
