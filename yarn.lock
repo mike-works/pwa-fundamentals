@@ -11754,10 +11754,10 @@ strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-style-ext-html-webpack-plugin@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/style-ext-html-webpack-plugin/-/style-ext-html-webpack-plugin-4.1.0.tgz#4469abfa96e56faae17fcae68da76e4ad91c4b8e"
-  integrity sha512-aBQ/Visx41tPwPA4hvjssedqxuKdI14wfPXJQvkyrE2A+MRZfIfGjvMkqvaS56vbu9Gy7XcFfrFAIvon8w3TVA==
+style-ext-html-webpack-plugin@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/style-ext-html-webpack-plugin/-/style-ext-html-webpack-plugin-4.1.2.tgz#6e05cda52d933adee1af62bbaf907f876dc00582"
+  integrity sha512-HNpxCbUl5M0rUnZM6HDSYoUlo54qPSiwMZeg7Dms4zFlNbmMusQbYGielSH96wXddkix4FN4ng+2A+4R+Qn0wg==
   dependencies:
     clean-css "^4.2.1"
     debug "^4.1.1"
