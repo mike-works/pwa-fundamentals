@@ -4764,10 +4764,10 @@ eslint-plugin-babel@5.3.0:
   dependencies:
     eslint-rule-composer "^0.3.0"
 
-eslint-plugin-jest@22.11.0:
-  version "22.11.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.11.0.tgz#f8c1ee954be19eda5f6ed80f6254019221c4a2b1"
-  integrity sha512-IshIjuOubQ3vI6XfL6w/UIEo8Pe/HH9hNrf7pS6kNOojLpV7FTk5PPfllZ5E48IkQgPqY8jZT+nlv7gM4kMyjQ==
+eslint-plugin-jest@22.11.1:
+  version "22.11.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.11.1.tgz#04b586e2fddd07e55900a381255d6b3d9242ae87"
+  integrity sha512-kPF1Nmr5xMLz6DT7qEttz0TTeyx1x6SozIkNO9y4F2yxuWjHMp/e70fo742pR3y0MewgXQQMIIXeSKLB66iO7Q==
 
 eslint-plugin-react@7.14.2:
   version "7.14.2"
