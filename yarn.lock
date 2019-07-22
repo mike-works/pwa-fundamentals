@@ -2010,10 +2010,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/sequelize@4.28.3":
-  version "4.28.3"
-  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.28.3.tgz#c393bf3cbfea2e18786ce43267e5921d91e27d4e"
-  integrity sha512-Z+gbWsLmGnqnAz91I8Wtfbe+4D1aUyQ4aawYfohpvar4Azr8aSNwzS1rFQYO2dk6zcClt5k9n0qCek/YAq4WNw==
+"@types/sequelize@4.28.4":
+  version "4.28.4"
+  resolved "https://registry.yarnpkg.com/@types/sequelize/-/sequelize-4.28.4.tgz#89262cca5de285d115afefd56c91cb46050d9def"
+  integrity sha512-kN9pBVtl6ed0xB0XwCUWNO7xJRREVBglo95TsEkAhs1JILsnDrJitUcUXQp+bqohKLqxRFfR56qT28OXZ7CiEA==
   dependencies:
     "@types/bluebird" "*"
     "@types/continuation-local-storage" "*"
