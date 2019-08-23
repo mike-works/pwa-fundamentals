@@ -91,7 +91,7 @@
     "express": "4.17.1",
     "idb": "3.0.2",
     "moment": "2.24.0",
-    "sequelize": "4.43.0",
+    "sequelize": "4.43.2",
     "sqlite3": "4.1.0",
     "web-push": "3.3.5"
   }
