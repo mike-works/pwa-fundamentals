@@ -8521,10 +8521,10 @@ ms@2.1.1, ms@^2.0.0, ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-muicss@0.9.43:
-  version "0.9.43"
-  resolved "https://registry.yarnpkg.com/muicss/-/muicss-0.9.43.tgz#42dd6b0012e4a3893aa59f070efabf265855dd9e"
-  integrity sha512-8y3zx+QFA5TR/+Uo0/bV+iqs6rZvY50O3NAuyRBAvhz6tPoR+SmUVWK43iMRlTnOPsNd2KPYJSyN7K/lc7B+mw==
+muicss@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/muicss/-/muicss-0.10.0.tgz#0f535b6619ce6081eda61f26b673be125d27ecc2"
+  integrity sha512-fPFFfO2whYzJENzR1xklR6U/xAWOmudiHIvltJQLN/L/vF5s9VAtzEm6dR0jUHUr0bfnUF78nkQEsDZ9snlBEQ==
   dependencies:
     react-addons-shallow-compare "^15.6.2"
 
