@@ -2335,6 +2335,13 @@ agent-base@4, agent-base@^4.1.0, agent-base@~4.2.0:
   dependencies:
     es6-promisify "^5.0.0"
 
+agent-base@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
+  integrity sha512-salcGninV0nPrwpGNn4VTXBb1SOuXQBiqbrNXoeizJsHrsL6ERFM2Ne3JUSBWRE6aeNJI2ROP/WEEIDUiDe3cg==
+  dependencies:
+    es6-promisify "^5.0.0"
+
 agentkeepalive@^3.4.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/agentkeepalive/-/agentkeepalive-3.5.1.tgz#4eba75cf2ad258fc09efd506cdb8d8c2971d35a4"
@@ -6352,6 +6359,14 @@ https-proxy-agent@^2.2.0, https-proxy-agent@^2.2.1:
   integrity sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
   dependencies:
     agent-base "^4.1.0"
+    debug "^3.1.0"
+
+https-proxy-agent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-3.0.0.tgz#0106efa5d63d6d6f3ab87c999fa4877a3fd1ff97"
+  integrity sha512-y4jAxNEihqvBI5F3SaO2rtsjIOnnNA8sEbuiP+UhJZJHeM2NRm6c09ax2tgqme+SgUUvjao2fJXF4h3D6Cb2HQ==
+  dependencies:
+    agent-base "^4.3.0"
     debug "^3.1.0"
 
 humanize-ms@^1.2.1:
@@ -12863,14 +12878,14 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-push@3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.4.0.tgz#9611fb5976690e041ea60267aa39d3e83d78b59e"
-  integrity sha512-weFBdWDB9hLj8ZQLjmYotmU2VWAB9rRDTuFezJL3F3Dm/V56yZ03bCvS5n5qwHPkEZ71gOdcEDffbO/P5VdZHA==
+web-push@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.4.1.tgz#158268665ab45dd62d48e614388cf6130b548e39"
+  integrity sha512-wtx18llPtWWW+x8hv+Gxvz+2VjO+vZuyihInsjySNpNGNVswH1Bb2KkbbCtE96yi52VUmbFMdidxM8kJAPaSWQ==
   dependencies:
     asn1.js "^5.0.0"
     http_ece "1.1.0"
-    https-proxy-agent "^2.2.1"
+    https-proxy-agent "^3.0.0"
     jws "^3.1.3"
     minimist "^1.2.0"
     urlsafe-base64 "^1.0.0"
