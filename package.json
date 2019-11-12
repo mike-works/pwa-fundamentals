@@ -60,7 +60,7 @@
     "qrcode-reader": "1.0.4",
     "react": "16.11.0",
     "react-dom": "16.11.0",
-    "react-hot-loader": "4.12.16",
+    "react-hot-loader": "4.12.17",
     "react-router-dom": "5.1.2",
     "react-test-renderer": "16.11.0",
     "regenerator-runtime": "0.13.3",
