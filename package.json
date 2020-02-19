@@ -50,7 +50,7 @@
     "eslint-plugin-jest": "22.21.0",
     "eslint-plugin-react": "7.18.3",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
-    "file-loader": "4.3.0",
+    "file-loader": "5.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
