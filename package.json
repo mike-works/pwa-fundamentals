@@ -51,7 +51,7 @@
     "eslint-plugin-react": "7.19.0",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "4.3.0",
-    "html-webpack-plugin": "4.0.3",
+    "html-webpack-plugin": "4.0.4",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
     "muicss": "0.10.1",
