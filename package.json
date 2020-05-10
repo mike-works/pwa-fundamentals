@@ -93,6 +93,6 @@
     "moment": "2.25.3",
     "sequelize": "4.44.4",
     "sqlite3": "4.2.0",
-    "web-push": "3.4.3"
+    "web-push": "3.4.4"
   }
 }
