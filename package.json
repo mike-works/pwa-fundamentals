@@ -89,7 +89,7 @@
     "debug": "4.2.0",
     "devcert-with-localhost": "0.3.3",
     "express": "4.17.1",
-    "idb": "3.0.2",
+    "idb": "5.0.8",
     "moment": "2.29.1",
     "sequelize": "4.44.4",
     "sqlite3": "4.2.0",
