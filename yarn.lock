@@ -4151,6 +4151,13 @@ clean-css@^4.2.1:
   dependencies:
     source-map "~0.6.0"
 
+clean-css@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
+  integrity sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA==
+  dependencies:
+    source-map "~0.6.0"
+
 clean-stack@^1.0.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.3.0.tgz#9e821501ae979986c46b1d66d2d432db2fd4ae31"
@@ -4902,6 +4909,13 @@ debug@^4.0.1, debug@^4.1.0:
   integrity sha512-heNPJUJIqC+xB6ayLAMHaIrmN9HKa7aQO8MGqKpvCA+uJYVcvR6l5kgdrhRuwPFHU7P5/A1w0BjByPHwpfTDKg==
   dependencies:
     ms "^2.1.1"
+
+debug@^4.2.0:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
+  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
+  dependencies:
+    ms "2.1.2"
 
 debuglog@^1.0.1:
   version "1.0.1"
@@ -13226,13 +13240,13 @@ strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-style-ext-html-webpack-plugin@4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/style-ext-html-webpack-plugin/-/style-ext-html-webpack-plugin-4.1.2.tgz#6e05cda52d933adee1af62bbaf907f876dc00582"
-  integrity sha512-HNpxCbUl5M0rUnZM6HDSYoUlo54qPSiwMZeg7Dms4zFlNbmMusQbYGielSH96wXddkix4FN4ng+2A+4R+Qn0wg==
+style-ext-html-webpack-plugin@4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/style-ext-html-webpack-plugin/-/style-ext-html-webpack-plugin-4.1.3.tgz#53a40caaacbcd08d50edb8239c9af3f2f9020d6d"
+  integrity sha512-J3zn7abHfyhlQ7ghOJd2sH0aYiKoKYuIsa5gk5bGqCmq/JAHlDkMd5gz3xKQ4elcSAS0TsPKpwm/7YAxpVJ+ZQ==
   dependencies:
-    clean-css "^4.2.1"
-    debug "^4.1.1"
+    clean-css "^4.2.3"
+    debug "^4.2.0"
 
 style-loader@0.23.1:
   version "0.23.1"
