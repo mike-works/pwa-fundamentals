@@ -6,8 +6,8 @@ notifications:
   email: false
 install: yarn install --no-lockfile --non-interactive
 node_js:
-  - '10'
-  - '8'
+  - '10.24.1'
+  - '8.17.0'
 script:
   - yarn test && yarn travis-deploy-once "npm run semantic-release"
 branches:
