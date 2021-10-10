@@ -73,7 +73,7 @@
     "webpack-cli": "3.3.12",
     "webpack-dev-middleware": "3.7.3",
     "webpack-dev-server": "3.11.2",
-    "webpack-hot-middleware": "2.25.0",
+    "webpack-hot-middleware": "2.25.1",
     "webpack-manifest-plugin": "2.2.0",
     "worker-loader": "2.0.0"
   },
