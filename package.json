@@ -75,7 +75,7 @@
     "webpack-dev-server": "3.11.3",
     "webpack-hot-middleware": "2.25.1",
     "webpack-manifest-plugin": "2.2.0",
-    "worker-loader": "2.0.0"
+    "worker-loader": "3.0.8"
   },
   "optionalDependencies": {
     "@mike-works/workshop-semantic-release-config": "1.0.0",
