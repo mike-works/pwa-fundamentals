@@ -9325,7 +9325,7 @@ loader-utils@^1.4.0:
     emojis-list "^3.0.0"
     json5 "^1.0.1"
 
-loader-utils@^2.0.0:
+loader-utils@^2.0.0, loader-utils@^2.0.3:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.4.tgz#8b5cb38b5c34a9a018ee1fc0e6a066d1dfcc528c"
   integrity sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==
@@ -12042,15 +12042,15 @@ react-dom@16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-hot-loader@4.13.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.13.0.tgz#c27e9408581c2a678f5316e69c061b226dc6a202"
-  integrity sha512-JrLlvUPqh6wIkrK2hZDfOyq/Uh/WeVEr8nc7hkn2/3Ul0sx1Kr5y4kOGNacNRoj7RhwLNcQ3Udf1KJXrqc0ZtA==
+react-hot-loader@4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.13.1.tgz#979fd7598e27338b3faffae6ed01c65374dace5e"
+  integrity sha512-ZlqCfVRqDJmMXTulUGic4lN7Ic1SXgHAFw7y/Jb7t25GBgTR0fYAJ8uY4mrpxjRyWGWmqw77qJQGnYbzCvBU7g==
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
     hoist-non-react-statics "^3.3.0"
-    loader-utils "^1.1.0"
+    loader-utils "^2.0.3"
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
